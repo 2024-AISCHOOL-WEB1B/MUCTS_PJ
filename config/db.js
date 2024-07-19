@@ -1,20 +1,23 @@
 // DB와 연결정보를 관리하는 공간
 const mysql = require("mysql2");
 
-// DB패스워드 암호화변수
-const dbPassword = process.env.DB_PASSWORD;
-
 // DB연결정보를 설정
 const conn = mysql.createConnection({
-    host : "localhost",
-    port : '3307',
-    user : "Insa5_JSB_hacksim_5",
-    password : dbPassword,
-    database : "Insa5_JSB_hacksim_5"
+    host : process.env.DB_HOST,
+    port : process.env.DB_PORT,
+    user : process.env.DB_USER,
+    password : process.env.DB_PASSWORD,
+    database : process.env.DB_DATABASE
 });
 
 // 연결 진행 !  이거는 모듈이다!
-conn.connect();   //DB연결해라~
-console.log("DB연결!"); 
+conn.connect((err)=>{
+    if(err){
+        console.log('DB 연결 실패');
+    }
+    else{
+        console.log("DB 연결 성공");
+    } 
+});
 
 module.exports = conn;  //모듈 문 만들기!!

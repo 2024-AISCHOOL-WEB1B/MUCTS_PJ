@@ -1,8 +1,9 @@
 // 회원정보를 DB에 연결해서 관리하는 라우터
 const express = require("express")
 const router = express.Router();
-const conn = require("../config/db");
 
+// mysql db와 연결
+const conn = require("../config/db");
 
 // 1.회원가입 경로로 접근했을 때!
 router.post("/join", (req, res) => {
@@ -32,3 +33,5 @@ router.post("/join", (req, res) => {
         }
     })
 })
+
+module.exports = router;
