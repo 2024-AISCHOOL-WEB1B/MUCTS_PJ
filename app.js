@@ -1,3 +1,6 @@
+// DB암호화모듈인 dotenv 불러오기
+require('dotenv').config();
+
 const express = require('express');
 const http = require('http');
 const bp = require('body-parser')
@@ -9,11 +12,12 @@ const socketHandler = require('./public/socketHandler');
 
 // router 불러오기
 const mainRouter = require('./routes/mainRouter');
-
+const userRouter = require("./routes/userRouter");
 
 // 서버 실행
 const app = express();
 const server = http.createServer(app);
+
 // socket io 핸들러 실행
 socketHandler(server);
 
@@ -23,9 +27,6 @@ socketHandler(server);
 const session = require('express-session');
 const fileStore = require('session-file-store')(session);
 
-
-
-
 // statitc 파일 등록
 app.use(express.static("public"));
 
@@ -34,6 +35,7 @@ app.use(bp.urlencoded({extended : true}));
 
 // router 등록
 app.use('/', mainRouter)
+app.use('/user', userRouter)
 
 // 세션 관련 설정 정보
 app.use(session({

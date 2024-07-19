@@ -10,4 +10,10 @@ router.get("/", (req, res)=>{
     // }
 });
 
+
+// 사용자가 회원가입을 요청했을 때!
+router.get("/join",(req,res)=>{
+    res.render("join");
+})
+
 module.exports = router;
