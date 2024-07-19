@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>먹츠 메인 페이지</h1>
+    <input type="number" id="roomId">
+   
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+            
+
+
+        const socket = io();
+        socket.on('connect', function() {
+            console.log('Connected to server');
+            var roomId = '1135'; // 예시로 채팅방 ID를 설정
+            socket.emit('join room', roomId);
+        });
+
+        // 서버로부터의 메시지 수신
+        socket.on('room joined', function(message) {
+            console.log(message); // 서버로부터 받은 메시지 출력
+        });
+
+        // 서버로부터의 새 유저 입장 알림 수신
+        socket.on('new user', function(message) {
+            console.log(message); // 새 유저 입장 메시지 출력
+        });
+
+        // 서버로부터의 채팅 메시지 수신
+        socket.on('chat message', function(msg) {
+            console.log('Received message:', msg); // 채팅 메시지 출력
+        });
+    </script>
+</body>
+</html>
