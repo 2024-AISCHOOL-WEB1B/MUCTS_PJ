@@ -10,6 +10,7 @@ const conn = mysql.createConnection({
     database : process.env.DB_DATABASE
 });
 
+
 // 연결 진행 !  이거는 모듈이다!
 conn.connect((err)=>{
     if(err){
