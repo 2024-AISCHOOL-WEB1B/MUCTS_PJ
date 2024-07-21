@@ -39,7 +39,9 @@ router.post("/login", (req, res) => {
         console.log("select 결과값: ", rows);
 
         if (rows.length > 0) { 
-            
+            // 세션에 닉네임 저장
+            req.session.nick = rows[0].nick;
+
             // 한 데이터처리안에 send와 redirect가 같이 처리할 수 없기 때문에 window.location.href='/'를 사용해서
             // 로그인 성공 후 성공alert창을 띄운 후에 정보를 저장해서 메인으로 보냄(redirect와 같음);
             res.send(`

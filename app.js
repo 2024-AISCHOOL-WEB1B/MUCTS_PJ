@@ -13,6 +13,7 @@ const socketHandler = require('./public/socketHandler');
 // router 불러오기
 const mainRouter = require('./routes/mainRouter');
 const userRouter = require("./routes/userRouter");
+const chatRouter = require("./routes/chatRouter");
 
 // 서버 실행
 const app = express();
@@ -34,8 +35,9 @@ app.use(express.static("public"));
 app.use(bp.urlencoded({extended : true}));
 
 // router 등록
-app.use('/', mainRouter)
-app.use('/user', userRouter)
+app.use('/', mainRouter);
+app.use('/user', userRouter);
+app.use('/chat', chatRouter);
 
 // 세션 관련 설정 정보
 app.use(session({
