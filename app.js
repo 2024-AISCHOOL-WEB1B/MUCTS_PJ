@@ -8,8 +8,6 @@ const nunjucks = require('nunjucks');
 // socket.io 핸들러 불러오기
 const socketHandler = require('./public/socketHandler');
 
-
-
 // router 불러오기
 const mainRouter = require('./routes/mainRouter');
 const userRouter = require("./routes/userRouter");
@@ -19,17 +17,23 @@ const chatRouter = require("./routes/chatRouter");
 const app = express();
 const server = http.createServer(app);
 
-// socket io 핸들러 실행
-socketHandler(server);
+// statitc 파일 등록
+app.use(express.static("public"));
 
-
-
-// 세션 저장
+// 세션 모듈
 const session = require('express-session');
 const fileStore = require('session-file-store')(session);
 
-// statitc 파일 등록
-app.use(express.static("public"));
+// 세션 미들웨어 설정
+const sessionMiddleware = session({
+    httpOnly: true,
+    resave: false,
+    secret: "secret",
+    store: new fileStore(),
+    saveUninitialized: false
+  });
+
+app.use(sessionMiddleware)
 
 // post데이터 처리 등록
 app.use(bp.urlencoded({extended : true}));
@@ -39,15 +43,6 @@ app.use('/', mainRouter);
 app.use('/user', userRouter);
 app.use('/chat', chatRouter);
 
-// 세션 관련 설정 정보
-app.use(session({
-    httpOnly : true,
-    resave : false,
-    secret : "secret",
-    store : new fileStore(),
-    saveUninitialized : false
-}));
-
 // nunjucks
 app.set("view engine", "html");
 nunjucks.configure("views", {
@@ -55,6 +50,8 @@ nunjucks.configure("views", {
     watch : true
 });
 
+// socket io 핸들러 실행
+socketHandler(server, sessionMiddleware);
 
 const PORT = 3000;
 server.listen(PORT, () => {
