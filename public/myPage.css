@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+h1 {
+    color: #6a5acd;
+    text-align: center;
+}
+.profile-info-container { /* 수정부분 */
+    display: flex; /* 자식요소들이 부모요소의 가로배치사이즈에 맞춤 */
+    gap: 20px; /* 자식요소들 사이 간격 */
+}
+.profile, .info {
+    flex: 1; /* 동일한 비율의 공간차지 */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+}
+.profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.profile .points {
+    color: gold;
+    font-size: 1.5em;
+}
+.info p {
+    margin: 5px 0;
+}
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    background-color: #6a5acd;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+}
+.button:hover {
+    background-color: #5a4bcf;
+}

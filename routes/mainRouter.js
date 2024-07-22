@@ -16,4 +16,37 @@ router.get("/login",(req,res)=>{
     res.render("login");
 })
 
+// 사용자가 프로필화면을 요청했을 때
+router.get("/profile",(req,res)=>{
+    
+    if(req.session){
+        res.render("profile",
+            { nick : req.session.nick,
+              point : req.session.point  
+            });
+            
+    }else {
+        res.render("profile")
+    }
+});
+
+router.get("/myPage",(req,res)=>{
+    console.log(req.session);
+    if(req.session){
+        res.render("myPage",
+            { nick : req.session.nick,
+              point : req.session.point,  
+              user_id : req.session.id,
+              tel : req.session.tel,
+              email : req.session.email,
+              user_date : req.session.user_date
+            });
+    }else{
+        res.render("profile")
+    }
+})
+
+
+
+
 module.exports = router;
