@@ -36,7 +36,7 @@ router.get("/myPage",(req,res)=>{
         res.render("myPage",
             { nick : req.session.nick,
               point : req.session.point,  
-              user_id : req.session.id,
+              user_id : req.session.user_id,
               tel : req.session.tel,
               email : req.session.email,
               user_date : req.session.user_date

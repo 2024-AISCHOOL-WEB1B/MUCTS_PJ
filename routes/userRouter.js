@@ -43,7 +43,7 @@ router.post("/login", (req, res) => {
 
             req.session.nick = rows[0].nick;
             req.session.point = rows[0].point;
-            req.session.id = rows[0].id;
+            req.session.user_id = rows[0].user_id;
             req.session.tel = rows[0].tel;
             req.session.email = rows[0].email;
             req.session.user_date = rows[0].user_date;
