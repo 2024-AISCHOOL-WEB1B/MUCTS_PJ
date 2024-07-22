@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PartyRoom</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 8px;
+            /* 여백 추가 */
+            min-height: 100vh;
+            /* 전체 화면을 채우도록 설정 */
+        }
+
+        /* 상단바 CSS */
+        #header {
+            width: 100%;
+            height: 100px;
+            background-color: white;
+            border-bottom: 1px solid #ffe655;
+        }
+
+        #header-width-container {
+            max-width: 1280px;
+            width: 100%;
+            height: 100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #header-logo {
+            display: inline-block;
+        }
+
+        #header-right {
+            display: inline-block;
+            width: 116px;
+            height: 34px;
+            font-size: 16px;
+            color: #ffffff;
+            text-align: center;
+            line-height: 32px;
+            border-radius: 17px;
+            background-color: #7e69fe;
+        }
+
+        #header-right a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        /* 파티룸 CSS */
+        .party-room {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 80px;
+            /* 상단바와의 겹침 방지 */
+            margin-bottom: 80px;
+            /* 하단바와의 겹침 방지 */
+        }
+
+        .party-rooms {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 8px 0;
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .party-leader,
+        .user {
+            flex: 1;
+            height: 274px;
+            border: 0.5px solid #000000;
+            box-sizing: border-box;
+        }
+
+        /* 지도, 채팅창, 최소주문금액, 주문버튼 CSS */
+        .map-chat-cash-btn {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            gap: 8px;
+            max-width: 1280px;
+            margin: 0 auto;
+            height: 500px;
+        }
+
+        .map-chat {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            gap: 8px;
+            height: 500px;
+        }
+
+        .map,
+        .chat {
+            flex: 1;
+            border: 0.5px solid #000000;
+            box-sizing: border-box;
+        }
+
+        .chat {
+            margin-left: 8px;
+        }
+
+        .cash-btn {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 216px;
+            gap: 8px;
+            border: 0.5px solid #000000;
+            height: 500px;
+        }
+
+        .min_cash,
+        .btn {
+            flex: 1;
+            border: 0.5px solid #000000;
+            box-sizing: border-box;
+        }
+
+        /* 하단바 CSS */
+        .footer {
+            position: relative;
+            padding: 35px 0;
+            font-size: 12px;
+            font-weight: 300;
+            color: #333;
+            line-height: 20px;
+            background-color: white;
+            border-top: 1px solid #f0eff7;
+            word-break: keep-all;
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .footer .padding-left {
+            position: relative;
+            padding-left: 0px;
+        }
+
+        .footer .v-bar {
+            margin-right: 20px;
+            color: #666666;
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* 미디어쿼리 */
+        @media (max-width: 768px) {
+            .map-chat {
+                flex-direction: column;
+            }
+
+            .map-chat .map,
+            .map-chat .chat {
+                flex: none;
+                width: 100%;
+                height: 200px;
+            }
+
+            .cash-btn {
+                flex-direction: row;
+                width: 100%;
+                height: 100px;
+            }
+
+            .cash-btn .min_cash,
+            .cash-btn .btn {
+                flex: 1;
+                height: 100%;
+            }
+
+            .party-rooms {
+                flex-direction: column;
+            }
+
+            .party-rooms .party-leader,
+            .party-rooms .user {
+                width: 100%;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 상단바 통일 => 로그인에서 로그아웃으로만 바뀜 -->
+    <div id="header">
+        <div id="header-width-container">
+            <div id="header-logo">
+                <a href="#">
+                    <img src="#" alt="Header Image" />
+                </a>
+            </div>
+            <div id="header-right">
+                <a href="#">로그아웃</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 파티룸 유저들 상태(on/off) -->
+    <div class="party-room">
+        <div class="party-rooms">
+            <div class="party-leader"></div>
+            <div class="user"></div>
+            <div class="user"></div>
+            <div class="user"></div>
+        </div>
+
+        <!-- 지도, 채팅창, 최소금액, 버튼 보이는 박스 -->
+        <div class="map-chat-cash-btn">
+            <div class="map-chat">
+                <div class="map"></div>
+                <div class="chat"></div>
+            </div>
+            <div class="cash-btn">
+                <div class="min_cash"></div>
+                <div class="btn"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 하단바 -->
+    <div class="footer">
+        <div class="width-container">
+            <div class="padding-left">
+                <img src="#" alt="Footer Image"> <!-- 먹츠로고 흑백으로 넣기 -->
+                <div class="footer-logo">
+                    <a href="#" target="_blank" class="v-bar"> 회사소개 </a>
+                    <a href="#" target="_blank" class="v-bar"> 제휴문의 </a>
+                    <a href="" target="_blank" class="v-bar"> 1:1문의 </a>
+                    <a href="#" target="_blank" class="v-bar"> 개인정보처리방침 </a>
+                    <a href="#" target="_blank" class="v-bar"> 서비스이용약관 </a>
+                    <a href="#" target="_blank" class="v-bar"> FAQ </a>
+                    <br />
+                    <br />
+                    <span class="v-bar"> 상호 : 먹츠 </span>
+                    <span>대표 : 이정현</span>
+                    <br />
+                    <span>주소 : 인공지능사관학교</span>
+                    <br />
+                    <span class="v-bar"> 사업자등록번호 : ###-##-##### </span>
+                    <span>통신판매번호 : 제 ####-##-####호</span>
+                    <br />
+                    <span class="v-bar"> 개인정보보호책임 : 이정현 </span>
+                    <span>호스팅 사업자 : 인공지능사관학교web_1B</span>
+                    <br />
+                    <span class="v-bar"> 이메일 : pongki@Rupongi </span>
+                    <span>대표전화번호 : 123-456-789</span>
+                    <br />
+                    <br />
+                    <span>Copyright © 2024 Mucts Inc. All rights reserved.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="width-container">
+            먹츠는 통신판매중개자이며, 통신판매의 당사자가 아닙니다. <br />
+            따라서, 상품에 대한 모든 거래정보와 책임은 판매자에게 있습니다.
+        </div>
+    </div>
+</body>
+
+</html>
