@@ -13,12 +13,6 @@ router.post("/join", (req, res) => {
     
     let sql = "insert into User_TB value(?,?,?,?,?,?,?,?,0,?,?,CURRENT_TIMESTAMP())";
     conn.query(sql, [id, pw, nick,adress,email,birth_date,gender,tel,wd_account,ba_number], (err, rows) => {
-        if(err){
-            console.log("입력에러",err);
-        }
-
-
-
         console.log("insert 결과값 : ", rows);
         if (rows) {
             //회원가입에 성공했을 때, 로그인창으로 이동!
