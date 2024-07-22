@@ -31,12 +31,18 @@ router.get("/profile",(req,res)=>{
 });
 
 router.get("/myPage",(req,res)=>{
+    console.log(req.session);
     if(req.session){
         res.render("myPage",
-            { nick : req.session.nick, 
+            { nick : req.session.nick,
+              point : req.session.point,  
+              user_id : req.session.id,
               tel : req.session.tel,
-              email : req.session.email  
+              email : req.session.email,
+              user_date : req.session.user_date
             });
+    }else{
+        res.render("profile")
     }
 })
 
