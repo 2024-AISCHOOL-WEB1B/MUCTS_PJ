@@ -16,4 +16,9 @@ router.get("/login",(req,res)=>{
     res.render("login");
 })
 
+//  사용자가 충전페이지를 요청했을 때
+router.get("/charge",(req,res)=>{
+    res.render("charge");
+})
+
 module.exports = router;

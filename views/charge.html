@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>폼 선택</title>
+    <style>
+        /* 간단한 스타일을 추가하여 페이지를 정리합니다. */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-container {
+            margin-bottom: 20px;
+        }
+        .form-container form {
+            display: none; /* 기본적으로 폼은 숨깁니다. */
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        .form-container.active form {
+            display: block;
+        }
+        .form-container button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>충전하기</h1>
+    <div id="formSelector">
+        <button onclick="showForm('charge')">금액충전</button>
+        <button onclick="showForm('use')">사용할 금액</button>
+        <button onclick="showForm('money')">조회하기</button>
+    </div>
+
+    <div id="chargeForm" class="form-container">
+        <h2>금액충전</h2>
+        <form action="/charge/charge" method="post">
+            id: <input type="text" name="user_id"> <br>
+            금액충전 : <input type="number" name="charge_money">
+            <input type="submit" value="충전">
+        </form>
+    </div>
+
+    <div id="useForm" class="form-container">
+        <h2>사용할 금액</h2>
+        <form action="/charge/use" method="post">
+            id: <input type="text" name="user_id"> <br>
+            사용할금액: <input type="number" name="charge_money">
+            <input type="submit" value="사용할 금액">
+        </form>
+    </div>
+
+    <div id="moneyForm" class="form-container">
+        <h2>조회하기</h2>
+        <form action="/charge/money" method="post">
+            id: <input type="text" name="user_id"> <br>
+            <input type="submit" value="조회하기">
+        </form>
+    </div>
+
+    <script>
+        function showForm(formId) {
+            // 모든 폼을 숨깁니다.
+            document.querySelectorAll('.form-container').forEach(container => {
+                container.classList.remove('active');
+            });
+            // 선택된 폼을 표시합니다.
+            document.getElementById(formId + 'Form').classList.add('active');
+        }
+
+        // 초기 로딩 시 기본 폼을 표시합니다.
+        showForm('charge');
+    </script>
+</body>
+</html>
