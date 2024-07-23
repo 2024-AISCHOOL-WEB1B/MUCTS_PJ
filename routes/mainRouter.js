@@ -55,9 +55,14 @@ router.get("/myPage",(req,res)=>{
 })
 
 
-
+// 파티룸에 입장했을 때
 router.get("/PartyRoom",(req,res)=>{
     res.render("PartyRoom");
 })
+
+router.get("/charge",(req,res)=>{
+    res.render("charge");
+})
+
 
 module.exports = router;
