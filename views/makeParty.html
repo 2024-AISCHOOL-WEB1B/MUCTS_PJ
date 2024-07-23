@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        #header,
+        #header-width-container {
+            width: 100%;
+            height: 100px;
+        }
+
+        #header {
+            background-color: white;
+            border-bottom: 1px solid #ffe655;
+        }
+
+        #header-width-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #header-logo {
+            display: inline-block;
+        }
+
+        #header-right {
+            display: inline-block;
+            width: 116px;
+            height: 34px;
+            font-size: 16px;
+            color: #ffffff;
+            text-align: center;
+            line-height: 32px;
+            border-radius: 17px;
+            background-color: #7e69fe;
+        }
+
+        #header-right a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .banner {
+            width: 100%;
+            min-height: 600px;
+        }
+
+        #main-width-container {
+            width: 1280px;
+            min-height: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #title-wrap-party {
+            width: 100%;
+            max-width: 1280px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 auto;
+            margin-top: 90px;
+        }
+
+        #title {
+            font-size: 22px;
+            color: #333333;
+            font-family: 'Noto Sans KR', 'NanumGothic', '나눔고딕', ng, 'Malgun Gothic', Gulim, Dotum, Sans-Serif !important;
+            font-weight: 500;
+        }
+
+        .footer {
+            position: relative;
+            padding: 35px 0;
+            font-size: 12px;
+            font-weight: 300;
+            color: #333;
+            line-height: 20px;
+            background-color: white;
+            border-top: 1px solid #f0eff7;
+            word-break: keep-all;
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .width-container {
+            max-width: 1280px;
+            height: 100%;
+            margin: 0 auto;
+        }
+
+        .footer .padding-left {
+            position: relative;
+            padding-left: 0px;
+        }
+
+        .footer .v-bar {
+            margin-right: 20px;
+            color: #666666;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+        }
+
+        #title-party {
+            width: 1280px;
+            height: 32px;
+            margin: 36px 0 20px;
+            margin-top: 56px;
+            margin-bottom: 24px;
+            font-size: 22px;
+            color: #333333;
+            line-height: 32px;
+        }
+
+        .text-purple {
+            color: #7e69fe !important;
+        }
+
+        .partner-fomr-list.border .subject {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 120px;
+            height: 46px;
+            padding: 14px 0 13px;
+        }
+
+        .form-list.border .subject {
+            width: 120px;
+            padding: 14px 0 13px 0;
+            text-indent: -5px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .form-group {
+            margin-bottom: 1em;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5em;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="tel"],
+        input[type="number"],
+        button {
+            width: 500px;
+            padding: 0.5em;
+            margin-bottom: 0.5em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #start_date,
+        #end_date {
+            width: 92px;
+            padding: 0.5em;
+            margin-bottom: 0.5em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <!-- 상단바 내용 -->
+    <div id="header">
+        <div id="header-width-container">
+            <div id="header-logo">
+                <a href="#">
+                    <img src="#" alt="Header Image" />
+                </a>
+            </div>
+            <div id="header-right">
+                <a href="#">로그인</a>
+            </div>
+        </div>
+    </div>
+
+
+    
+        <!-- 배너 내용 -->
+        <div class="banner">
+            <div id="main-width-container">
+                <div id="title-party">
+                    <span class="text-purple">파티/판매</span> 등록
+                    <form action="#">
+                        <br>
+                        <br>
+                        <!-- 제목 입력 -->
+                        <div class="form-group">
+                            <label for="title">제목</label>
+                            <input type="text" id="title" name="title" placeholder="제목을 입력해 주세요">
+                        </div>
+                        <!-- 모집인원 선택 -->
+                        <div class="form-group">
+                            <label for="members">모집인원</label>
+                            <input type="text" id="members" name="members" placeholder="본인제외 명">
+                        </div>
+                        <!-- 연락처 -->
+                        <div class="form-group">
+                            <div class="form-check">
+                                <label for="contact_phone">전화번호</label>
+                            </div>
+                            <input type="tel" id="contact_info" name="contact_info" placeholder="123-456-789">
+                        </div>
+                        <!-- 진행 기간 -->
+                        <div class="form-group">
+                            <label for="start_date">진행 기간</label>
+                            <input type="date" id="start_date" name="start_date">
+                            <input type="date" id="end_date" name="end_date">
+                        </div>
+                        <!-- 최소주문금액 금액 -->
+                        <div class="form-group">
+                            <label for="amount">최소주문금액</label>
+                            <input type="number" id="amount" name="amount" placeholder="최소주문 금액 입력">
+                        </div>
+                        <br><br>
+                        <button type="submit">제출</button>
+                    </form>
+<!-- 하단바 내용 -->
+<div class="footer">
+    <div class="width-container">
+         <div class="padding-left">
+            <img src="#" alt="Footer Image">
+             <div class="footer-logo">
+                <a href="#" target="_blank" class="v-bar">회사소개</a>
+                <a href="#" target="_blank" class="v-bar">제휴문의</a>
+                <a href="" target="_blank" class="v-bar">1:1문의</a>
+                <a href="#" target="_blank" class="v-bar">개인정보처리방침</a>
+                <a href="#" target="_blank" class="v-bar">서비스이용약관</a>
+                <a href="#" target="_blank" class="v-bar">FAQ</a>
+                <br>
+                <br>
+                <span class="v-bar">상호 : 먹츠</span>
+                <span>대표 : 이정현</span>
+                <br>
+                <span>주소 : 경기도 성남시 분당구 장미로 이치노구</span>
+                <br>
+                <span class="v-bar">사업자등록번호 : 123-45-78912</span>
+                <span>통신판매번호 : 제 2022-호주-0044호</span>
+                <br>
+                <span class="v-bar">개인정보보호책임 : 이정현</span>
+                <span>호스팅 사업자 : Amazon Web Service(AWS)</span>
+                <br>
+                <span class="v-bar">이메일 : pongki@Rupongi</span>
+                <span>대표전화번호 : 123-456-789</span>
+                <br>
+                <br>
+                <span>Copyright © 2024 Mucts Inc. All rights reserved.</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="width-container">
+        먹츠는 통신판매중개자이며, 통신판매의 당사자가 아닙니다.파티정보, 구매에 관한 의무와 책임은 판매자에게 있습니다.
+        <br>
+        먹츠는 소비자 보호와 안전거래를 위해고객센터(manager@buts.co.kr)를 운영하고 있으며, 분쟁이 발생 된 경우 별도의 분쟁처리절차에 의거분쟁해결 및 청약철회 등이 진행 됩니다.
+    </div>
+</div>
+    
+</body>
+
+</html>

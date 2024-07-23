@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PartyRoom</title>
+    <link rel="stylesheet" href="../public/PartyRoom.css">
+</head>
+
+<body>
+    <!-- 상단바 통일 => 로그인에서 로그아웃으로만 바뀜 -->
+    <div id="header">
+        <div id="header-width-container">
+            <div id="header-logo">
+                <a href="#">
+                    <img src="#" alt="Header Image" />
+                </a>
+            </div>
+            <div id="header-right">
+                <a href="#">로그아웃</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 파티룸 유저들 상태(on/off) -->
+    <div class="party-room">
+        <div class="party-rooms">
+            <div class="party-leader">
+                <img src="../public/MUCKS_LOGO.png" alt="MUCKS_LOGO">
+                <span type="button" class="userState">READY</span>
+            </div>
+            <div class="user">
+                <img src="../public/MUCKS_LOGO.png" alt="MUCKS_LOGO">
+                <span type="button" class="userState">READY</span>
+            </div>
+            <div class="user">
+                <img src="../public/MUCKS_LOGO.png" alt="MUCKS_LOGO">
+                <span type="button" class="userState">READY</span>
+            </div>
+            <div class="user">
+                <img src="../public/MUCKS_LOGO.png" alt="MUCKS_LOGO">
+                <span type="button" class="userState">READY</span>
+            </div>
+        </div>
+
+        <!-- 지도, 채팅창 -->
+        <div class="map-chat">
+            <div class="map-chat">
+                <div class="map"></div>
+                <form class="chat" action="#">
+                    <input type="text" name="#" id="chatting" placeholder="채팅입력공간"></input>
+                    <input type="submit" value="전송" id="send_btn"></input>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 하단바 -->
+    <div class="footer">
+        <div class="width-container">
+            <div class="padding-left">
+                <img src="#" alt="Footer Image">
+                <div class="footer-logo">
+                    <a href="#" target="_blank" class="v-bar"> 회사소개 </a>
+                    <a href="#" target="_blank" class="v-bar"> 제휴문의 </a>
+                    <a href="" target="_blank" class="v-bar"> 1:1문의 </a>
+                    <a href="#" target="_blank" class="v-bar"> 개인정보처리방침 </a>
+                    <a href="#" target="_blank" class="v-bar"> 서비스이용약관 </a>
+                    <a href="#" target="_blank" class="v-bar"> FAQ </a>
+                    <br />
+                    <br />
+                    <span class="v-bar"> 상호 : 먹츠 </span>
+                    <span>대표 : 이정현</span>
+                    <br />
+                    <span>주소 : 인공지능사관학교</span>
+                    <br />
+                    <span class="v-bar"> 사업자등록번호 : ###-##-##### </span>
+                    <span>통신판매번호 : 제 ####-##-####호</span>
+                    <br />
+                    <span class="v-bar"> 개인정보보호책임 : 이정현 </span>
+                    <span>호스팅 사업자 : 인공지능사관학교web_1B</span>
+                    <br />
+                    <span class="v-bar"> 이메일 : pongki@Rupongi </span>
+                    <span>대표전화번호 : 123-456-789</span>
+                    <br />
+                    <br />
+                    <span>Copyright © 2024 Mucts Inc. All rights reserved.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="width-container">
+            먹츠는 통신판매중개자이며, 통신판매의 당사자가 아닙니다. <br />
+            따라서, 상품에 대한 모든 거래정보와 책임은 판매자에게 있습니다.
+        </div>
+    </div>
+</body>
+
+</html>
