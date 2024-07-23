@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>파티룸</title>
     <link rel="stylesheet" href="PartyRoom.css">
-        
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=89926ade5278e9fc3303202cde99f939"></script>
+
+   
+    
+
 </head>
 
 <body>
@@ -28,34 +33,108 @@
     <div class="party-room">
         <div class="party-rooms">
             <div class="party-leader">
-                <img src="../public/MUCTS_LOGO_BLACK.png" alt="MUCTS_LOGO_BLACK">
-                <span type="button" class="userState active" onclick="toggleState(this)">READER</span>
+                <img src="../public/MUCKS_LOGO.png" alt="MUCKS_LOGO">
+                <span type="button" class="userState">READY</span>
             </div>
             <div class="user">
-                <img src="../public/MUCTS_LOGO_BLACK.png" alt="MUCTS_LOGO_BLACK">
-                <span type="button" class="userState active" onclick="toggleState(this)">NOT READY</span>
+                <img src="../public/MUCKS_LOGO.png" alt="MUCKS_LOGO">
+                <span type="button" class="userState">READY</span>
             </div>
             <div class="user">
-                <img src="../public/MUCTS_LOGO_BLACK.png" alt="MUCTS_LOGO_BLACK">
-                <span type="button" class="userState active" onclick="toggleState(this)">NOT READY</span>
+                <img src="../public/MUCKS_LOGO.png" alt="MUCKS_LOGO">
+                <span type="button" class="userState">READY</span>
             </div>
             <div class="user">
-                <img src="../public/MUCTS_LOGO_BLACK.png" alt="MUCTS_LOGO_BLACK">
-                <span type="button" class="userState active" onclick="toggleState(this)">NOT READY</span>
+                <img src="../public/MUCKS_LOGO.png" alt="MUCKS_LOGO">
+                <span type="button" class="userState">READY</span>
             </div>
         </div>
 
         <!-- 지도, 채팅창 -->
         <div class="map-chat">
             <div class="map-chat">
-                <div class="map"></div>
+                <div class="map">
+                  <!-- 지도가 표시될 div -->
+                <div id="map" style="width: 100%; height: 100%;"></div>
+                </div>
                 <form class="chat" action="#">
                     <input type="text" name="#" id="chatting" placeholder="채팅입력공간">
                     <input type="submit" value="전송" id="send_btn">
                 </form>
             </div>
         </div>
+
+        <script>
+            // 지도 표시 영역을 지정합니다
+            var mapContainer = document.getElementById('map');
+            var mapOption = { 
+                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
+            };
+    
+            // 지도를 생성합니다
+            var map = new kakao.maps.Map(mapContainer, mapOption);
+    
+            // 지도를 클릭했을 때 클릭한 위치에 마커를 추가하도록 지도에 클릭이벤트를 등록합니다
+            kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+                // 클릭한 위치에 마커를 표시합니다 
+                addMarker(mouseEvent.latLng);             
+            });
+    
+            // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
+            var markers = [];
+    
+            // 브라우저의 Geolocation API를 사용하여 현재 위치를 가져오고 마커를 추가합니다
+            function showCurrentLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        var lat = position.coords.latitude;
+                        var lng = position.coords.longitude;
+                        var currentPosition = new kakao.maps.LatLng(lat, lng);
+                        
+                        // 현재 위치에 마커를 추가합니다
+                        addMarker(currentPosition);
+                        
+                        // 지도의 중심을 현재 위치로 설정합니다
+                        map.setCenter(currentPosition);
+                    }, function(error) {
+                        console.log('현재 위치를 가져올 수 없습니다: ', error);
+                    });
+                } else {
+                    console.log('Geolocation API를 지원하지 않는 브라우저입니다.');
+                }
+            }
+    
+            // 마커를 생성하고 지도위에 표시하는 함수입니다
+            function addMarker(position) {
+                // 기존의 모든 마커를 삭제합니다
+                removeAllMarkers();
+                
+                // 마커를 생성합니다
+                var marker = new kakao.maps.Marker({
+                    position: position
+                });
+    
+                // 마커가 지도 위에 표시되도록 설정합니다
+                marker.setMap(map);
+                
+                // 생성된 마커를 배열에 추가합니다
+                markers.push(marker);
+            }
+    
+            // 지도에 표시된 모든 마커를 삭제하는 함수입니다
+            function removeAllMarkers() {
+                for (var i = 0; i < markers.length; i++) {
+                    markers[i].setMap(null); // 지도에서 마커를 제거합니다
+                }
+                markers = []; // 배열 초기화
+            }
+    
+            // 현재 위치로 마커를 추가합니다
+            showCurrentLocation();
+        </script>
     </div>
+
     <!-- 하단바 -->
     <div class="footer">
         <div class="width-container">
@@ -67,39 +146,35 @@
                     <a href="" target="_blank" class="v-bar"> 1:1문의 </a>
                     <a href="#" target="_blank" class="v-bar"> 개인정보처리방침 </a>
                     <a href="#" target="_blank" class="v-bar"> 서비스이용약관 </a>
+                    <a href="#" target="_blank" class="v-bar"> FAQ </a>
+                    <br />
+                    <br />
+                    <span class="v-bar"> 상호 : 먹츠 </span>
+                    <span>대표 : 이정현</span>
+                    <br />
+                    <span>주소 : 인공지능사관학교</span>
+                    <br />
+                    <span class="v-bar"> 사업자등록번호 : ###-##-##### </span>
+                    <span>통신판매번호 : 제 ####-##-####호</span>
+                    <br />
+                    <span class="v-bar"> 개인정보보호책임 : 이정현 </span>
+                    <span>호스팅 사업자 : 인공지능사관학교web_1B</span>
+                    <br />
+                    <span class="v-bar"> 이메일 : pongki@Rupongi </span>
+                    <span>대표전화번호 : 123-456-789</span>
+                    <br />
+                    <br />
+                    <span>Copyright © 2024 Mucts Inc. All rights reserved.</span>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        // READY 상태 전환 함수
-        function toggleState(element) {
-            const userElement = element.closest('.user, .party-leader');
-            const imgElement = userElement.querySelector('img');
-            
-            if (element.innerText === "READY") {
-                element.innerText = "NOT READY";
-                element.classList.add("active");
-                imgElement.src = "../public/MUCTS_LOGO_BLACK.png";
-                imgElement.alt = "MUCTS_LOGO_BLACK";
-            } else {
-                element.innerText = "READY";
-                element.classList.remove("active");
-                imgElement.src = "../public/MUCKS_LOGO.png";
-                imgElement.alt = "MUCKS_LOGO";
-            }
-
-            // 모든 유저 버튼의 상태를 검사하여 숫자 1번 버튼 업데이트
-            const allUsersReady = [...document.querySelectorAll('.user .userState')].every(el => el.innerText === "READY");
-            const partyLeaderButton = document.querySelector('.party-leader .userState');
-            if (allUsersReady) {
-                partyLeaderButton.innerText = "START";
-            } else {
-                partyLeaderButton.innerText = "NOT READY";
-            }
-        }
-    </script>
+    <div class="footer">
+        <div class="width-container">
+            먹츠는 통신판매중개자이며, 통신판매의 당사자가 아닙니다. <br />
+            따라서, 상품에 대한 모든 거래정보와 책임은 판매자에게 있습니다.
+        </div>
+    </div>
 </body>
 
 </html>
