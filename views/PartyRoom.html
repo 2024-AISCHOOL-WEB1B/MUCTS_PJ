@@ -1,11 +1,229 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PartyRoom</title>
-    <link rel="stylesheet" href="../public/PartyRoom.css">
+    <title>파티룸</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 8px;
+            min-height: 100vh;
+        }
+
+        /* 상단바 CSS */
+        #header {
+            width: 100%;
+            height: 100px;
+            background-color: white;
+            border-bottom: 1px solid #ffe655;
+        }
+
+        #header-width-container {
+            max-width: 1280px;
+            width: 100%;
+            height: 100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #header-logo {
+            display: inline-block;
+        }
+
+        #header-right {
+            display: inline-block;
+            width: 116px;
+            height: 34px;
+            font-size: 16px;
+            color: #ffffff;
+            text-align: center;
+            line-height: 32px;
+            border-radius: 17px;
+            background-color: #7e69fe;
+        }
+
+        #header-right a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        /* 파티룸 CSS */
+        .party-room {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 80px;
+            margin-bottom: 80px;
+        }
+
+        .party-rooms {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 8px 0;
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .party-leader,
+        .user {
+            flex: 1;
+            height: 274px;
+            border: 0.5px solid #000000;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-radius: 70px;
+        }
+
+        .party-leader img,
+        .user img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+            width: 100px;
+            height: 100px;
+        }
+
+        .party-leader a,
+        .user a {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .userState {
+            padding: 10px 20px;
+            color: white;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .userState.active {
+            background-color: grey;
+        }
+
+        /* 지도, 채팅창, 최소주문금액, 주문버튼 CSS */
+        .map-chat {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            gap: 8px;
+            max-width: 1280px;
+            margin: 0 auto;
+            height: 500px;
+        }
+
+        .map,
+        .chat {
+            flex: 1;
+            border: 0.5px solid #000000;
+            box-sizing: border-box;
+            border-radius: 10px
+        }
+
+        .chat {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-end;
+            width: 100%;
+            height: 100%;
+        }
+
+        #chatting {
+            flex: 8;
+            border: 1px solid #000;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 10px
+        }
+
+        #send_btn {
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            color: white;
+            background-color: rgba(81, 88, 86, 0.892);
+            text-align: center;
+        }
+
+        /* 하단바 CSS */
+        .footer {
+            padding: 35px 0;
+            font-size: 12px;
+            font-weight: 300;
+            color: #333;
+            line-height: 20px;
+            background-color: white;
+            border-top: 1px solid #f0eff7;
+            word-break: keep-all;
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .footer .padding-left {
+            padding-left: 0px;
+        }
+
+        .footer .v-bar {
+            margin-right: 20px;
+            color: #666666;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* 미디어쿼리 */
+        @media (max-width: 768px) {
+            .map-chat {
+                flex-direction: column;
+            }
+
+            .map-chat .map,
+            .map-chat .chat {
+                flex: none;
+                width: 100%;
+                height: 200px;
+            }
+
+            .party-rooms {
+                flex-direction: column;
+            }
+
+            .party-rooms .party-leader,
+            .party-rooms .user {
+                width: 100%;
+                height: 200px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -27,20 +245,20 @@
     <div class="party-room">
         <div class="party-rooms">
             <div class="party-leader">
-                <img src="../public/MUCKS_LOGO.png" alt="MUCKS_LOGO">
-                <span type="button" class="userState">READY</span>
+                <img src="../public/MUCTS_LOGO_BLACK.png" alt="MUCTS_LOGO_BLACK">
+                <span type="button" class="userState active" onclick="toggleState(this)">READER</span>
             </div>
             <div class="user">
-                <img src="../public/MUCKS_LOGO.png" alt="MUCKS_LOGO">
-                <span type="button" class="userState">READY</span>
+                <img src="../public/MUCTS_LOGO_BLACK.png" alt="MUCTS_LOGO_BLACK">
+                <span type="button" class="userState active" onclick="toggleState(this)">NOT READY</span>
             </div>
             <div class="user">
-                <img src="../public/MUCKS_LOGO.png" alt="MUCKS_LOGO">
-                <span type="button" class="userState">READY</span>
+                <img src="../public/MUCTS_LOGO_BLACK.png" alt="MUCTS_LOGO_BLACK">
+                <span type="button" class="userState active" onclick="toggleState(this)">NOT READY</span>
             </div>
             <div class="user">
-                <img src="../public/MUCKS_LOGO.png" alt="MUCKS_LOGO">
-                <span type="button" class="userState">READY</span>
+                <img src="../public/MUCTS_LOGO_BLACK.png" alt="MUCTS_LOGO_BLACK">
+                <span type="button" class="userState active" onclick="toggleState(this)">NOT READY</span>
             </div>
         </div>
 
@@ -49,13 +267,12 @@
             <div class="map-chat">
                 <div class="map"></div>
                 <form class="chat" action="#">
-                    <input type="text" name="#" id="chatting" placeholder="채팅입력공간"></input>
-                    <input type="submit" value="전송" id="send_btn"></input>
+                    <input type="text" name="#" id="chatting" placeholder="채팅입력공간">
+                    <input type="submit" value="전송" id="send_btn">
                 </form>
             </div>
         </div>
     </div>
-
     <!-- 하단바 -->
     <div class="footer">
         <div class="width-container">
@@ -67,35 +284,39 @@
                     <a href="" target="_blank" class="v-bar"> 1:1문의 </a>
                     <a href="#" target="_blank" class="v-bar"> 개인정보처리방침 </a>
                     <a href="#" target="_blank" class="v-bar"> 서비스이용약관 </a>
-                    <a href="#" target="_blank" class="v-bar"> FAQ </a>
-                    <br />
-                    <br />
-                    <span class="v-bar"> 상호 : 먹츠 </span>
-                    <span>대표 : 이정현</span>
-                    <br />
-                    <span>주소 : 인공지능사관학교</span>
-                    <br />
-                    <span class="v-bar"> 사업자등록번호 : ###-##-##### </span>
-                    <span>통신판매번호 : 제 ####-##-####호</span>
-                    <br />
-                    <span class="v-bar"> 개인정보보호책임 : 이정현 </span>
-                    <span>호스팅 사업자 : 인공지능사관학교web_1B</span>
-                    <br />
-                    <span class="v-bar"> 이메일 : pongki@Rupongi </span>
-                    <span>대표전화번호 : 123-456-789</span>
-                    <br />
-                    <br />
-                    <span>Copyright © 2024 Mucts Inc. All rights reserved.</span>
                 </div>
             </div>
         </div>
     </div>
-    <div class="footer">
-        <div class="width-container">
-            먹츠는 통신판매중개자이며, 통신판매의 당사자가 아닙니다. <br />
-            따라서, 상품에 대한 모든 거래정보와 책임은 판매자에게 있습니다.
-        </div>
-    </div>
+
+    <script>
+        // READY 상태 전환 함수
+        function toggleState(element) {
+            const userElement = element.closest('.user, .party-leader');
+            const imgElement = userElement.querySelector('img');
+            
+            if (element.innerText === "READY") {
+                element.innerText = "NOT READY";
+                element.classList.add("active");
+                imgElement.src = "../public/MUCTS_LOGO_BLACK.png";
+                imgElement.alt = "MUCTS_LOGO_BLACK";
+            } else {
+                element.innerText = "READY";
+                element.classList.remove("active");
+                imgElement.src = "../public/MUCKS_LOGO.png";
+                imgElement.alt = "MUCKS_LOGO";
+            }
+
+            // 모든 유저 버튼의 상태를 검사하여 숫자 1번 버튼 업데이트
+            const allUsersReady = [...document.querySelectorAll('.user .userState')].every(el => el.innerText === "READY");
+            const partyLeaderButton = document.querySelector('.party-leader .userState');
+            if (allUsersReady) {
+                partyLeaderButton.innerText = "START";
+            } else {
+                partyLeaderButton.innerText = "NOT READY";
+            }
+        }
+    </script>
 </body>
 
 </html>
