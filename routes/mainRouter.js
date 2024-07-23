@@ -2,36 +2,24 @@ const express = require("express");
 const router = express.Router();
 
 
-// 사용자가 메인을 요청했을 때!
+
 router.get("/", (req, res) => {
     res.render("main");
 });
 
+
 // 사용자가 회원가입을 요청했을 때!
-router.get("/join", (req, res) => {
+router.get("/join",(req,res)=>{
     res.render("join");
 })
 
 //  사용자가 로그인을 요청했을 때
-router.get("/login", (req, res) => {
+router.get("/login",(req,res)=>{
     res.render("login");
 })
 
 
-// 사용자가 프로필화면을 요청했을 때
-router.get("/profile",(req,res)=>{
-    
-    if(req.session){
-        res.render("profile",
-            { nick : req.session.nick,
-              point : req.session.point  
-            });
-            
-    }else {
-        res.render("profile")
-    }
-});
-
+// 사용자가 마이페이지화면을 요청했을 때
 router.get("/myPage",(req,res)=>{
     console.log(req.session);
     if(req.session){
@@ -64,14 +52,11 @@ router.get("/myPage",(req,res)=>{
               user_date : formattedJoinDate
             });
     }else{
-        res.render("profile")
+        res.render("myPage")
     }
 })
 
-// 사용자가 충전을 요구했을 때
-router.get("/charge",(req,res)=>{
-    res.render("charge");
-})
+
 
 
 module.exports = router;
