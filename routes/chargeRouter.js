@@ -1,4 +1,3 @@
-// 회원정보를 db에 연결해서 관리하는 라우터
 const express = require("express");
 const router = express.Router();
 const conn = require("../config/db");
@@ -56,22 +55,14 @@ router.post("/money",(req,res)=>{
     console.log("문자형태로 넘어온 데이터",req.body);
     let {user_id } = req.body
 
-    // 실습
     // 1.sql 쿼리문 작성
     let sql = "SELECT * FROM Charge_TB  WHERE user_id = ?";
 
     // 2.conn쿼리문 실행
     conn.query(sql,[user_id],(err,rows)=>{
         console.log(rows);
-       
-        //  money가 일치하하면 성공 아니면 실패
-        // select문을 실행할 때 반드시 rows의 length로 조건을 부여
-        // 조건이 성립하면데이터가 들어있는 배열 리턴, 아니면 비어있는 배열 리턴
-        // 반드시 데이터의 길이가 0보다 크다 == 데이터가 담겨있다
         if (rows.length > 0) {
             console.log("입금 성공");
-            // 사용자의 닉네임 정보를 세션에 저장
-            // 사용자의 데이터는 db에서 조회했기 때문에, rows변수에서 데이터 꺼내기
             req.session.money = rows[0].charge_money;
             res.send(`충전된 금액: ${rows[0].charge_money }`)
         } else {
