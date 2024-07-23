@@ -30,7 +30,7 @@
                 </a>
             </p>
         </div>
-        <form action="http://localhost:3000/user/login" method="post" id="loginForm">
+        <form action="" method="post" id="loginForm">
             <p>
                 <input type="text" id="username" name="id" placeholder="아이디를 입력하세요.">
             </p>
@@ -39,13 +39,14 @@
             </p>
             <div class="loss">
                 <div class="a_tags">
-                    <div type="button" id="id_pw">
-                        <a href="#">아이디/비밀번호 찾기</a>
+                    <div>
+                        <button id="openModal_btn" type="button" onclick="openModal()">아이디/비밀번호 찾기</button>
+                        <!-- <a href="#">아이디/비밀번호 찾기</a> -->
                     </div>
                     <span class="bar">|</span>
-                    <div type="button" id="join_us">
+                    <button type="button" id="join_us">
                         <a href="/join">회원가입</a>
-                    </div>
+                    </button>
                 </div>
             </div>
             <div>
@@ -95,6 +96,31 @@
             </div>
         </div>
     </div>
+
+    <!-- 아이디/비밀번호 찾기 모달창 -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>아이디 찾기</h2>
+            <hr>
+
+            <form>
+                <label for="name">이름</label>
+                <br>
+                <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+                <br><br>
+                <label for="email">이메일주소</label>
+                <br>
+                <input type="email" id="email" name="email" placeholder="회원가입시 등록한 이메일주소를 입력하세요" required>
+                <br><br>
+                <div class="close_ok_btn">
+                    <button type="button" class="close_btn" onclick="closeModal()">닫기</button>
+                    <button type="submit" class="ok_btn">확인</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="../public/login.js"></script>
 </body>
 
 </html>
