@@ -1,0 +1,203 @@
+        /* 상단바 CSS */
+        #header {
+            width: 100%;
+            height: 100px;
+            background-color: white;
+            border-bottom: 1px solid #ffe655;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        #header-width-container {
+            max-width: 1280px;
+            width: 100%;
+            height: 100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #header-logo {
+            display: inline-block;
+        }
+
+        #header-right {
+            display: inline-block;
+            width: 116px;
+            height: 34px;
+            font-size: 16px;
+            color: #ffffff;
+            text-align: center;
+            line-height: 32px;
+            border-radius: 17px;
+            background-color: #7e69fe;
+        }
+
+        #header-right a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        /*상단바 CSS 종료*/
+
+        /* 하단바 CSS */
+        .footer {
+            position: relative;
+            padding: 35px 0;
+            font-size: 12px;
+            font-weight: 300;
+            color: #333;
+            line-height: 20px;
+            background-color: white;
+            border-top: 1px solid #f0eff763;
+            word-break: keep-all;
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+            text-align: left;
+        }
+
+        .footer .padding-left {
+            position: relative;
+            padding-left: 0px;
+        }
+
+        .footer .v-bar {
+            margin-right: 20px;
+            color: #666666;
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+        }
+
+        /*하단바 CSS 종료*/
+
+        * {
+            font-family: 'GmarketSansMedium';
+        }
+
+        body {
+            margin: auto;
+            width: 960px;
+        }
+
+        #logInBtn {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        table {
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 500px;
+            box-sizing: border-box;
+            border-radius: 10px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 20px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border-radius: 5px;
+        }
+
+        .loss {
+            display: flex;
+            justify-content: center;
+            /* 중앙 정렬 */
+            margin-top: 10px;
+            font-size: 15px;
+        }
+
+        .loss a {
+            color: inherit;
+            text-decoration: none;
+            margin: 10px;
+            margin-top: 5px;
+        }
+
+        .homeLogo {
+            margin-top: 20px;
+        }
+
+        .homeLogo a {
+            padding-left: 20px;
+            text-decoration: none;
+            color: black;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .homeLogo a:hover {
+            margin-left: -20px;
+            -webkit-transition: .5s ease-in-out;
+            transition: .5s ease-in-out;
+        }
+
+        .logInBox {
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        #id_pw,
+        #join_us {
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            margin: 0 5px;
+            /* 중앙 정렬을 위해 마진 조정 */
+        }
+
+        #id_pw a,
+        #join_us a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .a_tags {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .bar {
+            margin: 0 10px;
+        }
+
+        @media (max-width: 480px) {
+            #header-right {
+                font-size: 14px;
+                height: 30px;
+                line-height: 28px;
+            }
+
+            .logInBox {
+                margin-top: 30px;
+            }
+
+            input[type="text"],
+            input[type="password"] {
+                padding: 12px;
+            }
+
+            .footer {
+                font-size: 9px;
+                padding: 20px 10px;
+            }
+
+            .footer .v-bar {
+                margin-right: 10px;
+                margin-bottom: 5px;
+            }
+
+            .homeLogo a {
+                font-size: 24px;
+                padding-left: 10px;
+            }
+        }
