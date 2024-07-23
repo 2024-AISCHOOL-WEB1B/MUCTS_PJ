@@ -11,6 +11,7 @@ const mainRouter = require('./routes/mainRouter');
 const userRouter = require("./routes/userRouter");
 const chatRouter = require("./routes/chatRouter");
 const chargeRouter = require("./routes/chargeRouter")
+const partyRouter = require("./routes/partyRouter");
 
 // 서버 실행
 const app = express();
@@ -46,6 +47,7 @@ app.use('/', mainRouter);
 app.use('/user', userRouter);
 app.use('/chat', chatRouter);
 app.use('/charge',chargeRouter);
+app.use('/party',partyRouter);
 
 // nunjucks
 app.set("view engine", "html");
