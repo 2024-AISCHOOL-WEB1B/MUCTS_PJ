@@ -47,8 +47,6 @@ router.post("/login", (req, res) => {
             req.session.email = rows[0].email;
             req.session.user_date = rows[0].user_date;
 
-            // 한 데이터처리안에 send와 redirect가 같이 처리할 수 없기 때문에 window.location.href='/'를 사용해서
-            // 로그인 성공 후 성공alert창을 띄운 후에 정보를 저장해서 메인으로 보냄(redirect와 같음);
             res.send(`
                 <script>
                     alert('로그인 성공: ${rows[0].nick}님 환영합니다!');
@@ -61,6 +59,8 @@ router.post("/login", (req, res) => {
         }
     });
 });
+
+
 
 
 module.exports = router;
