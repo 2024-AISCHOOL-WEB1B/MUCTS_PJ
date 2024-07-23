@@ -8,14 +8,17 @@ const nunjucks = require('nunjucks');
 // socket.io 핸들러 불러오기
 const socketHandler = require('./public/socketHandler');
 
+
 // router 불러오기
 const mainRouter = require('./routes/mainRouter');
 const userRouter = require("./routes/userRouter");
 const chatRouter = require("./routes/chatRouter");
+const chargeRouter = require("./routes/chargeRouter");
 
 // 서버 실행
 const app = express();
 const server = http.createServer(app);
+
 
 // statitc 파일 등록
 app.use(express.static("public"));
@@ -42,6 +45,7 @@ app.use(bp.urlencoded({extended : true}));
 app.use('/', mainRouter);
 app.use('/user', userRouter);
 app.use('/chat', chatRouter);
+app.use('/charge',chargeRouter);
 
 // nunjucks
 app.set("view engine", "html");
