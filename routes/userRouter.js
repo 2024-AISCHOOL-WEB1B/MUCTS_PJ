@@ -35,8 +35,7 @@ router.post("/login", (req, res) => {
     let sql = "select * from User_TB where user_id=? and pw=?"; 
     
     conn.query(sql, [id, pw], (err, rows) => {
-        console.log(err);
-
+        
 
         console.log("select 결과값: ", rows);
 
