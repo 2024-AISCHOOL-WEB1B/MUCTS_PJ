@@ -56,7 +56,9 @@ router.get("/myPage",(req,res)=>{
     }
 })
 
-
+router.get("/charge",(req,res)=>{
+    res.render("charge");
+})
 
 
 module.exports = router;
