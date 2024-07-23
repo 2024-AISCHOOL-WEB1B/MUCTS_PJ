@@ -41,8 +41,11 @@ router.post("/login", (req, res) => {
         if (rows.length > 0) { 
             console.log(rows[0]);
             req.session.nick = rows[0].nick;
-          
-
+            req.session.point = rows[0].point;
+            req.session.user_id = rows[0].user_id;
+            req.session.tel = rows[0].tel;
+            req.session.email = rows[0].email;
+            req.session.user_date = rows[0].user_date;
             res.send(`
                 <script>
                     alert('로그인 성공: ${rows[0].nick}님 환영합니다!');
@@ -57,31 +60,28 @@ router.post("/login", (req, res) => {
 });
 
 // 마이페이지 경로로 접근했을 때!
-router.post('/myPage', (req, res) => {
-    console.log(req.body);
-    let { id } = req.body;
-    let sql = 'SELECT * FROM User_TB WHERE user_id = ?';
-    req.conn.query(sql, [id], (err, rows) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).send('Internal Server Error');
-        }
+// router.post('/myPage', (req, res) => {
+//     console.log(req.body);
+//     let { id } = req.body;
+//     let sql = 'SELECT * FROM User_TB WHERE user_id = ?';
+//     req.conn.query(sql, [id], (err, rows) => {
+//         if (err) {
+//             console.error(err);
+//             return res.status(500).send('Internal Server Error');
+//         }
 
-        console.log('select 결과값: ', rows);
-
-        if (rows.length > 0) {
-            console.log(rows[0]);
-            req.session.nick = rows[0].nick;
-            req.session.point = rows[0].point;
-            req.session.user_id = rows[0].user_id;
-            req.session.tel = rows[0].tel;
-            req.session.email = rows[0].email;
-            req.session.user_date = rows[0].user_date;
-            res.send('User data saved in session');
-        } else {
-            res.status(404).send('User not found');
-        }
-    });
-});
+//         console.log('select 결과값: ', rows);
+//         console.log("값 들어옴!");
+//         if (rows.length > 0) {
+//             req.session.nick = rows[0].nick;
+//             req.session.point = rows[0].point;
+//             req.session.user_id = rows[0].user_id;
+//             req.session.tel = rows[0].tel;
+//             req.session.email = rows[0].email;
+//             req.session.user_date = rows[0].user_date;
+//             res.redirect("/myPage")
+//         }
+//     });
+// });
 
 module.exports = router;
