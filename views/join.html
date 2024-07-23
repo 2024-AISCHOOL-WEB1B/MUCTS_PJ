@@ -6,89 +6,332 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 카카오 주소입력api -->
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <title>Document</title>
+    <title>회원가입</title>
+    <style>
+        html, body {
+        margin: 0;
+        padding: 0;   
+    }
+    #header,#header-width-container {
+        width: 100%;
+        height: 100px;
+    }
+    #header {
+        background-color: white;
+        border-bottom: 1px solid #ffe655;
+    }
+    #header-width-container {
+        max-width: 1280px; /* ********** 가로 길이 고정시키기. 없으면 퍼짐 ********** */
+        margin: 0 auto; /* 중앙 정렬 */
+        display: flex; /* flexbox 사용 */
+        justify-content: space-between; /* 양쪽 끝 정렬 */
+        align-items: center; /* 수직 가운데 정렬 */
+    }
+    #header-logo {
+        display: inline-block;
+    }
+    #header-right {
+        display: inline-block;
+        width: 116px;
+        height: 34px;
+        font-size: 16px;
+        color: #ffffff;
+        text-align: center;
+        line-height: 32px;
+        border-radius: 17px;
+        background-color: #7e69fe;
+    }
+    #header-right a {
+        color: #ffffff; /* 링크의 글자색을 흰색으로 설정 */
+        text-decoration: none; /* 링크의 밑줄 제거 */
+    }
+    .banner {
+        width: 100%;
+        min-height: 600px;
+    }
+    #main-width-container {
+        width: 1280px;
+        min-height: 600px;
+        margin: 0 auto; /* 중앙 정렬 */
+        display: flex; /* flexbox 사용 */
+        flex-direction: column; /* 세로로 정렬 */
+        /* align-items: center; 수직 가운데 정렬 */
+    }
+    #title-wrap-party {
+        width: 100%; /* 가로 전체를 사용 */
+        max-width: 1280px; /* ********** 가로 길이 고정시키기. 없으면 퍼짐 ********** */
+        display: flex; /*  flexbox 사용 */
+        justify-content: space-between; /*  양쪽 끝 정렬 */
+        align-items: center; /* 수직 가운데 정렬 */
+        margin: 0 auto; /* ********** 가로 길이 고정시키기. 없으면 퍼짐 ********** */
+        margin-top: 90px;
+    }
+    #title {
+        font-size: 22px;
+        color: #333333;
+        font-family: 'Noto Sans KR', 'NanumGothic', '나눔고딕', ng, 'Malgun Gothic', Gulim, Dotum, Sans-Serif !important;
+        font-weight: 500; /* 글씨 굵기 설정 */
+    }
+    .footer {
+        position: relative;
+        padding: 35px 0;
+        font-size: 12px;
+        font-weight: 300;
+        color: #333;
+        line-height: 20px;
+        background-color: white;
+        border-top: 1px solid #f0eff7;
+        word-break: keep-all;
+        max-width: 1280px; /* ********** 가로 길이 고정시키기. 없으면 퍼짐 ********** */
+        margin : 0 auto; /* ********** 가로 길이 고정시키기. 없으면 퍼짐 ********** */
+    }
+    .width-container {
+        position: relative;
+        max-width: 1280px;
+        height: 100%;
+        margin: 0 auto;
+    }
+        .footer .padding-left {
+        position: relative;
+        padding-left: 0px;
+        
+    }
+        .footer .v-bar {
+        margin-right: 20px;
+        color: #666666;
+        text-decoration: none;
+        position: relative;
+        display: inline-block;
+    }
+    #form {
+        /* margin-left: 150px; */
+    }
+    </style>
 </head>
 
 <body>
-    <h1>회원가입 페이지 입니다!</h1>
-    <form action="http://localhost:3000/user/join" method="post">
-        id:<input type="text" name="id"><br>
-        pw:<input type="password" name="pw"><br>
-        nick:<input type="text" name="nick"><br>
-        address:<input type="text" id="sample4_postcode" class="rgst_inputBox" placeholder="우편번호" name="addr3">
-        <input type="button" id="searchAddrButton" value="우편번호 찾기" class="searchAddr"><br>
-        <input type="text" id="sample4_roadAddress" class="rgst_inputBox" placeholder="도로명주소" name="addr1">
-        <input type="text" id="sample4_detailAddress" class="rgst_inputBox" placeholder="상세주소" name="addr2"><br>
-        email:<input type="email" name="email"><br>
-        birth_date:<input type="text" name="birth_date"><br>
-        gender:<input type="radio" name="gender" value="M">남
-        <input type="radio" name="gender" value="W">여<br>
-        tel:<input type="text" name="tel"><br>
-        계좌:<input type="text" name="wd_account"><br>
-        계좌번호:<input type="text" name="ba_number"><br>
+        <!-- 상단바 내용 -->
+        <div id="header">
+            <div id="header-width-container">
+                <div id="header-logo">
+                    <a href="#">
+                        <img src="#" alt="Header Image"/>
+                    </a>
+                </div>
+                <div id="header-right">
+                    <a href="#">로그인</a>
+                </div>
+            </div>
+        </div>
+        
 
 
-        <input type="submit" value="회원가입">
-
-        <script>
-            document.getElementById('searchAddrButton').addEventListener('click', sample4_execDaumPostcode);
-            function sample4_execDaumPostcode() {
-                var element_wrap = document.createElement('div'); // 팝업을 감쌀 div 생성
-                document.body.appendChild(element_wrap); // body에 div 추가
-
-                var currentPostcode = new daum.Postcode({
-                    oncomplete: function (data) {
-                        // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                        // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-                        // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                        var roadAddr = data.roadAddress; // 도로명 주소 변수
-                        var extraRoadAddr = ''; // 참고 항목 변수
-
-                        // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                        // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                        if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-                            extraRoadAddr += data.bname;
-                        }
-                        // 건물명이 있고, 공동주택일 경우 추가한다.
-                        if (data.buildingName !== '' && data.apartment === 'Y') {
-                            extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                        }
-                        // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                        if (extraRoadAddr !== '') {
-                            extraRoadAddr = ' (' + extraRoadAddr + ')';
-                        }
-
-                        // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                        document.getElementById('sample4_postcode').value = data.zonecode;
-                        document.getElementById("sample4_roadAddress").value = roadAddr;
-                        document.getElementById("sample4_detailAddress").value = ''; // 상세주소 필드는 사용자가 직접 입력하도록 설정
-
-                        // 팝업을 감싼 div 제거
-                        document.body.removeChild(element_wrap);
-                    },
-                    // 팝업을 감쌀 div 설정
-                    container: element_wrap
-                });
-
-                currentPostcode.open();
+        <style>
+            #id,#pw,#nick,#sample4_postcode,#searchAddrButton,#sample4_roadAddress,
+            #sample4_detailAddress,#email,#birth_date,#gender-radio,#tel,#wd_account,
+            #ba_number,#submit {
+            padding: 0.5em;
+            margin-bottom: 0.5em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 10px;
             }
-            document.getElementById('addressForm').addEventListener('submit', function (event) {
-                // addr1, addr2, addr3 값을 합쳐서 address 필드에 넣기
-                var postcode = document.getElementById('sample4_postcode').value;
-                var roadAddress = document.getElementById('sample4_roadAddress').value;
-                var detailAddress = document.getElementById('sample4_detailAddress').value;
-                var fullAddress = postcode + ' ' + roadAddress + ' ' + detailAddress;
 
-                document.getElementById('fullAddress').value = fullAddress;
-            });
-        </script>
+            #sample4_roadAddress,#sample4_detailAddress,#email,#birth_date,#gender-radio,
+            #tel,#wd_account,#ba_number,#submit {
+            width: 280px;
+            }
+            #sample4_detailAddress,#searchAddrButton {
+            width: 100px; 
+            }
+            #id,#pw,#nick,#sample4_postcode {
+            width: 125px;
+            }
+            #id {
+            margin-left: 16px;
+            }
+            #nick {
+            margin-left: 32px;
+            }
+            #sample4_postcode {
+            margin-left: 32px;
+            }
+            #searchAddrButton {
+            width: 100px;
+            margin-left: 20px;
+            }
+            #sample4_roadAddress {
+            margin-left: 69px;
+            }
+            #email {
+            margin-left: 16px;
+            }
+            #gender {
+            margin-left: 35px;
+            }
+            #gender-radio {
+            width: 13px;
+            margin-left: 10px;
+            }
+            #tel {
+            margin-left: 16px;
+            }
+            #wd_account {
+            margin-left: 32px;
+            }
+            #submit {
+            width: 90px;
+            }
+
+        </style>
+        <!-- 메인 내용 -->
+        <div class="banner">
+            <div id="main-width-container">
+                <br>
+                <div id="form">
+                    <form action="http://localhost:3000/user/join" method="post">
+                        아이디  <input type="text" name="id" id="id"><br>
+                        비밀번호  <input type="password" name="pw" id="pw"><br>
+                        별명  <input type="text" name="nick" id="nick"><br>
+                        주소  <input type="text" id="sample4_postcode" class="rgst_inputBox" placeholder="우편번호" name="addr3">
+                        <input type="button" id="searchAddrButton" value="우편번호 찾기" class="searchAddr"><br>
+                        <input type="text" id="sample4_roadAddress" class="rgst_inputBox" placeholder="도로명주소" name="addr1">
+                        <input type="text" id="sample4_detailAddress" class="rgst_inputBox" placeholder="상세주소" name="addr2"><br>
+                        이메일  <input type="email" name="email" id="email"><br>
+                        생년월일  <input type="text" name="birth_date" id="birth_date" placeholder="8자리 입력해주세요."><br>
+                        성별  <input type="radio" name="gender" value="M" id="gender">남
+                        <input type="radio" name="gender" value="W" id="gender-radio">여<br>
+                        휴대폰  <input type="text" name="tel" id="tel"><br>
+                        계좌  <input type="text" name="wd_account" id="wd_account"><br>
+                        계좌번호  <input type="text" name="ba_number" id="ba_number"><br>
+
+
+                        <input type="submit" value="회원가입" id="submit">
+
+                        <script>
+                            document.getElementById('searchAddrButton').addEventListener('click', sample4_execDaumPostcode);
+                            function sample4_execDaumPostcode() {
+                                var element_wrap = document.createElement('div'); // 팝업을 감쌀 div 생성
+                                document.body.appendChild(element_wrap); // body에 div 추가
+
+                                var currentPostcode = new daum.Postcode({
+                                    oncomplete: function (data) {
+                                        // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                                        // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                                        // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                                        var roadAddr = data.roadAddress; // 도로명 주소 변수
+                                        var extraRoadAddr = ''; // 참고 항목 변수
+
+                                        // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                                        // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                                        if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                                            extraRoadAddr += data.bname;
+                                        }
+                                        // 건물명이 있고, 공동주택일 경우 추가한다.
+                                        if (data.buildingName !== '' && data.apartment === 'Y') {
+                                            extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                                        }
+                                        // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                                        if (extraRoadAddr !== '') {
+                                            extraRoadAddr = ' (' + extraRoadAddr + ')';
+                                        }
+
+                                        // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                                        document.getElementById('sample4_postcode').value = data.zonecode;
+                                        document.getElementById("sample4_roadAddress").value = roadAddr;
+                                        document.getElementById("sample4_detailAddress").value = ''; // 상세주소 필드는 사용자가 직접 입력하도록 설정
+
+                                        // 팝업을 감싼 div 제거
+                                        document.body.removeChild(element_wrap);
+                                    },
+                                    // 팝업을 감쌀 div 설정
+                                    container: element_wrap
+                                });
+
+                                currentPostcode.open();
+                            }
+                            document.getElementById('addressForm').addEventListener('submit', function (event) {
+                                // addr1, addr2, addr3 값을 합쳐서 address 필드에 넣기
+                                var postcode = document.getElementById('sample4_postcode').value;
+                                var roadAddress = document.getElementById('sample4_roadAddress').value;
+                                var detailAddress = document.getElementById('sample4_detailAddress').value;
+                                var fullAddress = postcode + ' ' + roadAddress + ' ' + detailAddress;
+
+                                document.getElementById('fullAddress').value = fullAddress;
+                            });
+                        </script>
 
 
 
 
 
-    </form>
+                    </form>
+                </div>
+            </div>
+            <!-- 하단바 내용 -->
+            <div class="footer">
+                <div class="width-container">
+                    <div class="padding-left">
+                        <img src="#" alt="Footer Image">   <!-- 먹츠로고 흑백으로 넣기 -->
+                        <div class="footer-logo">
+    
+                            <a href="#" target="_blank" class="v-bar">
+                                회사소개
+                            </a>
+                            <a href="#" target="_blank" class="v-bar">
+                                제휴문의
+                            </a>
+                            <a href="" target="_blank" class="v-bar">
+                                1:1문의
+                            </a>
+                            <a href="#" target="_blank" class="v-bar">
+                                개인정보처리방침
+                            </a>
+                            <a href="#" target="_blank" class="v-bar">
+                                서비스이용약관
+                            </a>
+                            <a href="#" target="_blank" class="v-bar">
+                                FAQ
+                            </a>
+                            <br>
+                            <br>
+                            <span class="v-bar">
+                                상호 : 먹츠
+                            </span>
+                            <span>대표 : 이정현</span>
+                            <br>
+                            <span>주소 : 경기도 성남시 분당구 장미로 이치노구</span>
+                            <br>
+                            <span class="v-bar">
+                                사업자등록번호 : 123-45-78912
+                            </span>
+                            <span>통신판매번호 : 제 2022-호주-0044호</span>
+                            <br>
+                            <span class="v-bar">
+                                개인정보보호책임 : 이정현
+                            </span>
+                            <span>호스팅 사업자 : Amazon Web Service(AWS)</span>
+                            <br>
+                            <span class="v-bar">
+                                이메일 : pongki@Rupongi
+                            </span>
+                            <span>대표전화번호 : 123-456-789</span>
+                            <br>
+                            <br>
+                            <span>Copyright © 2024 Mucts Inc. All rights reserved.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="width-container">
+                    먹츠는 통신판매중개자이며, 통신판매의 당사자가 아닙니다.파티정보, 구매에 관한 의무와 책임은 판매자에게 있습니다.
+                    <br>
+                    먹츠는 소비자 보호와 안전거래를 위해고객센터(manager@buts.co.kr)를 운영하고 있으며,
+                    분쟁이 발생 된 경우 별도의 분쟁처리절차에 의거분쟁해결 및 청약철회 등이 진행 됩니다.
+                </div>
+             </div>
 </body>
 
 </html>
