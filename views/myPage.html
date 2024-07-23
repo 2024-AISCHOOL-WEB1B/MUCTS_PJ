@@ -1,35 +1,40 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MY 프로필</title>
     <link rel="stylesheet" href="myPage.css">
 </head>
+
 <body>
-<div class="container">
-    <h1>MY 프로필</h1>
-
-    <div class="profile-info-container"> <!-- 클래스 추가 -->
-        <div class="profile">
-            <h2>나의 프로필</h2>
-            <p>· 닉네임: {{nick}}</p>
-            <p>· 보유 포인트: <span class="points">{{point}}</span></p>
+    <div class="container">
+        <h1>MY 프로필</h1>
+        {% if user %}
+        <div class="profile-info-container"> <!-- 클래스 추가 -->
+            <div class="profile">
+                <h2>나의 프로필</h2>
+                <p>· 닉네임: {{user.nick}}</p>
+                <p>· 보유 포인트: <span class="points">{{user.point}}</span></p>
+            </div>
+            <div class="info">
+                <h2>알림 정보</h2>
+                <p>· 아이디: {{user.user_id}}</p>
+                <p>· 연락처: {{user.tel}}</p>
+                <p>· 이메일: {{user.email}}</p>
+                <p>· 가입일: {{user_date}}</p>
+                <a href="#" class="button">정보 수정</a>
+                <a href="#" class="button">탈퇴하기</a>
+            </div>
         </div>
-
-        <div class="info">
-            <h2>알림 정보</h2>
-            <p>· 아이디: {{user_id}}</p>
-            <p>· 연락처: {{tel}}</p>
-            <p>· 이메일: {{email}}</p>
-            <p>· 가입일: {{user_date}}</p>
-            <a href="#" class="button">정보 수정</a>
-            <a href="#" class="button" style="background-color: #ff4c4c;">탈퇴하기</a>
-        </div>
+        {% else %}
+        <h1>사용자를 찾을 수 없습니다.</h1>
+        {% endif %}
     </div>
-</div>
 
 
 
 </body>
+
 </html>
