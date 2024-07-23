@@ -8,11 +8,11 @@ const conn = require("../config/db");
 // 회원가입 경로로 접근했을 때!
 router.post("/join", (req, res) => {
    // 주소입력창에 우편번호,도로명주소,상세주소 ==> 총 주소 1개변수로 병합하는 코드
-    const { id, pw, nick, addr1, addr2, addr3, email, birth_date, gender, tel, wd_account, ba_number } = req.body;
+    const { user_id, pw, nick, addr1, addr2, addr3, email, birth_date, gender, tel, wd_account, ba_number } = req.body;
     const adress = `${addr3} ${addr1} ${addr2}`; // 합친 주소 필드
     
     let sql = "insert into User_TB value(?,?,?,?,?,?,?,?,0,?,?,CURRENT_TIMESTAMP())";
-    conn.query(sql, [id, pw, nick,adress,email,birth_date,gender,tel,wd_account,ba_number], (err, rows) => {
+    conn.query(sql, [user_id, pw, nick,adress,email,birth_date,gender,tel,wd_account,ba_number], (err, rows) => {
         console.log("insert 결과값 : ", rows);
         if (rows) {
             //회원가입에 성공했을 때, 로그인창으로 이동!
@@ -30,11 +30,11 @@ router.post("/join", (req, res) => {
 
 router.post("/login", (req, res) => {
     console.log("넘어온 데이터", req.body);
-    let { id, pw } = req.body;
+    let { user_id, pw } = req.body;
 
     let sql = "select * from User_TB where user_id=? and pw=?"; 
     
-    conn.query(sql, [id, pw], (err, rows) => {
+    conn.query(sql, [user_id, pw], (err, rows) => {
         
 
         console.log("select 결과값: ", rows);
@@ -59,9 +59,6 @@ router.post("/login", (req, res) => {
         }
     });
 });
-
-
-
 
 
 module.exports = router;
