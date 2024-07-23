@@ -32,20 +32,23 @@ router.post("/login", (req, res) => {
     console.log("넘어온 데이터", req.body);
     let { id, pw } = req.body;
 
-    let sql = "select * from User_TB where user_id=? and pw=?";
+    let sql = "select * from User_TB where user_id=? and pw=?"; 
     
     conn.query(sql, [id, pw], (err, rows) => {
         
+
+
         console.log("select 결과값: ", rows);
 
-        if (rows.length > 0) { 
+       if (rows.length > 0) { 
             console.log(rows[0]);
             req.session.nick = rows[0].nick;
-            req.session.point = rows[0].point;
-            req.session.user_id = rows[0].user_id;
-            req.session.tel = rows[0].tel;
-            req.session.email = rows[0].email;
-            req.session.user_date = rows[0].user_date;
+            // req.session.point = rows[0].point;
+            // req.session.user_id = rows[0].user_id;
+            // req.session.tel = rows[0].tel;
+            // req.session.point = rows[0].point;
+            // req.session.email = rows[0].email;
+            // req.session.user_date = rows[0].user_date;
             res.send(`
                 <script>
                     alert('로그인 성공: ${rows[0].nick}님 환영합니다!');
@@ -83,5 +86,48 @@ router.post("/login", (req, res) => {
 //         }
 //     });
 // });
+
+// router.get("/myPage", (req, res) => {
+//     console.log('Session:', req.session);
+    
+//     if (req.session && req.session.user_id) {
+//         try {
+//             // 날짜 포맷팅 함수
+//             function formatDate(date) {
+//                 const year = date.getFullYear();
+//                 const month = String(date.getMonth() + 1).padStart(2, '0');
+//                 const day = String(date.getDate()).padStart(2, '0');
+//                 let hours = date.getHours();
+//                 const minutes = String(date.getMinutes()).padStart(2, '0');
+//                 const ampm = hours >= 12 ? '오후' : '오전';
+                
+//                 hours = hours % 12;
+//                 hours = hours ? String(hours).padStart(2, '0') : '12';
+                
+//                 return `${year}년 ${month}월 ${day}일 ${ampm} ${hours}:${minutes}`;
+//             }
+
+//             const joinDate = new Date(req.session.user_date); // 데이터베이스에서 가져온 날짜
+//             const formattedJoinDate = formatDate(joinDate);
+//             console.log('Formatted Join Date:', formattedJoinDate);
+
+//             res.render("myPage", {
+//                 nick: req.session.nick,
+//                 point: req.session.point,
+//                 user_id: req.session.user_id,
+//                 tel: req.session.tel,
+//                 email: req.session.email,
+//                 user_date: formattedJoinDate
+//             });
+//         } catch (error) {
+//             console.error('Error formatting date or rendering page:', error);
+//             res.status(500).send('Internal Server Error');
+//         }
+//     } else {
+//         res.render("myPage");
+//     }
+// });
+
+
 
 module.exports = router;
