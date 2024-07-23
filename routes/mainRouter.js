@@ -60,6 +60,7 @@ router.get("/PartyRoom",(req,res)=>{
     res.render("PartyRoom");
 })
 
+// 충전을 하려고 할때
 router.get("/charge",(req,res)=>{
     res.render("charge");
 })
