@@ -60,5 +60,8 @@ router.get("/charge",(req,res)=>{
     res.render("charge");
 })
 
+router.get("/PartyRoom",(req,res)=>{
+    res.render("PartyRoom");
+})
 
 module.exports = router;
