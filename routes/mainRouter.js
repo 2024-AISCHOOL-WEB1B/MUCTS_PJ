@@ -22,8 +22,7 @@ router.get("/login",(req,res)=>{
 // 사용자가 마이페이지화면을 요청했을 때
 router.get("/myPage",(req,res)=>{
     console.log(req.session);
-    if(req.session){
-
+    if(req.session && req.session.user_id){
         // 날짜 포멧팅하는 함수
         function formatDate(date) {
             const year = date.getFullYear();
