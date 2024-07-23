@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PartyRoom</title>
+    <title>파티룸</title>
     <style>
         body,
         html {
@@ -95,6 +95,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
+            border-radius: 70px;
         }
 
         .party-leader img,
@@ -144,6 +145,7 @@
             flex: 1;
             border: 0.5px solid #000000;
             box-sizing: border-box;
+            border-radius: 10px
         }
 
         .chat {
@@ -160,6 +162,7 @@
             border: 1px solid #000;
             padding: 10px;
             box-sizing: border-box;
+            border-radius: 10px
         }
 
         #send_btn {
@@ -243,7 +246,7 @@
         <div class="party-rooms">
             <div class="party-leader">
                 <img src="../public/MUCTS_LOGO_BLACK.png" alt="MUCTS_LOGO_BLACK">
-                <span type="button" class="userState active" onclick="toggleState(this)">NOT READY</span>
+                <span type="button" class="userState active" onclick="toggleState(this)">READER</span>
             </div>
             <div class="user">
                 <img src="../public/MUCTS_LOGO_BLACK.png" alt="MUCTS_LOGO_BLACK">
@@ -302,6 +305,15 @@
                 element.classList.remove("active");
                 imgElement.src = "../public/MUCKS_LOGO.png";
                 imgElement.alt = "MUCKS_LOGO";
+            }
+
+            // 모든 유저 버튼의 상태를 검사하여 숫자 1번 버튼 업데이트
+            const allUsersReady = [...document.querySelectorAll('.user .userState')].every(el => el.innerText === "READY");
+            const partyLeaderButton = document.querySelector('.party-leader .userState');
+            if (allUsersReady) {
+                partyLeaderButton.innerText = "START";
+            } else {
+                partyLeaderButton.innerText = "NOT READY";
             }
         }
     </script>
