@@ -25,14 +25,14 @@
         <div class="points-header">
             <div class="username">
                 <!-- <img src="https://via.placeholder.com/50" alt="Profile Image"> -->
-                <span>{{nick}}</span>
+                <span>{{user.nick}}</span>
             </div>
             <div class="points">
            <form action="/charge/charge" method="post">
             포인트충전 : <input type="number" name="charge_money">
             <input type="submit" value="충전">
            </form>
-                <span>포인트:</span> <strong>{{charge_money}}</strong>
+                <span>포인트:</span> <strong>{{user.point}}</strong>
             </div>
         </div>
         <h2>포인트 상세내역</h2>
