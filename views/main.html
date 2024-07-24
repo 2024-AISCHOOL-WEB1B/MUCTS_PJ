@@ -1,157 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>main-page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>BUTS</title>
     <link rel="stylesheet" href="main.css">
+    
 </head>
 <body>
-        <!-- 상단바 내용 -->
-        <div id="header">
-            <div id="header-width-container">
-                <div id="header-logo">
-                    <a href="/">
-                        <img src="#" alt="Header Image"/>
-                    </a>
-                </div>
-                <div id="header-right">
-                    <a href="/login">로그인</a>
-                </div>
-            </div>
+    <!-- head -->
+    <div id="topper">
+        <div id="topper-menu">
+            <a href="">커뮤니티</a>
+            <a href="">이벤트</a>
+            <a href="">공지사항</a>
         </div>
-
-        <!-- 배너 내용 -->
-        <div class="banner">
-            <div id="main-width-container">
-                <br>
-                <br>
-                <a href="#">
-                    <img src="#" alt="Banner Image">
+    </div>
+    <div id="header">
+        <div id="header-width-container">
+            <div id="header-logo">
+                <a href="https://buts.co.kr/">
+                    <img src="small-butslogo.png" alt="Buts Logo">
                 </a>
             </div>
-
-        <!-- 채팅방 만들기 간판 -->
-        <div id="title-wrap-party">
-            <div id="title">
-                먹츠
-                <span id="text-party">파티</span>
+            <div id="header-right">
+                <a href="https://buts.co.kr/bbs/login.php">로그인</a>
             </div>
-            <a href="/makeParty" id="botton-make-party">
-                파티 만들기
+        </div>
+    </div>
+    <!-- body -->
+    <div id="main-body">
+        <div id="main-width-container">
+            <br>
+            <a href="https://buts.co.kr/bbs/guide_buts.php">
+                <img src="./guide_main_banner.png" alt="Guide Banner">
             </a>
-        </div>
-
-        <!-- 밑으로는 PartyRoom들이라고 보면됨 -->
-        <div class="party-rooms">
-            <div class="party">
-                <div><span>party.number</span> 방제목 : (분류)가게상호명 </div>
-                <div>인원수</div>
-                <div>최소주문금액</div>
+            <div id="title-wrap-party">
+                <div id="title">
+                    먹츠
+                    <span id="text-party">파티</span>
+                </div>
+                <a href="https://buts.co.kr/shop/partner/login.php" id="botton-make-party">
+                    파티 만들기
+                </a>
             </div>
-            <div class="party">
-                <div><span>party.number</span> 방제목 : (분류)가게상호명 </div>
-                <div>인원수</div>
-                <div>최소주문금액</div>
-            </div>
-            <div class="party">
-                <div><span>party.number</span> 방제목 : (분류)가게상호명 </div>
-                <div>인원수</div>
-                <div>최소주문금액</div>
-            </div>
-            <div class="party">
-                <div><span>party.number</span> 방제목 : (분류)가게상호명 </div>
-                <div>인원수</div>
-                <div>최소주문금액</div>
-            </div>
-            <div class="party">
-                <div><span>party.number</span> 방제목 : (분류)가게상호명 </div>
-                <div>인원수</div>
-                <div>최소주문금액</div>
-            </div>
-            <div class="party">
-                <div><span>party.number</span> 방제목 : (분류)가게상호명 </div>
-                <div>인원수</div>
-                <div>최소주문금액</div>
-            </div>
-            <div class="party">
-                <div><span>party.number</span> 방제목 : (분류)가게상호명 </div>
-                <div>인원수</div>
-                <div>최소주문금액</div>
-            </div>
-            <div class="party">
-                <div><span>party.number</span> 방제목 : (분류)가게상호명 </div>
-                <div>인원수</div>
-                <div>최소주문금액</div>
-            </div>
-            <div class="party">
-                <div><span>party.number</span> 방제목 : (분류)가게상호명 </div>
-                <div>인원수</div>
-                <div>최소주문금액</div>
-            </div>
-        </div>
-            <!-- 하단바 내용 -->
-        <div class="footer">
-            <div class="width-container">
-                <div class="padding-left">
-                    <img src="#" alt="Footer Image">   <!-- 먹츠로고 흑백으로 넣기 -->
-                    <div class="footer-logo">
-
-                        <a href="#" target="_blank" class="v-bar">
-                            회사소개
-                        </a>
-                        <a href="#" target="_blank" class="v-bar">
-                            제휴문의
-                        </a>
-                        <a href="" target="_blank" class="v-bar">
-                            1:1문의
-                        </a>
-                        <a href="#" target="_blank" class="v-bar">
-                            개인정보처리방침
-                        </a>
-                        <a href="#" target="_blank" class="v-bar">
-                            서비스이용약관
-                        </a>
-                        <a href="#" target="_blank" class="v-bar">
-                            FAQ
-                        </a>
-                        <br>
-                        <br>
-                        <span class="v-bar">
-                            상호 : 먹츠
-                        </span>
-                        <span>대표 : 이정현</span>
-                        <br>
-                        <span>주소 : 경기도 성남시 분당구 장미로 이치노구</span>
-                        <br>
-                        <span class="v-bar">
-                            사업자등록번호 : 123-45-78912
-                        </span>
-                        <span>통신판매번호 : 제 2022-호주-0044호</span>
-                        <br>
-                        <span class="v-bar">
-                            개인정보보호책임 : 이정현
-                        </span>
-                        <span>호스팅 사업자 : Amazon Web Service(AWS)</span>
-                        <br>
-                        <span class="v-bar">
-                            이메일 : pongki@Rupongi
-                        </span>
-                        <span>대표전화번호 : 123-456-789</span>
-                        <br>
-                        <br>
-                        <span>Copyright © 2024 Mucts Inc. All rights reserved.</span>
-                    </div>
+            <div class="chat-container">
+                <div class="card">
+                    <div class="card-title">디즈니</div>
+                    <div class="card-content">6개월/즉시시청/안전보장</div>
+                    <div class="card-price">16,110원</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">넷플릭스 프리미엄</div>
+                    <div class="card-content">[모든기기시청] 1개월 / 즉시시청 ...</div>
+                    <div class="card-price">2,100원</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">넷플릭스 프리미엄</div>
+                    <div class="card-content">[직접인증가능] 3개월/즉시시청/최저...</div>
+                    <div class="card-price">13,650원</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">넷플릭스 프리미엄</div>
+                    <div class="card-content">즉시시청 / 안전보장</div>
+                    <div class="card-price">22,500원</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">유튜브 프리미엄</div>
+                    <div class="card-content">[참여자즉시대] 신속혜택/안전운영</div>
+                    <div class="card-price">36,400원</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">넷플릭스 프리미엄</div>
+                    <div class="card-content">[직접인증가능] 6개월/즉시시청/최저...</div>
+                    <div class="card-price">27,150원</div>
                 </div>
             </div>
         </div>
-        <div class="footer">
-            <div class="width-container">
-                먹츠는 통신판매중개자이며, 통신판매의 당사자가 아닙니다.파티정보, 구매에 관한 의무와 책임은 판매자에게 있습니다.
-                <br>
-                먹츠는 소비자 보호와 안전거래를 위해고객센터(manager@buts.co.kr)를 운영하고 있으며,
-                분쟁이 발생 된 경우 별도의 분쟁처리절차에 의거분쟁해결 및 청약철회 등이 진행 됩니다.
+    </div>
+    <!-- footer -->
+    <div class="footer">
+        <div class="width-container">
+            <div class="padding-left">
+                <img src="./small-butslogo-glay.png" alt="Buts Logo">
+                <div class="footer-logo">
+                    <a href="https://butscorp.com/" target="_blank" class="v-bar">회사소개</a>
+                    <a href="https://butscorp.com/contact/" target="_blank" class="v-bar">제휴문의</a>
+                    <a href="" target="_blank" class="v-bar">1:1문의</a>
+                    <a href="https://buts.co.kr/bbs/page.php?hid=privacy" target="_blank" class="v-bar">개인정보처리방침</a>
+                    <a href="https://buts.co.kr/bbs/page.php?hid=provision" target="_blank" class="v-bar">서비스이용약관</a>
+                    <a href="https://buts.co.kr/bbs/faq.php" target="_blank" class="v-bar">FAQ</a>
+                    <br>
+                    <br>
+                    <span class="v-bar">상호 : 먹츠</span><span>대표 : 김유민</span>
+                    <br>
+                    <span>주소 : 경기도 성남시 분당구 장미로 이치노구</span>
+                    <br>
+                    <span class="v-bar">사업자등록번호 : 123-45-78912</span><span>통신판매번호 : 제 2022-호주-0044호</span>
+                    <br>
+                    <span class="v-bar">개인정보보호책임 : 주현빈</span><span>호스팅 사업자 : Amazon Web Service(AWS)</span>
+                    <br>
+                    <span class="v-bar">이메일 : pongki@Rupongi</span><span>대표전화번호 : 123-456-789</span>
+                    <br>
+                    <br>
+                    <span>Copyright © 2024 Mucts Inc. All rights reserved.</span>
+                </div>
             </div>
-         </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="width-container">
+            먹츠는 통신판매중개자이며, 통신판매의 당사자가 아닙니다. 파티정보, 구매에 관한 의무와 책임은 판매자에게 있습니다.
+            <br>
+            먹츠는 소비자 보호와 안전거래를 위해 고객센터(manager@buts.co.kr)를 운영하고 있으며, 분쟁이 발생 된 경우 별도의 분쟁처리절차에 의거 분쟁해결 및 청약철회 등이 진행 됩니다.
+        </div>
+    </div>
 </body>
 </html>
