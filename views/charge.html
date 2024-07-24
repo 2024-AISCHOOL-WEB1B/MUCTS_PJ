@@ -1,76 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>폼 선택</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .form-container {
-            margin-bottom: 20px;
-        }
-        .form-container form {
-            display: none; /* 기본적으로 폼은 숨깁니다. */
-            border: 1px solid #ddd;
-            padding: 10px;
-        }
-        .form-container.active form {
-            display: block;
-        }
-        .form-container button {
-            margin-top: 10px;
-        }
-    </style>
+    <title>벗츠 포인트</title>
+    <link rel="stylesheet" href="charge.css">
 </head>
 <body>
-    <h1>충전하기</h1>
-    <div id="formSelector">
-        <button onclick="showForm('charge')">금액충전</button>
-        <button onclick="showForm('use')">사용할 금액</button>
-        <button onclick="showForm('money')">조회하기</button>
-    </div>
+    <div class="container">
+        <div class="header">
+            <img src="https://via.placeholder.com/150" alt="Logo">
+            <div class="nav">
+                <a href="#">영상</a>
+                <a href="#">도서/음악</a>
+                <a href="#">게임</a>
+                <a href="#">기타</a>
+                <a href="#">충전</a>
+            </div>
+            <div class="profile">
+                <img src="https://via.placeholder.com/50" alt="Profile Image">
+            </div>
+        </div>
 
-    <div id="chargeForm" class="form-container">
-        <h2>금액충전</h2>
-        <form action="/charge/charge" method="post">
-            id: <input type="text" name="user_id"> <br>
-            금액충전 : <input type="number" name="charge_money">
+        <div class="points-header">
+            <div class="username">
+                <!-- <img src="https://via.placeholder.com/50" alt="Profile Image"> -->
+                <span>{{nick}}</span>
+            </div>
+            <div class="points">
+           <form action="/charge/charge" method="post">
+            포인트충전 : <input type="number" name="charge_money">
             <input type="submit" value="충전">
-        </form>
+           </form>
+                <span>포인트:</span> <strong>{{charge_money}}</strong>
+            </div>
+        </div>
+        <h2>포인트 상세내역</h2>
+        <table>
+            <tr>
+                <th>{{charge_date}}</th>
+                <th>충전 포인트</th>
+                <!-- <th>사용 포인트</th> -->
+                <!-- <th>잔여 포인트</th> -->
+            </tr>
+            <tr>
+                <td>2024-07-24 11:29 (수)</td>
+                <td style="color: #6c63ff;">+500 포인트</td>
+                <!-- <td style="color: #ff0000;">0 포인트</td> -->
+                <!-- <td style="color: black;">0 포인트</td> -->
+            </tr>
+        </table>
+        <div class="pagination">
+            <a href="#">&laquo;</a>
+            <a href="#" class="active">1</a>
+            <a href="#">&raquo;</a>
+        </div>
     </div>
-
-    <div id="useForm" class="form-container">
-        <h2>사용할 금액</h2>
-        <form action="/charge/use" method="post">
-            id: <input type="text" name="user_id"> <br>
-            사용할금액: <input type="number" name="charge_money">
-            <input type="submit" value="사용할 금액">
-        </form>
+    <div class="footer">
+        <p>회사소개 | 제휴문의 | 1:1문의하기 | <a href="#">개인정보처리방침</a> | 서비스 이용약관 | FAQ</p>
+        <ㅎ>
+            상호: 먹츠 | 대표: 홍길동<br>
+            주소: 인공지능사관학교<br>
+            사업자등록번호: 000-00-00000 | 통신판매업번호: 제 0000-광주동구A-00000호<br>
+            개인정보보호책임자: 홍길동 | 호스팅 사업자: Amazon Web Service(AWS)<br>
+            이메일:  | 대표전화: 070-4354-1015
+        </호
     </div>
-
-    <div id="moneyForm" class="form-container">
-        <h2>조회하기</h2>
-        <form action="/charge/money" method="post">
-            id: <input type="text" name="user_id"> <br>
-            <input type="submit" value="조회하기">
-        </form>
-    </div>
-
-    <script>
-        function showForm(formId) {
-            // 모든 폼을 숨깁니다.
-            document.querySelectorAll('.form-container').forEach(container => {
-                container.classList.remove('active');
-            });
-            // 선택된 폼을 표시합니다.
-            document.getElementById(formId + 'Form').classList.add('active');
-        }
-
-        // 초기 로딩 시 기본 폼을 표시합니다.
-        showForm('charge');
-    </script>
 </body>
 </html>
