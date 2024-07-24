@@ -1,123 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>Mucts</title>
     <link rel="stylesheet" href="login.css">
 </head>
-
 <body>
-    <!-- 상단바 통일 => 로그인에서 로그아웃으로만 바뀜 -->
+    <!-- head -->
+    <div id="topper">
+        <div id="topper-menu">
+            <a href="">커뮤니티</a>
+            <a href="">이벤트</a>
+            <a href="">공지사항</a>
+        </div>
+    </div>
     <div id="header">
         <div id="header-width-container">
             <div id="header-logo">
-                <a href="/">
-                <img src="#" alt="Header Image" />
+                <a href="https://buts.co.kr/">
+                    <img src="Mainlogo.png" alt="Buts Logo">
                 </a>
             </div>
+            <div id="header-right">
+                <a href="https://buts.co.kr/bbs/login.php">로그인</a>
+            </div>
         </div>
     </div>
-    <div class="logInBox">
-        <div>
-            <p>
-                <a href="#" id="upper_Logo">
-                    <img src="#">
-                </a>
-            </p>
-        </div>
-        <form action="http://localhost:3000/user/login" method="post" id="loginForm">
-            <p>
-                <input type="text" id="username" name="user_id" placeholder="아이디를 입력하세요.">
-            </p>
-            <p>
-                <input type="password" id="passWord" name="pw" placeholder="비밀번호를 입력하세요.">
-            </p>
-            <div class="loss">
-                <div class="a_tags">
-                    <div>
-                        <button id="openModal_btn" type="button" onclick="openModal()">아이디/비밀번호 찾기</button>
-                        <!-- <a href="#">아이디/비밀번호 찾기</a> -->
+    <!-- body -->
+    <div id="main-body">
+        <div id="main-width-container">
+            <div id="form-login">
+                <form id="form" role="form" name="flogin" action="#" method="post">
+                    <div id="login-logo">
+                        <img src="Mainlogo.png">
                     </div>
-                    <span class="bar">|</span>
-                    <button type="button" id="join_us">
-                        <a href="/join">회원가입</a>
-                    </button>
-                </div>
-            </div>
-            <div>
-                <input type="submit" id="logInBtn" value="로그인">
-            </div>
-            <br>
-            <br>
-        </form>
-        <!-- 하단바 -->
-        <div class="footer">
-            <div class="width-container">
-                <div class="padding-left">
-                    <img src="#" alt="Footer Image">
-                    <div class="footer-logo">
-                        <a href="#" target="_blank" class="v-bar"> 회사소개 </a>
-                        <a href="#" target="_blank" class="v-bar"> 제휴문의 </a>
-                        <a href="" target="_blank" class="v-bar"> 1:1문의 </a>
-                        <a href="#" target="_blank" class="v-bar"> 개인정보처리방침 </a>
-                        <a href="#" target="_blank" class="v-bar"> 서비스이용약관 </a>
-                        <a href="#" target="_blank" class="v-bar"> FAQ </a>
-                        <br />
-                        <br />
-                        <span class="v-bar"> 상호 : 먹츠 </span>
-                        <span>대표 : 이정현</span>
-                        <br />
-                        <span>주소 : 인공지능사관학교</span>
-                        <br />
-                        <span class="v-bar"> 사업자등록번호 : ###-##-##### </span>
-                        <span>통신판매번호 : 제 ####-##-####호</span>
-                        <br />
-                        <span class="v-bar"> 개인정보보호책임 : 이정현 </span>
-                        <span>호스팅 사업자 : 인공지능사관학교web_1B</span>
-                        <br />
-                        <span class="v-bar"> 이메일 : pongki@Rupongi </span>
-                        <span>대표전화번호 : 123-456-789</span>
-                        <br />
-                        <br />
-                        <span>Copyright © 2024 Mucts Inc. All rights reserved.</span>
+                    <div id="login-input">
+                        <input type="text" name="mb_id" id="login_id" required="" maxlength="20" placeholder="아이디를 입력하세요">
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer">
-            <div class="width-container">
-                먹츠는 통신판매중개자이며, 통신판매의 당사자가 아닙니다. <br />
-                따라서, 상품에 대한 모든 거래정보와 책임은 판매자에게 있습니다.
+                    <br>
+                    <div id="login-input-pw">
+                        <input type="password" name="mb_password" id="login_pw" required="" maxlength="20" placeholder="패스워드를 입력하세요">
+                    </div>
+                    <br>
+                    <div id="login-option">
+                        <div id="login-option-right">
+                            <a href="./register.php" class="v-bar">회원가입</a>
+                            <a href="https://buts.co.kr/bbs/password_lost.php" id="login_password_lost">아이디/비밀번호찾기</a>
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" id="form-login-button">로그인</button>
+                    <a href="#" id="form-login-button-kakao">카카오계정 로그인하기
+                    </a>
+                    
+                </form>
             </div>
         </div>
     </div>
-
-    <!-- 아이디/비밀번호 찾기 모달창 -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>아이디 찾기</h2>
-            <hr>
-
-            <form>
-                <label for="name">이름</label>
-                <br>
-                <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
-                <br><br>
-                <label for="email">이메일주소</label>
-                <br>
-                <input type="email" id="email" name="email" placeholder="회원가입시 등록한 이메일주소를 입력하세요" required>
-                <br><br>
-                <div class="close_ok_btn">
-                    <button type="button" class="close_btn" onclick="closeModal()">닫기</button>
-                    <button type="submit" class="ok_btn">확인</button>
+    <!-- footer -->
+    <div class="footer">
+        <div class="width-container">
+            <div class="padding-left">
+                <img src="./small-butslogo-glay.png" alt="Buts Logo">
+                <div class="footer-logo">
+                    <a href="https://butscorp.com/" target="_blank" class="v-bar">회사소개</a>
+                    <a href="https://butscorp.com/contact/" target="_blank" class="v-bar">제휴문의</a>
+                    <a href="" target="_blank" class="v-bar">1:1문의</a>
+                    <a href="https://buts.co.kr/bbs/page.php?hid=privacy" target="_blank" class="v-bar">개인정보처리방침</a>
+                    <a href="https://buts.co.kr/bbs/page.php?hid=provision" target="_blank" class="v-bar">서비스이용약관</a>
+                    <a href="https://buts.co.kr/bbs/faq.php" target="_blank" class="v-bar">FAQ</a>
+                    <br>
+                    <br>
+                    <span class="v-bar">상호 : 먹츠</span><span>대표 : 김유민</span>
+                    <br>
+                    <span>주소 : 경기도 성남시 분당구 장미로 이치노구</span>
+                    <br>
+                    <span class="v-bar">사업자등록번호 : 123-45-78912</span><span>통신판매번호 : 제 2022-호주-0044호</span>
+                    <br>
+                    <span class="v-bar">개인정보보호책임 : 주현빈</span><span>호스팅 사업자 : Amazon Web Service(AWS)</span>
+                    <br>
+                    <span class="v-bar">이메일 : pongki@Rupongi</span><span>대표전화번호 : 123-456-789</span>
+                    <br>
+                    <br>
+                    <span>Copyright © 2024 Mucts Inc. All rights reserved.</span>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-    <script src="login.js"></script>
+    <div class="footer">
+        <div class="width-container">
+            먹츠는 통신판매중개자이며, 통신판매의 당사자가 아닙니다. 파티정보, 구매에 관한 의무와 책임은 판매자에게 있습니다.
+            <br>
+            먹츠는 소비자 보호와 안전거래를 위해 고객센터(manager@buts.co.kr)를 운영하고 있으며, 분쟁이 발생 된 경우 별도의 분쟁처리절차에 의거 분쟁해결 및 청약철회 등이 진행 됩니다.
+        </div>
+    </div>
 </body>
-
 </html>

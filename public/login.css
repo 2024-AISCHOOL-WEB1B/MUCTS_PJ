@@ -1,27 +1,51 @@
-/* 상단바 CSS */
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+#topper {
+    width: 100%;
+    height: 35px;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #f0eff7;
+}
+#topper-menu {
+    position: relative;
+    text-align: right;
+    line-height: 34px;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+#topper-menu > a {
+    display: inline-block;
+    padding: 0 20px;
+    font-size: 12px;
+    color: #888888;
+}
 #header {
     width: 100%;
     height: 100px;
     background-color: white;
     border-bottom: 1px solid #ffe655;
-    max-width: 1280px;
-    margin: 0 auto;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
 }
-
 #header-width-container {
-    max-width: 1280px;
     width: 100%;
+    max-width: 1280px;
     height: 100px;
     margin: 0 auto;
+    padding: 0 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
 #header-logo {
     display: inline-block;
 }
-
 #header-right {
     display: inline-block;
     width: 116px;
@@ -31,38 +55,62 @@
     text-align: center;
     line-height: 32px;
     border-radius: 17px;
-    background-color: #7e69fe;
+    background-color: black;
 }
-
 #header-right a {
     color: #ffffff;
     text-decoration: none;
 }
-
-/*상단바 CSS 종료*/
-
-/* 하단바 CSS */
+#main-body {
+    width: 100%;
+    min-height: 600px;
+    padding-top: 100px; /* Adjust for fixed header */
+}
+#main-width-container {
+    width: 100%;
+    max-width: 1280px;
+    min-height: 600px;
+    margin: 0 auto;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#title-wrap-party {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 90px;
+}
+#title {
+    font-size: 23px;
+    color: #333333;
+    font-family: 'Noto Sans KR', 'NanumGothic', '나눔고딕', ng, 'Malgun Gothic', Gulim, Dotum, Sans-Serif !important;
+    font-weight: 500;
+}
 .footer {
     position: relative;
-    padding: 35px 0;
+    padding: 35px 10px;
     font-size: 12px;
     font-weight: 300;
     color: #333;
     line-height: 20px;
     background-color: white;
-    border-top: 1px solid #f0eff763;
+    border-top: 1px solid #f0eff7;
     word-break: keep-all;
-    max-width: 1280px;
-    margin: 0 auto;
-    width: 100%;
-    text-align: left;
 }
-
+.width-container {
+    position: relative;
+    width: 100%;
+    max-width: 1280px;
+    height: 100%;
+    margin: 0 auto;
+}
 .footer .padding-left {
     position: relative;
     padding-left: 0px;
 }
-
 .footer .v-bar {
     margin-right: 20px;
     color: #666666;
@@ -70,203 +118,170 @@
     position: relative;
     display: inline-block;
 }
-
-/*하단바 CSS 종료*/
-
-* {
-    font-family: 'GmarketSansMedium';
+@media all and (max-width: 1200px) {
+    #topper-menu {
+        width: 100%;
+    }
+    #header-width-container {
+        width: 100%;
+    }
+    #main-width-container {
+        width: 100%;
+        padding: 0 10px;
+    }
+    .card {
+        width: 100%;
+        max-width: 100%;
+    }
 }
-
-body {
-    margin: auto;
-    width: 960px;
-}
-
-#logInBtn {
-    width: 100%;
-    padding: 10px;
-    border-radius: 10px;
-}
-
-table {
-    margin: 20px auto;
-    border: 1px solid #ccc;
-    padding: 10px;
-    width: 500px;
-    box-sizing: border-box;
-    border-radius: 10px;
-}
-
-input[type="text"],
-input[type="password"] {
-    width: 100%;
-    padding: 20px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-    border-radius: 5px;
-}
-
-.loss {
-    display: flex;
-    justify-content: center;
-    /* 중앙 정렬 */
-    margin-top: 10px;
-    font-size: 15px;
-}
-
-.loss a {
-    color: inherit;
-    text-decoration: none;
-    margin: 10px;
-    margin-top: 5px;
-}
-
-.homeLogo {
-    margin-top: 20px;
-}
-
-.homeLogo a {
-    padding-left: 20px;
-    text-decoration: none;
-    color: black;
-    font-size: 30px;
-    font-weight: bold;
-}
-
-.homeLogo a:hover {
-    margin-left: -20px;
-    -webkit-transition: .5s ease-in-out;
-    transition: .5s ease-in-out;
-}
-
-.logInBox {
-    text-align: center;
-    margin-top: 100px;
-}
-
-
-/* 모달창 Css */
-.modal {
-    display: none; /* 기본적으로 숨김 */
-    position: fixed;
-    z-index: 1000; /* 다른 요소들 위에 표시 */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0); /* 검은색 배경 */
-    background-color: rgba(0,0,0,0.4); /* 배경 투명도 */
-}
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;  /*화면중앙배치*/
-    padding: 20px;
-    border: 1px solid #888;
-    width: 500px; /* 모달창 너비 */
-    max-width: 100%;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-/* 모달창의 이름 입력칸 css */
-#name{
-    height: 40px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-/* 모달창의 이메일 입력칸 css */
-#email{
-    height: 40px;
-    width: 100%;
-    border-radius: 5px;
-    padding-left: 15px;
-    box-sizing: border-box;
-}
-
-/* 모달창 닫기 버튼 css */
-.close_btn{
-    border-radius: 5px;
-    border: 1px solid black;
-    padding: 10px 20px;
-    text-align: center;
-    margin-right: 10px;
-}
-
-/* 모달창 확인 버튼 css */
-.ok_btn{
-    border-radius: 5px;
-    border: 1px solid black;
-    padding: 10px 20px;
-    text-align: center;
-}
-
-/* 닫기, 확인 버튼 css */
-.close_ok_btn{
-    text-align: center;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* 모달창 css 종료 */
-
-#join_us a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.a_tags {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.bar {
-    margin: 0 10px;
-}
-
-@media (max-width: 480px) {
+@media all and (max-width: 768px) {
+    #topper-menu {
+        text-align: center;
+        line-height: 1.2;
+    }
+    #topper-menu > a {
+        display: block;
+        padding: 10px 0;
+    }
+    #header-width-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
     #header-right {
-        font-size: 14px;
-        height: 30px;
-        line-height: 28px;
+        margin-top: 10px;
     }
-
-    .logInBox {
-        margin-top: 30px;
+    #title-wrap-party {
+        flex-direction: column;
+        align-items: flex-start;
     }
-
-    input[type="text"],
-    input[type="password"] {
-        padding: 12px;
+    .chat-container {
+        flex-direction: column;
+        align-items: center;
     }
-
-    .footer {
-        font-size: 9px;
-        padding: 20px 10px;
+    .card {
+        width: 100%;
+        margin-bottom: 20px;
     }
-
-    .footer .v-bar {
-        margin-right: 10px;
-        margin-bottom: 5px;
-    }
-
-    .homeLogo a {
-        font-size: 24px;
-        padding-left: 10px;
-    }
+}
+#form-login {
+    max-width: 400px;
+    margin: 0 auto;
+    padding-top: 120px;
+    width: 400px;
+    height: 680px;
+   
+}
+#form {
+margin: 0;
+padding: 0;
+border: 0;
+width: 400px;
+height: 395px;
+}
+#login-logo {
+position: relative;
+margin-bottom: 42px;
+text-align: center;
+}
+#login-input,#login-input-pw{
+height: 60px;
+padding: 0 20px;
+font-size: 16px;
+border-radius: 10px;
+}
+#login_id {
+height: 60px;
+padding: 0 20px;
+font-size: 16px;
+border-radius: 10px;
+width: 100%;
+color: #333;
+border: solid 1px #dddddd;
+background-color: white;
+outline: none;
+margin-left: -21px;
+}
+#login_pw {
+height: 60px;
+padding: 0 20px;
+font-size: 16px;
+border-radius: 10px;
+width: 100%;
+color: #333;
+border: solid 1px #dddddd;
+background-color: white;
+outline: none;
+margin-left: -21px;
+}
+#login-option {
+position: relative;
+box-sizing: border-box;
+padding: 0;
+font-size: 13px;
+font-family: 'Noto Sans KR', 'NanumGothic', '나눔고딕', ng, 'Malgun Gothic', Gulim, Dotum, Sans-Serif !important;
+font-weight: 400;
+line-height: 1.6;
+color: #666;
+background-color: white;
+-webkit-font-smoothing: antialiased !important;
+text-rendering: optimizelegibility;
+background-attachment: fixed;
+word-break: keep-all;
+}
+#login-option-right{
+position: absolute;
+top: 0;
+right: 0;
+}
+.v-bar {
+margin-right: 20px;
+font-size: 14px;
+color: #666666;
+text-decoration: none;
+position: relative;
+display: inline-block;
+background: 0 0;
+box-sizing: border-box;
+}
+#login_password_lost {
+font-size: 14px;
+color: #666666;
+text-decoration: none;
+position: relative;
+display: inline-block;
+background: 0 0;
+box-sizing: border-box;
+}
+#form-login-button{
+margin: 25px 0 20px 0;
+background-color: #7e69fe;
+width: 100%;
+ height: 60px;
+line-height: 58px;
+border-radius: 10px;
+position: relative;
+display: inline-block;
+min-width: 240px;
+padding: 0 10px;
+font-size: 18px;
+color: white;
+text-align: center;
+border: 0;
+}
+#form-login-button-kakao{ 
+margin: 25px 0 20px 0;
+width: 100%;
+height: 60px;
+line-height: 58px;
+border-radius: 10px;
+position: relative;
+display: inline-block;
+min-width: 240px;
+padding: -1 10px;
+font-size: 18px;
+text-align: center;
+border: 0;
+color: #331420;
+background-color: #f9e000;
+text-decoration-line: none;
 }
