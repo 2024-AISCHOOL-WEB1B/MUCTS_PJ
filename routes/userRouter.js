@@ -54,6 +54,9 @@ router.post("/login", (req, res) => {
         }
     });
 });
+
+
+
 router.get("/myPage", (req, res) => {
     console.log(req.session.user_id);
     let user_id = req.session.user_id;
