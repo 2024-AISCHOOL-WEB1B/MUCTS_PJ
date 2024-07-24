@@ -61,6 +61,8 @@ nunjucks.configure("views", {
 
 // 여기부터 채팅방 코드입니다.
 // socketio 웹소켓 연결 시
+let roomList = {};
+let maxRoomCapacity = 4; // 임시값
 io.on('connection', (socket) => {
     let roomId;
     let nick;
@@ -69,11 +71,28 @@ io.on('connection', (socket) => {
     // 클라이언트가 채팅방에 들어감
     socket.on('enter room', (data)=>{
         roomId = data.roomId;
-        nick = data.nick;
-        console.log('채팅방 입장할 때 : ', data);
+        nick = data.nick||"Geust";
+
+        // 객체에 방 생성
+        if(!roomList[roomId]){
+            roomList[roomId] = [];
+            console.log('roomList에 roomId가 없을 때 추가', 'roomList[roomId]', roomList[roomId]);
+        }
+        
+        if(roomList[roomId].length >= maxRoomCapacity){
+            socket.emit('full room', "방 인원이 가득 찼습니다.. 뒤로가기 해주세요ㅠㅠ");
+            socket.disconnect();
+            return; // 연결 종료
+        }
+        
+        // 사용자 추가
+        if(roomList[roomId].indexOf(nick) === -1){
+            roomList[roomId].push(nick);
+        }
+        
+        console.log('채팅방 입장할 때 : ', data, roomList);
 
         socket.join(roomId);
-        console.log('엔터', socket.rooms);
         console.log(`사용자 ${nick}가 방 ${roomId}에 입장`);
     
         // 입장한 사용자에게 메시지 전송
@@ -93,12 +112,29 @@ io.on('connection', (socket) => {
         io.to(roomId).emit('return message', msg);
     })
 
-
     // 연결 종료
     socket.on('disconnect', () => {
+        /*
+        Optional Chaining 연산자는 객체의 깊은 프로퍼티에 접근할 때,
+        그 중간에 null 또는 undefined가 있어도 오류를 발생시키지 않고 undefined를 반환합니다. 
+        이는 코드의 안정성을 높이고, 중간 값이 null 또는 undefined인 경우에 대한 예외 처리를 쉽게 해줍니다.
+        */
+        if (roomList[roomId]) {
+            const idx = roomList[roomId].indexOf(nick);
+            if (idx !== -1) {
+                roomList[roomId].splice(idx, 1); // 요소 삭제
+            }
+    
+            // 방이 비어있다면 방 제거
+            if (roomList[roomId].length === 0) {
+                delete roomList[roomId];
+            }
+        }
+
         console.log(`클라이언트 ${socket.id} 접속 해제`);
+        console.log('접속 해제 하고', roomList[roomId], roomList[roomId]?.length);
     });
-})
+});
 // 채팅방 코드 끝!
 
 
