@@ -1,40 +1,98 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MY 프로필</title>
-    <link rel="stylesheet" href="myPage.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>BUTS</title>
+    <link rel="stylesheet" href="/myPage.css">
+    
 </head>
-
 <body>
+    <!-- head -->
+    <div id="topper">
+        <div id="topper-menu">
+            <a href="">커뮤니티</a>
+            <a href="">이벤트</a>
+            <a href="">공지사항</a>
+        </div>
+    </div>
+    <div id="header">
+        <div id="header-width-container">
+            <div id="header-logo">
+                <a href="https://buts.co.kr/">
+                    <img src="/Mainlogo.png" alt="Buts Logo">
+                </a>
+            </div>
+            <div id="header-right">
+                <a href="http://localhost:3000/login">로그인</a>
+            </div>
+        </div>
+    </div>
+    <!-- body -->
     <div class="container">
         <h1>MY 프로필</h1>
         {% if user %}
         <div class="profile-info-container"> <!-- 클래스 추가 -->
-            <div class="profile">
-                <h2>나의 프로필</h2>
-                <p>· 닉네임: {{user.nick}}</p>
-                <p>· 보유 포인트: <span class="points">{{user.point}}</span></p>
+            <!-- <div class="line"> -->
+                <div class="profile">
+                    <div class="title_s">나의 프로필</div>
+                    <span class="title_xs">닉네임:</span> {{user.nick}}<br>
+                    <span class="title_xs">보유 포인트:</span><span class="points">{{user.point}}</span>
+                </div>
+                <div class="info">
+                    <div class="title_s">알림 정보</div>
+                    <div class="title_xs">아이디:{{user.user_id}}</span></div>
+                    <div class="title_xs">연락처:{{user.tel}}</span></div>
+                    <div class="title_xs">이메일:{{user.email}}</span></div>
+                    <div class="title_xs">가입일:{{user_date}}</span></div>
+                <!-- </div> -->
             </div>
-            <div class="info">
-                <h2>알림 정보</h2>
-                <p>· 아이디: {{user.user_id}}</p>
-                <p>· 연락처: {{user.tel}}</p>
-                <p>· 이메일: {{user.email}}</p>
-                <p>· 가입일: {{user_date}}</p>
-                <a href="http://localhost:3000/user/changeInfo" class="button">정보 수정</a>
-                <a href="#" class="button">탈퇴하기</a>
-            </div>
+        </div>
+        <div class="buttons">
+            <a href="#" class="button">정보 수정</a>
+            <a href="#" class="button">탈퇴하기</a>
         </div>
         {% else %}
         <h1>사용자를 찾을 수 없습니다.</h1>
         {% endif %}
     </div>
-
-
-
+    <!-- footer -->
+    <div class="footer">
+        <div class="width-container">
+            <div class="padding-left">
+                <img src="/Mainlogo.png" alt="Buts Logo">
+                <div class="footer-logo">
+                    <a href="https://butscorp.com/" target="_blank" class="v-bar">회사소개</a>
+                    <a href="https://butscorp.com/contact/" target="_blank" class="v-bar">제휴문의</a>
+                    <a href="" target="_blank" class="v-bar">1:1문의</a>
+                    <a href="https://buts.co.kr/bbs/page.php?hid=privacy" target="_blank" class="v-bar">개인정보처리방침</a>
+                    <a href="https://buts.co.kr/bbs/page.php?hid=provision" target="_blank" class="v-bar">서비스이용약관</a>
+                    <a href="https://buts.co.kr/bbs/faq.php" target="_blank" class="v-bar">FAQ</a>
+                    <br>
+                    <br>
+                    <span class="v-bar">상호 : 먹츠</span><a href="https://m.blog.naver.com/imnotokayummni?tab=1" style="text-decoration-line: none; color:hotpink;">대표 : 김유민</a>
+                    <br>
+                    <span>주소 : 경기도 성남시 분당구 장미로 이치노구</span>
+                    <br>
+                    <span class="v-bar">사업자등록번호 : 123-45-78912</span><span>통신판매번호 : 제 2022-호주-0044호</span>
+                    <br>
+                    <span class="v-bar">개인정보보호책임 : 주현빈</span><span>호스팅 사업자 : Amazon Web Service(AWS)</span>
+                    <br>
+                    <span class="v-bar">이메일 : pongki@Rupongi</span><span>대표전화번호 : 123-456-789</span>
+                    <br>
+                    <br>
+                    <span>Copyright © 2024 Mucts Inc. All rights reserved.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="width-container">
+            먹츠는 통신판매중개자이며, 통신판매의 당사자가 아닙니다. 파티정보, 구매에 관한 의무와 책임은 판매자에게 있습니다.
+            <br>
+            먹츠는 소비자 보호와 안전거래를 위해 고객센터(manager@buts.co.kr)를 운영하고 있으며, 분쟁이 발생 된 경우 별도의 분쟁처리절차에 의거 분쟁해결 및 청약철회 등이 진행 됩니다.
+        </div>
+    </div>
 </body>
-
 </html>

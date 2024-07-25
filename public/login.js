@@ -13,3 +13,13 @@ window.onclick = function (event) {
         closeModal();
     }
 }
+
+
+
+// 모달 창 내부의 취소,확인버튼 버튼 활성화
+
+// 모달창 내부의 취소버튼
+document.querySelector('.cancel').onclick=function(){
+    closeModal();
+}
+

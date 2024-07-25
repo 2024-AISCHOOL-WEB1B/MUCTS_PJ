@@ -62,7 +62,7 @@
             text-align: center;
             line-height: 32px;
             border-radius: 17px;
-            background-color: #7e69fe;
+            background-color: black;
         }
 
         #header-right a {
@@ -318,9 +318,6 @@
             margin-left: 185px;
         }
 
-        #sample4_postcode {
-            margin-left: 66px;
-        }
 
         #sample4_roadAddress {
             margin-top: 16px;
