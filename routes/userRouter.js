@@ -7,28 +7,31 @@ const conn = require("../config/db");
 
 // 회원가입 경로로 접근했을 때!
 router.post("/join", (req, res) => {
-    // 주소입력창에 우편번호,도로명주소,상세주소 ==> 총 주소 1개변수로 병합하는 코드
-    const { user_id, pw, name, nick, addr1, addr2, addr3, email, birth_date, gender, tel, wd_account, ba_number } = req.body;
-    const adress = `${addr3} ${addr1} ${addr2}`; // 합친 주소 필드
-    console.log(req.body);
-    let sql = "insert into User_TB value(?,?,?,?,?,?,?,?,?,0,?,?,CURRENT_TIMESTAMP())";
-    conn.query(sql, [user_id, pw, name, nick, adress, email, birth_date, gender, tel, wd_account, ba_number], (err, rows) => {
-        console.log(err);
-        console.log("insert 결과값 : ", rows);
-       
-        if (rows) {
-            //회원가입에 성공했을 때, 로그인창으로 이동!
+    // 요청 본문에서 데이터 추출
+    const { user_id, pw, name, nick, addr_code, addr_jibun, addr_detail, email, birth_date, gender, tel, wd_account, ba_number } = req.body;
+    console.log("데이터 확인!",req.body); 
+    // SQL 쿼리문 작성
+    const sql = `
+        INSERT INTO User_TB (user_id, pw, name, nick, addr_code, addr_jibun, addr_detail, email, birth_date, gender, tel, point, wd_account, ba_number)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?, ?)
+    `;
+
+    // 쿼리 실행
+    conn.query(sql, [user_id, pw, name, nick, addr_code, addr_jibun, addr_detail, email, birth_date, gender, tel, wd_account, ba_number], (err, results) => {
+        if (err) {
+            console.error("Database insertion error: ", err);
+            res.send("<script>alert('회원가입 실패..'); history.back();</script>");
+        } else {
+            console.log("Insert 결과값 : ", results);
             res.send(`
                 <script>
                     alert('회원가입 성공!');
                     window.location.href='/login';
                 </script>`
             );
-        } else {
-            res.send("<script>alert('회원가입 실패..'); history.back();</script>");
         }
-    })
-})
+    });
+});
 
 router.post("/login", (req, res) => {
     console.log("넘어온 데이터", req.body);
@@ -37,7 +40,6 @@ router.post("/login", (req, res) => {
     let sql = "select * from User_TB where user_id=? and pw=?";
 
     conn.query(sql, [user_id, pw], (err, rows) => {
-
 
         console.log("select 결과값: ", rows);
 
@@ -103,6 +105,7 @@ router.get("/changeInfo",(req,res)=>{
 
     conn.query(sql, [user_id], (err, rows) => {
         if (rows.length > 0) {
+            console.log(rows[0]);
             res.render("changeInfo", { user: rows[0] });
         } else {
             res.render("changeInfo", { user: null });
@@ -110,32 +113,53 @@ router.get("/changeInfo",(req,res)=>{
     })
 })
 
-router.post("/changeInfo", (req, res) => {
-    const { pw, name, nick, addr1, addr2, addr3, email, tel, wd_account, ba_number } = req.body;
-    const adress = `${addr3} ${addr1} ${addr2}`; // 합친 주소 필드
-    const user_id = req.session.user_id
-    console.log("리퀘스트", req.body);
 
-    let sql = "UPDATE User_TB SET pw=?, name=?, nick=?, email=?, adress=?, tel=?, wd_account=?, ba_number=? WHERE user_id=?";
-    
-    conn.query(sql, [ pw, name, nick, email, adress, tel, wd_account, ba_number, user_id], (err, rows) => {
-        
-        if (rows.affectedRows > 0) {
-            console.log("변경 성공!");
+
+
+
+router.post("/changeInfo", (req, res) => {
+    // 요청 본문에서 데이터 추출
+    const { pw, name, nick, email, addr_code, addr_jibun, addr_detail, tel, wd_account, ba_number } = req.body;
+    const user_id = req.session.user_id;
+
+    console.log("수정할 데이터 확인:", req.body);
+
+    // SQL 쿼리문 작성
+    const sql = `
+        UPDATE User_TB 
+        SET
+            pw = ?,
+            name = ?,
+            nick = ?,
+            email = ?,
+            addr_code = ?,
+            addr_jibun = ?,
+            addr_detail = ?,
+            tel = ?,
+            wd_account = ?,
+            ba_number = ?
+        WHERE user_id = ?;
+    `;
+
+    // 쿼리 실행
+    conn.query(sql, [pw, name, nick, email, addr_code, addr_jibun, addr_detail, tel, wd_account, ba_number, user_id], (err, result) => {
+        if (err) {
+            console.error("SQL 실행 중 오류 발생:", err);
+            res.status(500).send("서버 오류가 발생했습니다.");
+        } else if (result.affectedRows > 0) {
+            console.log("변경 성공!", result);
             res.send(`
                 <script>
-                    alert('성공적으로 변경되었습니다!');
+                    alert('회원정보 수정성공!');
                     window.location.href='/user/myPage';
                 </script>
             `)
         } else {
-            console.log("변경 없음!");
-            res.send(`
-                <script>
-                    alert('잘못 입력되었습니다!');
-                </script>`);
+            console.log("변경 없음!", result);
+            res.status(400).send("변경된 내용이 없습니다.");
         }
     });
 });
+
 
 module.exports = router;
