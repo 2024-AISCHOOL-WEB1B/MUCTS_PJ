@@ -103,13 +103,13 @@ io.on('connection', (socket) => {
     });
 
     // 클라이언트가 입력한 채팅 받기
-    socket.on('send message', (msg) => {
+    socket.on('send message', (data) => {
         console.log(socket.rooms);
-        console.log(`${msg} from ${socket.id} room ${roomId}`);
+        console.log(`${data.msg} from ${socket.id} room ${roomId}`);
 
         // 클라이언트에게 받은 메시지를 같은 방에 있는 모든 사용자에게 반환
-        // socket.emit('return message', msg);
-        io.to(roomId).emit('return message', msg);
+        socket.emit('return myMessage', data);
+        socket.to(roomId).emit('return message', data);
     })
 
     // 연결 종료
