@@ -16,9 +16,4 @@ router.get("/login",(req,res)=>{
     res.render("login");
 })
 
-router.get("/charge",(req,res)=>{
-    res.render("charge");
-})
-
-
 module.exports = router;

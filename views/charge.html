@@ -1,70 +1,137 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>벗츠 포인트</title>
-    <link rel="stylesheet" href="charge.css">
+    <title>포인트 페이지</title>
+    <link rel="stylesheet" href="/charge.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="https://via.placeholder.com/150" alt="Logo">
-            <div class="nav">
-                <a href="#">영상</a>
-                <a href="#">도서/음악</a>
-                <a href="#">게임</a>
-                <a href="#">기타</a>
-                <a href="#">충전</a>
+     <!-- head -->
+     <div id="topper">
+        <div id="topper-menu">
+            <a href="">커뮤니티</a>
+            <a href="">이벤트</a>
+            <a href="">공지사항</a>
+        </div>
+    </div>
+    <div id="header">
+        <div id="header-width-container">
+            <div id="header-logo">
+                <a href="https://buts.co.kr/">
+                    <img src="/Mainlogo.png" alt="Buts Logo">
+                </a>
             </div>
-            <div class="profile">
-                <img src="https://via.placeholder.com/50" alt="Profile Image">
+            <div id="header-right">
+                <a href="http://localhost:3000/login">로그인</a>
             </div>
         </div>
+    </div>
+        <div id="container">
+            <div class="points-header">
+                <div class="username">
+                    <span class="title_xs">닉네임:</span> {{charge.nick}}<br>
+                </div>
+                <div class="points">
+                    <span class="title_xs">보유 포인트:</span><span class="points">{{charge.point}}</span>
+                </div>
+            </div>
+            <div class="points-details">
+                <form id="chargeForm" action="/charge/charge" method="POST">
+                    포인트충전: <input type="number" name="charge_money">
+                    <button type="submit">충전</button>
+                </form>
+            </div>
+            <div class="points-history" >
+                <h2>포인트 상세내역</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>충전일</th>
+                            <th>포인트 증가</th>
+                            <th>포인트 사용</th>
+                        </tr>
+                    </thead>
+                    <tbody id="points-history">
+                        
+                    </tbody>
+                </table>
+            </div>
 
-        <div class="points-header">
-            <div class="username">
-                <img src="https://via.placeholder.com/50" alt="Profile Image">
-                <span>{{user.nick}}</span>
-            </div>
-            <div class="points">
-           <form action="/charge/charge" method="post">
-            포인트충전 : <input type="number" name="charge_money">
-            <input type="submit" value="충전">
-           </form>
-                <span>포인트:</span> <strong>{{user.point}}</strong>
+            <script>
+                $(document).ready(function() {
+                    function loadPointsHistory() {
+                        $.get("/charge/history", function(data) {
+                            let tbody = $("#points-history");
+                            tbody.empty(); // 기존 내용 삭제
+            
+                            data.forEach(row => {
+                                let chargeMoney = row.charge_money > 0 ? row.charge_money : '0';
+                                let usageMoney = row.charge_money < 0 ? Math.abs(row.charge_money) : '0';
+            
+                                let rowHtml = `
+                                    <tr>
+                                        <td>${new Date(row.charge_date).toLocaleDateString()}</td>
+                                        <td>${chargeMoney} 포인트</td>
+                                        <td>${usageMoney} 포인트</td>
+                                    </tr>
+                                `;
+                                tbody.append(rowHtml);
+                            });
+                        }).fail(function() {
+                            alert('포인트 내역을 불러오는 데 실패했습니다.');
+                        });
+                    }
+            
+                    // 페이지 로드 시 포인트 내역 로드
+                    loadPointsHistory();
+                });
+            </script>
+    
+            <div class="pagination">
+                <a href="#" class="active">1</a>
             </div>
         </div>
-        <h2>포인트 상세내역</h2>
-        <table>
-            <tr>
-                <th>{{charge_date}}</th>
-                <th>충전 포인트</th>
-                <!-- <th>사용 포인트</th> -->
-                <!-- <th>잔여 포인트</th> -->
-            </tr>
-            <tr>
-                <td>2024-07-24 11:29 (수)</td>
-                <td style="color: #6c63ff;">+500 포인트</td>
-                <!-- <td style="color: #ff0000;">0 포인트</td> -->
-                <!-- <td style="color: black;">0 포인트</td> -->
-            </tr>
-        </table>
-        <div class="pagination">
-            <a href="#">&laquo;</a>
-            <a href="#" class="active">1</a>
-            <a href="#">&raquo;</a>
+    </div>
+
+     <!-- footer -->
+     <div class="footer">
+        <div class="width-container">
+            <div class="padding-left">
+                <img src="/Mainlogo.png" alt="Footer Image">
+                <div class="footer-logo">
+                    <a href="https://butscorp.com/" target="_blank" class="v-bar">회사소개</a>
+                    <a href="https://butscorp.com/contact/" target="_blank" class="v-bar">제휴문의</a>
+                    <a href="" target="_blank" class="v-bar">1:1문의</a>
+                    <a href="https://buts.co.kr/bbs/page.php?hid=privacy" target="_blank" class="v-bar">개인정보처리방침</a>
+                    <a href="https://buts.co.kr/bbs/page.php?hid=provision" target="_blank" class="v-bar">서비스이용약관</a>
+                    <a href="https://buts.co.kr/bbs/faq.php" target="_blank" class="v-bar">FAQ</a>
+                    <br>
+                    <br>
+                    <span class="v-bar">상호 : 먹츠</span><span>대표 : 김유민</span>
+                    <br>
+                    <span>주소 : 경기도 성남시 분당구 장미로 이치노구</span>
+                    <br>
+                    <span class="v-bar">사업자등록번호 : 123-45-78912</span><span>통신판매번호 : 제 2022-호주-0044호</span>
+                    <br>
+                    <span class="v-bar">개인정보보호책임 : 주현빈</span><span>호스팅 사업자 : Amazon Web Service(AWS)</span>
+                    <br>
+                    <span class="v-bar">이메일 : pongki@Rupongi</span><span>대표전화번호 : 123-456-789</span>
+                    <br>
+                    <br>
+                    <span>Copyright © 2024 Mucts Inc. All rights reserved.</span>
+                </div>
+            </div>
         </div>
     </div>
     <div class="footer">
-        <p>회사소개 | 제휴문의 | 1:1문의하기 | <a href="#">개인정보처리방침</a> | 서비스 이용약관 | FAQ</p>
-        <ㅎ>
-            상호: 먹츠 | 대표: 홍길동<br>
-            주소: 인공지능사관학교<br>
-            사업자등록번호: 000-00-00000 | 통신판매업번호: 제 0000-광주동구A-00000호<br>
-            개인정보보호책임자: 홍길동 | 호스팅 사업자: Amazon Web Service(AWS)<br>
-            이메일:  | 대표전화: 070-4354-1015
-        </호
+        <div class="width-container">
+            먹츠는 통신판매중개자이며, 통신판매의 당사자가 아닙니다. 파티정보, 구매에 관한 의무와 책임은 판매자에게 있습니다.
+            <br>
+            먹츠는 소비자 보호와 안전거래를 위해 고객센터(manager@buts.co.kr)를 운영하고 있으며, 분쟁이 발생 된 경우 별도의 분쟁처리절차에 의거 분쟁해결 및 청약철회 등이 진행 됩니다.
+        </div>
     </div>
+
 </body>
 </html>

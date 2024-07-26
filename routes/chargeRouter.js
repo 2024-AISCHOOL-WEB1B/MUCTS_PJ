@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const conn = require("../config/db");
 
+
 // 1.충전
 router.post("/charge", (req, res) => {
     const user_id = req.session.user_id;
@@ -35,8 +36,12 @@ router.post("/charge", (req, res) => {
                 console.error('누적 금액 업데이트 오류:', err);
                 return res.status(500).send('서버 오류');
             }
-
-            res.send('충전 완료!');
+            res.send(`
+                    <script>
+                        alert('${charge_money}원 충전완료')
+                        window.location.href = '/charge/charge';
+                    </script>
+            `);
         });
     });
 });
@@ -129,5 +134,49 @@ router.post("/use", (req, res) => {
     });
 });
 
+router.get("/charge", (req, res) => {
+    console.log(req.session.user_id);
+    let user_id = req.session.user_id;
+    let sql = "select * from User_TB where user_id=?";
+
+    conn.query(sql, [user_id], (err, rows) => {
+        if (err) {
+            console.error('쿼리 오류:', err);
+            return res.status(500).send('서버 오류');
+        }
+        if (rows.length > 0) {
+            console.log("가져온값",rows[0]);
+            res.render("charge",
+                {
+                    charge: rows[0],
+                    // user_date: formattedJoinDate
+                });
+        } else {
+            res.render("charge", { charge: null });
+        }
+    })
+})
+
+// routes/chargeRouter.js
+router.get('/history', (req, res) => {
+    const user_id = req.session.user_id;
+    if (!user_id) {
+        return res.status(401).send('로그인이 필요합니다.');
+    }
+
+    // 포인트 내역을 가져오는 SQL 쿼리
+    const sql = "SELECT charge_date, charge_money FROM Charge_TB WHERE user_id = ? ORDER BY charge_date DESC";
+    conn.query(sql, [user_id], (err, rows) => {
+        if (err) {
+            console.error('데이터베이스 쿼리 오류:', err);
+            return res.status(500).send('서버 오류');
+        }
+
+        // 결과를 JSON 형식으로 클라이언트에 반환
+        res.json(rows);
+    });
+});
+
 
 module.exports = router;
+
