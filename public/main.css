@@ -46,6 +46,9 @@ html, body {
 #header-logo {
     display: inline-block;
 }
+#btns {
+    display: inline-block;
+}
 #header-right {
     display: inline-block;
     width: 116px;
@@ -57,10 +60,31 @@ html, body {
     border-radius: 17px;
     background-color: black;
 }
+
+#cash_btn,
+#mypage_btn {
+    display: inline-block;
+    width: 116px;
+    height: 34px;
+    text-align: center;
+    line-height: 32px;
+
+}
+#cash_btn a,
+#mypage_btn a {
+    height: 100px;
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+}
+#mypage_btn{
+    padding-right: 80px;
+}
 #header-right a {
     color: #ffffff;
     text-decoration: none;
 }
+
 #main-body {
     width: 100%;
     min-height: 600px;
