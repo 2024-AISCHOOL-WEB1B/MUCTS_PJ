@@ -17,10 +17,6 @@ const partyRouter = require("./routes/partyRouter");
 const app = express();
 const server = http.createServer(app);
 
-// socket.io에 서버 정보를 넘겨주고 구동
-const socketIo = require('socket.io');
-const io = socketIo(server);
-
 // statitc 파일 등록
 app.use(express.static("public"));
 
@@ -55,7 +51,6 @@ nunjucks.configure("views", {
     express : app,
     watch : true
 });
-
 
 
 const socketHandler = require('./socketHandler');
