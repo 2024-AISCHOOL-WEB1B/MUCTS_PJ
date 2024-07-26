@@ -28,7 +28,7 @@
 
                     <li class="chat-sidebar-profile">
                         <button type="button" class="chat-sidebar-profile-toggle">
-                            <img src="MUCTS_LOGO_BLACK.png" alt="">
+                            <img src="Mainlogo.png" alt="">
                         </button>
                         <ul class="chat-sidebar-profile-dropdown">
                             <li><a href="#"><i class="ri-user-line"></i> Profile</a></li>
@@ -49,57 +49,20 @@
                         <input type="search" class="content-sidebar-input" placeholder="최소 금액 입력">
                         <button type="submit" class="content-sidebar-submit"><i class="ri-search-line"></i></button>
                     </form>
-                    <div class="content-messages">
-                        <ul class="content-messages-list">
-                            <li class="content-message-title"><span>Participant</span></li>
+                    <div class="content-participants">
+                        <ul class="content-participants-list" id="content-participants-list">
+                            <li class="content-participants-title"><span>Participants</span></li>
                             <li>
-                                <a href="#" data-conversation="#conversation-1">
-                                    <span class="content-message-info">
-                                        <span class="content-message-name">참가자 1</span>
-                                        <span class="content-message-text">참가자 1의 정보</span>
+                                <div class="content-participant">
+                                    <span class="content-participant-info">
+                                        <span class="content-participant-name">참가자 1</span>
+                                        <span class="content-participant-text">지불 금액</span>
                                     </span>
-                                    <span class="content-message-more">
-                                        <span class="content-message-unread">5</span>
-                                        <span class="content-message-time">12:30</span>
+                                    <span class="content-participant-more">
+                                        <span class="content-participant-ready">완료</span>
+                                        <span class="content-participant-role">Host</span>
                                     </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" data-conversation="#conversation-2">
-                                    
-                                    <span class="content-message-info">
-                                        <span class="content-message-name">참가자 2</span>
-                                        <span class="content-message-text">참가자 2의 정보</span>
-                                    </span>
-                                    <span class="content-message-more">
-                                        <span class="content-message-time">12:30</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    
-                                    <span class="content-message-info">
-                                        <span class="content-message-name">참가자 3</span>
-                                        <span class="content-message-text">참가자 3의 정보</span>
-                                    </span>
-                                    <span class="content-message-more">
-                                        <span class="content-message-unread">5</span>
-                                        <span class="content-message-time">12:30</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    
-                                    <span class="content-message-info">
-                                        <span class="content-message-name">참가자 4</span>
-                                        <span class="content-message-text">참가자4 의 정보</span>
-                                    </span>
-                                    <span class="content-message-more">
-                                        <span class="content-message-time">12:30</span>
-                                    </span>
-                                </a>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -114,11 +77,11 @@
                 <div class="conversation acitve active" id="conversation-1">
                     <div class="conversation-top">
                         <button type="button" class="conversation-back"><i class="ri-arrow-left-line"></i></button>
-                        <div class="conversation-user">
+                        <div class="conversation-status">
                             
                             <div>
-                                <div class="conversation-user-name">방 제목을 여기다가 적어보자!</div>
-                                <div class="conversation-user-status online">여기다가 인원 가득 찼는지 안 찼는지 넣을까?</div>
+                                <div class="conversation-status-title" id="conversation-status-title">ROOM TITLE</div>
+                                <div class="conversation-status-capacity" id="conversation-status-capacity">CAPACITY</div>
                             </div>
                         </div>
                         <div class="conversation-buttons">
@@ -129,7 +92,7 @@
                     </div>
                     <div class="conversation-main">
                         <ul class="conversation-wrapper" id="conversation-wrapper">
-                            <div class="conversation-divider"><span>매너 채팅 부탁😜</span></div>
+                            
                             
                 
 

@@ -220,29 +220,28 @@ body {
 .content-sidebar-submit:hover {
     color: var(--slate-600);
 }
-.content-messages {
+.content-participants {
     overflow-y: auto;
     height: 100%;
     margin-top: 16px;
 }
-.content-messages-list {
+.content-participants-list {
     list-style-type: none;
     padding: 8px 0;
 }
-.content-messages-list > * > a {
+.content-participants-list > * > div {
     display: flex;
     align-items: center;
-    text-decoration: none;
     color: var(--slate-700);
     padding: 6px 16px;
 }
-.content-messages-list > * > a:hover {
+.content-participants-list > * > div:hover {
     background-color: var(--slate-50);
 }
-.content-messages-list > .active > a {
+.content-participants-list > .active > div {
     background-color: var(--slate-100);
 }
-.content-message-title {
+.content-participants-title {
     margin-left: 16px;
     margin-right: 16px;
     color: var(--slate-400);
@@ -251,13 +250,13 @@ body {
     margin-bottom: 2px;
     position: relative;
 }
-.content-message-title > * {
+.content-participants-title > * {
     position: relative;
     z-index: 1;
     padding: 0 4px 0 0;
     background-color: var(--white);
 }
-.content-message-title::before {
+.content-participants::before {
     content: '';
     position: absolute;
     top: 50%;
@@ -268,28 +267,35 @@ body {
     border-bottom: 1px solid var(--slate-300);
     z-index: 0;
 }
-.content-message-info {
-    display: grid;
+.content-participant {
+    display: flex; /* flex로 변경 */
+    justify-content: space-between; /* 양쪽 끝으로 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
     margin-right: 12px;
     width: 100%;
 }
-.content-message-name {
+.content-participant-name {
     display: block;
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 2px;
 }
-.content-message-text {
+.content-participant-text {
     font-size: 13px;
     color: var(--slate-400);
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
-.content-message-more {
-    text-align: right;
+.content-participant-more {
+    display: flex;
+    flex-direction: column; /* 수직 정렬 */
+    align-items: flex-end; /* 오른쪽 정렬 */
+    text-align: right; /* 텍스트 오른쪽 정렬 */
+    margin-top: auto; /* 여백 추가 */
 }
-.content-message-unread {
+.content-participant-ready {
+    margin-bottom: 4px; /* 완료와 호스트 사이의 여백 */
     font-size: 12px;
     font-weight: 500;
     color: var(--white);
@@ -297,7 +303,7 @@ body {
     padding: 2px 4px;
     border-radius: 4px;
 }
-.content-message-time {
+.content-participant-role {
     font-size: 12px;
     color: var(--slate-400);
     font-weight: 500;
@@ -345,30 +351,30 @@ body {
 .conversation-back:active {
     background-color: var(--slate-200);
 }
-.conversation-user {
+.conversation-status {
     display: flex;
     align-items: center;
 }
-.conversation-user-name {
+.conversation-status-title {
     font-weight: 500;
     font-size: 17px;
 }
-.conversation-user-status {
+.conversation-status-capacity {
     color: var(--slate-400);
     font-size: 13px;
 }
-.conversation-user-status::before {
+.conversation-status-capacity::before {
     content: '';
     width: 10px;
     height: 10px;
-    background-color: var(--slate-300);
+    background-color: var(--emerald-500);
     border-radius: 50%;
     vertical-align: middle;
     display: inline-block;
     margin-right: 4px;
 }
-.conversation-user-status.online::before {
-    background-color: var(--emerald-500);
+.conversation-status-capacity.full::before {
+    background-color: var(--red-500);
 }
 .conversation-buttons {
     display: flex;
