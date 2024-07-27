@@ -6,7 +6,7 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <title>BUTS</title>
     <link rel="stylesheet" href="main.css">
-    
+    <link rel="stylesheet" href="main_modal.css">
 </head>
 <body>
     <!-- head -->
@@ -50,7 +50,7 @@
                     먹츠
                     <span id="text-party">파티</span>
                 </div>
-                <a href="http://localhost:3000/party/makeParty" id="botton-make-party">
+                <a href="javascript:void(0);" id="botton-make-party" onclick="checkAccount()">
                     파티 만들기
                 </a>
             </div>
@@ -125,5 +125,35 @@
             먹츠는 소비자 보호와 안전거래를 위해 고객센터(manager@buts.co.kr)를 운영하고 있으며, 분쟁이 발생 된 경우 별도의 분쟁처리절차에 의거 분쟁해결 및 청약철회 등이 진행 됩니다.
         </div>
     </div>
+
+    <!-- 계좌 인증 여부 모달 -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAuthModal()">&times;</span>
+            <h2>계좌 인증</h2>
+            <p>계좌 인증을 진행하시겠습니까?</p>
+            <div class="modal-button">
+                <button onclick="showAccountModal()">예</button>
+                <button onclick="redirectToMainPage()">아니오</button>
+            </div>
+        </div>
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>계좌 정보 등록</h2>
+            <form action="/party/registerAccount" method="POST">
+                <input type="hidden" name="userId" id="userId">
+                <label for="wd_account">출금계좌(은행):</label>
+                <input type="text" id="wd_account" name="wd_account" required><br>
+                <label for="ba_number">계좌번호:</label>
+                <input type="text" id="ba_number" name="ba_number" required><br>
+                <button type="submit">등록</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="main_modal.js"></script>
 </body>
 </html>
