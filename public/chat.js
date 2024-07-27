@@ -58,7 +58,7 @@ socket.on('new user', (msg) => {
 
 // 사용자에게 인원 현황을 보여주자..
 socket.on('reload participants', (data) => {
-  participantList.innerHTML = ''; // 기존 리스트 비우기
+  participantList.innerHTML = '<li class="content-participants-title"><span>Participants</span></li>'; // 기존 리스트 비우기
   const { participantsID, participantsNick, user_id, personnel} = data;
   let isReady = true; // 기본값으로 true 고정 (나중에 변경 가능)
 
@@ -128,72 +128,44 @@ socket.on('return message', (data) => {
   scrollToBottom();
 });
 
+
+
+
+
 // 메시지를 추가하는 함수
 function addMessage(sender, text) {
   // 현재 시간을 클라이언트 기준으로 가져오기
   const now = new Date();
   const time = formatTime(now);
 
-  // 새로운 li 요소 생성
-  const li = document.createElement('li');
-  li.className = 'conversation-item';
-
-  // 메세지의 발신자가 나인지 아닌지에 따라 클래스 추가
-  if (sender === 'me') {
-      li.classList.add('me');
-  }
-
-  // 메시지 콘텐츠를 담을 div 생성
-  const contentDiv = document.createElement('div');
-  contentDiv.className = 'conversation-item-content';
-
-  // 메시지 박스를 담을 div 생성
-  const boxDiv = document.createElement('div');
-  boxDiv.className = 'conversation-item-box';
-
-  // 메시지 텍스트를 담을 div 생성
-  const textDiv = document.createElement('div');
-  textDiv.className = 'conversation-item-text';
-
-  // 메시지 텍스트와 시간 추가
-  const p = document.createElement('p');
-  p.textContent = text;
-  const timeDiv = document.createElement('div');
-  timeDiv.className = 'conversation-item-time';
-  timeDiv.textContent = time;
-
-  // 텍스트와 시간을 텍스트 div에 추가
-  textDiv.appendChild(p);
-  textDiv.appendChild(timeDiv);
-
-  // 메시지 박스에 텍스트 div 추가
-  boxDiv.appendChild(textDiv);
-
-  // 메시지 콘텐츠 div에 메시지 박스 추가
-  contentDiv.appendChild(boxDiv);
-
-  // li 요소에 메시지 콘텐츠 div 추가
-  li.appendChild(contentDiv);
+  // 메시지 콘텐츠 HTML 구조
+  const messageHTML = `
+      <li class="conversation-item ${sender === 'me' ? 'me' : ''}">
+          <div class="conversation-item-content">
+              <div class="conversation-item-box">
+                  <div class="conversation-item-text">
+                      <p>${text}</p>
+                      <div class="conversation-item-time">${time}</div>
+                  </div>
+              </div>
+          </div>
+      </li>
+  `;
 
   // #conversation-wrapper 요소에 li 추가
-  conversationWrapper.appendChild(li);
+  conversationWrapper.innerHTML += messageHTML;
 }
 
 // 서버 메시지를 보여주는 함수
 function serverMessage(text) {
   // 새로운 div 요소 생성
-  const div = document.createElement('div');
-  div.className = 'conversation-divider';
-
-  // 메시지 텍스트 추가
-  const span = document.createElement('span');
-  span.textContent = text;
-
-  // divider에 서버 메시지 span 추가
-  div.appendChild(span);
-
+  const serverMessage = `
+  <div class="conversation-divider">
+    <span>${text}</span>
+  </div>
+  `
   // #conversation-wrapper 요소에 divider 추가
-  conversationWrapper.appendChild(div);
+  conversationWrapper.innerHTML += serverMessage;
 }
 
 // 채팅창의 가장 아래로 스크롤하는 함수
@@ -211,52 +183,3 @@ function formatTime(date) {
   const minutes = date.getMinutes().toString().padStart(2, '0');
   return `${hours}:${minutes}`;
 }
-
-
-
-
-// 여기부터 나중에 할거임 프론트엔드 버튼 처리할 곳
-
-/*
-// start: Sidebar
-document.querySelector('.chat-sidebar-profile-toggle').addEventListener('click', function(e) {
-  e.preventDefault();
-  this.parentElement.classList.toggle('active');
-});
-
-document.addEventListener('click', function(e) {
-  if (!e.target.matches('.chat-sidebar-profile, .chat-sidebar-profile *')) {
-      document.querySelector('.chat-sidebar-profile').classList.remove('active');
-  }
-});
-// end: Sidebar
-
-// start: Conversation
-
-/*
-document.querySelectorAll('.conversation-form-input').forEach(function(item) {
-  item.addEventListener('input', function() {
-      this.rows = this.value.split('\n').length;
-  });
-});
-*/
-/*
-document.querySelectorAll('[data-conversation]').forEach(function(item) {
-  item.addEventListener('click', function(e) {
-      e.preventDefault();
-      document.querySelectorAll('.conversation').forEach(function(i) {
-          i.classList.remove('active');
-      });
-      document.querySelector(this.dataset.conversation).classList.add('active');
-  });
-});
-
-document.querySelectorAll('.conversation-back').forEach(function(item) {
-  item.addEventListener('click', function(e) {
-      e.preventDefault();
-      this.closest('.conversation').classList.remove('active');
-      document.querySelector('.conversation-default').classList.add('active');
-  });
-});
-// end: Conversation
-*/

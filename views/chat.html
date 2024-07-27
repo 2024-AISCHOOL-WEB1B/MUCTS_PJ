@@ -21,10 +21,10 @@
                     <i class="ri-chat-1-fill"></i>
                 </a>
                 <ul class="chat-sidebar-menu">
-                    <li class="active"><a href="#" data-title="Chats"><i class="ri-chat-3-line"></i></a></li>
-                    <li><a href="#" data-title="Contacts"><i class="ri-contacts-line"></i></a></li>
-                    <li><a href="#" data-title="Documents"><i class="ri-folder-line"></i></a></li>
-                    <li><a href="#" data-title="Settings"><i class="ri-settings-line"></i></a></li>
+                    <li><a href="#" data-title="Chats" id="chatBTN"><i class="ri-chat-3-line"></i></a></li>
+                    <li><a href="#" data-title="Participants" id="participantsBTN"><i class="ri-contacts-line"></i></a></li>
+                    <li><a href="#" data-title="Map" id="mapBTN"><i class="ri-map-pin-line"></i></a></li>
+                    <li><a href="#" data-title="Payment" id="paymentBTN"><i class="ri-coins-line"></i></a></li>
 
                     <li class="chat-sidebar-profile">
                         <button type="button" class="chat-sidebar-profile-toggle">
@@ -37,6 +37,7 @@
                     </li>
                 </ul>
             </aside>
+            
             <!-- end: Sidebar -->
 
             <!-- start: Content -->
@@ -70,13 +71,14 @@
                 <!-- end: Content side -->
 
                 <!-- start: Conversation -->
-                <div class="conversation conversation-default">
+                <div class="conversation conversation-default" id="conversation-default">
                     <i class="ri-chat-3-line"></i>
                     <p>입장에 실패하셨습니다 ㅠㅠ</p>
                 </div>
-                <div class="conversation acitve active" id="conversation-1">
+
+                <div class="conversation active" id="conversation">
                     <div class="conversation-top">
-                        <button type="button" class="conversation-back"><i class="ri-arrow-left-line"></i></button>
+                        
                         <div class="conversation-status">
                             
                             <div>
@@ -106,11 +108,10 @@
                         </div>
                         <button type="button" class="conversation-form-button conversation-form-submit"><i class="ri-send-plane-2-line"></i></button>
                     </div>
-
-
-             
                 <!-- end: Conversation -->
+
             </div>
+
             <!-- end: Content -->
         </div>
     </section>
