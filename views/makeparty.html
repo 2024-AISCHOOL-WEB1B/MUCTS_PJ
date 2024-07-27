@@ -29,30 +29,23 @@
             <div id="title-party">
                 <span class="text-purple">파티/판매</span> 등록
             </div>
-            <form action="#">
+            <form action="http://localhost:3000/party/makeParty" method="post">
                 <br>
                 <br>
                 <!-- 제목 입력 -->
                 <div class="form-group">
                     <label for="title">제목</label>
-                    <input type="text" id="title" name="title" placeholder="제목을 입력해 주세요">
+                    <input type="text" id="title" name="party_title" placeholder="제목을 입력해 주세요">
                 </div>
                 <!-- 모집인원 선택 -->
                 <div class="form-group">
                     <label for="members">모집인원</label>
-                    <input type="text" id="members" name="members" placeholder="본인제외 명">
-                </div>
-                <!-- 지역 -->
-                <div class="form-group">
-                    <div class="form-check">
-                        <label for="contact_area">지역</label>
-                    </div>
-                    <input type="text" id="contact_area" name="contact_area" placeholder="지역을 입력하세요">
+                    <input type="text" id="members" name="personnel" placeholder="본인제외 명">
                 </div>
                 <!-- 최소주문금액 금액 -->
                 <div class="form-group">
                     <label for="amount">최소주문금액</label>
-                    <input type="number" id="amount" name="amount" placeholder="최소주문 금액 입력">
+                    <input type="number" id="amount" name="min_amount" placeholder="최소주문 금액 입력">
                 </div>
                 <br><br>
                 <button id="submit" type="submit">제출</button>
