@@ -82,7 +82,7 @@ function addParticipant(nickname, id, isHost, isReady) {
   // 참가자 정보를 담는 HTML 구조
   const participantHTML = `
       <li>
-          <div class="content-participant">
+          <div class="content-participant" id="${id}">
               <span class="content-participant-info">
                   <span class="content-participant-name">${nickname}</span>
                   <span class="content-participant-text">${id}</span>
@@ -182,4 +182,35 @@ function formatTime(date) {
   const hours = date.getHours().toString().padStart(2, '0');
   const minutes = date.getMinutes().toString().padStart(2, '0');
   return `${hours}:${minutes}`;
+}
+
+// 채팅창 열고 닫고
+const chatBTN = document.getElementById("chatBTN");
+chatBTN.addEventListener('click', () => {
+  const conversation = document.getElementById("conversation");
+  const conversation_default = document.getElementById("conversation-default");
+  conversation.classList.toggle('active');
+  conversation_default.classList.toggle('active');
+})
+
+// 참가자 현황
+const participantsBTN = document.getElementById("participantsBTN");
+participantsBTN.addEventListener('click', () => {
+  const content_sidebar = document.getElementById("content-sidebar");
+  content_sidebar.classList.toggle("active");
+
+})
+
+
+const mapBTN = document.getElementById("mapBTN");
+mapBTN.addEventListener('click', ()=>{
+  openModal();
+})
+
+function openModal() {
+  document.getElementById('modal').style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('modal').style.display = 'none';
 }

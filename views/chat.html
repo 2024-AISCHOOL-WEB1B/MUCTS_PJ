@@ -21,19 +21,13 @@
                     <i class="ri-chat-1-fill"></i>
                 </a>
                 <ul class="chat-sidebar-menu">
-                    <li><a href="#" data-title="Chats" id="chatBTN"><i class="ri-chat-3-line"></i></a></li>
-                    <li><a href="#" data-title="Participants" id="participantsBTN"><i class="ri-contacts-line"></i></a></li>
-                    <li><a href="#" data-title="Map" id="mapBTN"><i class="ri-map-pin-line"></i></a></li>
-                    <li><a href="#" data-title="Payment" id="paymentBTN"><i class="ri-coins-line"></i></a></li>
+                    <li><a href="" data-title="Chats" id="chatBTN"><i class="ri-chat-3-line"></i></a></li>
+                    <li><a href="" data-title="Participants" id="participantsBTN"><i class="ri-contacts-line"></i></a></li>
+                    <li><a href="" data-title="Map" id="mapBTN"><i class="ri-map-pin-line"></i></a></li>
+                    <li><a href="" data-title="Payment" id="paymentBTN"><i class="ri-coins-line"></i></a></li>
 
                     <li class="chat-sidebar-profile">
-                        <button type="button" class="chat-sidebar-profile-toggle">
-                            <img src="Mainlogo.png" alt="">
-                        </button>
-                        <ul class="chat-sidebar-profile-dropdown">
-                            <li><a href="#"><i class="ri-user-line"></i> Profile</a></li>
-                            <li><a href="#"><i class="ri-logout-box-line"></i> Logout</a></li>
-                        </ul>
+                        <a href="" data-title="Exit" chat-sidebar-profile-toggle"><i class="ri-arrow-go-back-line"></i></a>
                     </li>
                 </ul>
             </aside>
@@ -44,7 +38,7 @@
             <div class="chat-content">
                 <!-- start: Content side -->
                 
-                <div class="content-sidebar">
+                <div class="content-sidebar active" id="content-sidebar">
                     <div class="content-sidebar-title">Chats</div>
                     <form action="" class="content-sidebar-form">
                         <input type="search" class="content-sidebar-input" placeholder="최소 금액 입력">
@@ -73,7 +67,7 @@
                 <!-- start: Conversation -->
                 <div class="conversation conversation-default" id="conversation-default">
                     <i class="ri-chat-3-line"></i>
-                    <p>입장에 실패하셨습니다 ㅠㅠ</p>
+                    <p>MUCTS</p>
                 </div>
 
                 <div class="conversation active" id="conversation">
@@ -86,33 +80,40 @@
                                 <div class="conversation-status-capacity" id="conversation-status-capacity">CAPACITY</div>
                             </div>
                         </div>
-                        <div class="conversation-buttons">
-                            <button type="button"><i class="ri-phone-fill"></i></button>
-                            <button type="button"><i class="ri-vidicon-line"></i></button>
-                            <button type="button"><i class="ri-information-line"></i></button>
-                        </div>
+        
                     </div>
                     <div class="conversation-main">
                         <ul class="conversation-wrapper" id="conversation-wrapper">
                             
-                            
-                
-
                     </div>
                     
                     <div class="conversation-form">
-                        <button type="button" class="conversation-form-button"><i class="ri-emotion-line"></i></button>
                         <div class="conversation-form-group">
                             <textarea id="messageInput" class="conversation-form-input" rows="1" placeholder="Type here..."></textarea>
-                            <button type="button" class="conversation-form-record"><i class="ri-mic-line"></i></button>
                         </div>
-                        <button type="button" class="conversation-form-button conversation-form-submit"><i class="ri-send-plane-2-line"></i></button>
+                        <button type="button" class="conversation-form-submit"><i class="ri-send-plane-2-line"></i></button>
                     </div>
                 <!-- end: Conversation -->
 
             </div>
 
             <!-- end: Content -->
+        
+            <!-- start : modal -->
+            <!-- <div class="modal" id="modal">
+                <div class="modal-content">
+                    <div class="modal-head">
+                        <button class="close-button" onclick="closeModal()">닫기</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-map"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div> -->
+            <!-- start : modal -->
+
         </div>
     </section>
     <!-- end: Chat -->

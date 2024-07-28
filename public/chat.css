@@ -121,45 +121,13 @@ body {
     height: 100%;
     border-radius: 50%;
 }
-.chat-sidebar-profile-dropdown {
-    position: absolute;
-    bottom: 100%;
-    left: 16px;
-    background-color: var(--white);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
-    list-style-type: none;
-    border-radius: 4px;
-    padding: 4px 0;
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(.9);
-    transform-origin: left bottom;
-    transition: all .15s ease-in-out;
-}
-.chat-sidebar-profile.active .chat-sidebar-profile-dropdown {
+
+.chat-sidebar-profile.active {
     opacity: 1;
     visibility: visible;
     transform: scale(1);
 }
-.chat-sidebar-profile-dropdown a {
-    display: flex;
-    align-items: center;
-    padding: 8px 12px;
-    text-decoration: none;
-    color: var(--slate-400);
-    font-size: 14px;
-}
-.chat-sidebar-profile-dropdown a:hover {
-    background-color: var(--slate-100);
-    color: var(--slate-600);
-}
-.chat-sidebar-profile-dropdown a:active {
-    background-color: var(--slate-200);
-}
-.chat-sidebar-profile-dropdown a i {
-    margin-right: 12px;
-    font-size: 17px;
-}
+
 /* end: Sidebar */
 
 
@@ -169,16 +137,25 @@ body {
     padding-left: 64px;
     height: 100%;
     position: relative;
+    display: flex;
 }
 .content-sidebar {
+    width: 256px;
+    background-color: var(--white);
+    display: none;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    top: 0;
+}
+.content-sidebar.active {
     width: 256px;
     background-color: var(--white);
     display: flex;
     flex-direction: column;
     height: 100%;
-    position: absolute;
+    position: relative;
     top: 0;
-    left: 64px;
 }
 .content-sidebar-title {
     font-size: 20px;
@@ -249,7 +226,7 @@ body {
 }
 .content-participants-title > * {
     position: relative;
-    z-index: 1;
+ 
     padding: 0 4px 0 0;
     background-color: var(--white);
 }
@@ -262,7 +239,7 @@ body {
     width: 100%;
     height: 0;
     border-bottom: 1px solid var(--slate-300);
-    z-index: 0;
+ 
 }
 .content-participant {
     display: flex; /* flex로 변경 */
@@ -313,8 +290,8 @@ body {
 .conversation {
     background-color: var(--slate-100);
     height: 100%;
-    padding-left: 256px;
     display: none;
+    flex-grow: 1;
 }
 .conversation.active {
     display: flex;
@@ -351,33 +328,7 @@ body {
 .conversation-status-capacity.full::before {
     background-color: var(--red-500);
 }
-.conversation-buttons {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-}
-.conversation-buttons > * {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    font-size: 20px;
-    background-color: transparent;
-    border: none;
-    outline: transparent;
-    cursor: pointer;
-    color: var(--slate-600);
-    margin-left: 4px;
-}
-.conversation-buttons > :hover {
-    background-color: var(--slate-100);
-    color: var(--slate-700);
-}
-.conversation-buttons > :active {
-    background-color: var(--slate-200);
-}
+
 
 .conversation-main {
     overflow-y: auto;
@@ -485,7 +436,7 @@ body {
     padding: 0 8px;
     background-color: var(--slate-100);
     position: relative;
-    z-index: 1;
+  
 }
 
 .conversation-form {
@@ -517,21 +468,9 @@ body {
 .conversation-form-input:focus {
     border-color: var(--slate-400);
 }
-.conversation-form-record {
-    position: absolute;
-    bottom: 8px;
-    right: 16px;
-    font-size: 20px;
-    color: var(--slate-400);
-    background-color: transparent;
-    border: none;
-    outline: transparent;
-    cursor: pointer;
-}
-.conversation-form-record:hover {
-    color: var(--slate-600);
-}
-.conversation-form-button {
+
+
+.conversation-form-submit {
     width: 40px;
     height: 40px;
     display: flex;
@@ -542,19 +481,8 @@ body {
     background-color: transparent;
     outline: transparent;
     font-size: 20px;
-    color: var(--slate-400);
     cursor: pointer;
     flex-shrink: 0;
-}
-.conversation-form-button:hover {
-    background-color: var(--slate-100);
-    color: var(--slate-600);
-}
-.conversation-form-button:active {
-    background-color: var(--slate-200);
-    color: var(--slate-600);
-}
-.conversation-form-submit {
     background-color: var(--emerald-500);
     box-shadow: 0 2px 8px -2px var(--emerald-500);
     color: var(--white);
@@ -571,7 +499,6 @@ body {
     align-items: center;
     justify-content: center;
     padding: 16px;
-    padding-left: calc(256px + 16px);
     color: var(--slate-400);
 }
 .conversation-default i {
@@ -623,19 +550,13 @@ body {
         width: 32px;
         height: 32px;
     }
-    .chat-sidebar-profile-dropdown {
-        left: unset;
-        right: 16px;
-    }
 
-    .conversation,
-    .chat-content {
-        padding-left: unset;
-    }
-    .content-sidebar {
+
+    .content-sidebar.active {
         left: unset;
-        z-index: 10;
         width: 100%;
+        position: absolute;
+        z-index: 10;
     }
     .chat-sidebar-menu > * > a::before {
         left: 50%;
@@ -654,16 +575,54 @@ body {
     }
 
     .chat-content {
+        padding-left: unset;
         position: relative;
         height: calc(100% - 48px);
     }
     .conversation.active {
         position: relative;
-        z-index: 20;
     }
     .conversation-default.active {
-        display: none;
+        display: flex;
         padding: 16px;
     }
 }
 /* end: Breakpoints */
+
+
+.modal {
+    display: flex; /* Flexbox를 사용하여 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    position: fixed; /* 화면에 고정 */
+    top: 0; /* 상단에 위치 */
+    left: 0; /* 좌측에 위치 */
+    width: 100vw; /* 전체 너비 */
+    height: 100vh; /* 전체 높이 */
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+    z-index: 1000; /* 다른 요소들 위에 표시 */
+}
+
+.close-button {
+    width:5%;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px; /* 기본 너비 */
+ 
+    height: 600px;
+
+    padding: 20px; /* 여백 */
+    background-color: white; /* 흰색 배경 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+}
+
+.modal-map {
+    width: 95%;
+    height: 40%;
+    border: 1px solid black;
+}
