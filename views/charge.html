@@ -38,9 +38,11 @@
                 </div>
             </div>
             <div class="points-details">
-                <form id="chargeForm" action="/charge/charge" method="POST">
-                    포인트충전: <input type="number" name="charge_money">
-                    <button type="submit">충전</button>
+                <form id="chargeForm" action="/charge/charge" method="POST" onsubmit="return validateForm()">
+                    포인트충전: <input type="number" name="charge_money" min="0" required>
+                    <button type="submit">충전</button> 
+                    <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>"
+                    <script src="/pay.js"></script>
                 </form>
             </div>
             <div class="points-history" >
@@ -49,7 +51,7 @@
                     <thead>
                         <tr>
                             <th>충전일</th>
-                            <th>포인트 증가</th>
+                            <th>포인트 충전</th>
                             <th>포인트 사용</th>
                         </tr>
                     </thead>
@@ -72,7 +74,7 @@
             
                                 let rowHtml = `
                                     <tr>
-                                        <td>${new Date(row.charge_date).toLocaleDateString()}</td>
+                                        <td>${new Date(row.charge_date).toLocaleString()}</td>
                                         <td>${chargeMoney} 포인트</td>
                                         <td>${usageMoney} 포인트</td>
                                     </tr>
