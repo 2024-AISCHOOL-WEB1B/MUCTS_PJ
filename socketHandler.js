@@ -118,8 +118,7 @@ module.exports = (server) => {
                 }
         
                 // 방이 비어있다면 
-                /* 밑에 잘 작동하는데 party_status 바꾸는 거라 일단 주석처리함!
-                if (roomList[roomId].participants.length === 0) {
+                if (roomList[roomId].participantsID.length === 0) {
                     delete roomList[roomId];
                     
                     let sql = `
@@ -138,7 +137,6 @@ module.exports = (server) => {
                         }
                     });
                 }
-                */
             }
 
             // 클라이언트 인원 현황 리로드

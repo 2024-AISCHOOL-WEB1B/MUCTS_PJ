@@ -26,7 +26,7 @@ function makeRoom() {
             const content = `
                 <div class="card" data-roomId="${party.party_id}" style="cursor: pointer;">
                     <div class="card-title">${party.party_title}</div>
-                    <div class="card-content">${party.party_date}</div>
+                    <div class="card-content">총원 ${party.personnel} 명</div>
                     <div class="card-price">${party.min_amount}</div>
                 </div>
             `;

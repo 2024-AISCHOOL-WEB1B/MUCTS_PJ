@@ -84,7 +84,8 @@ socket.on('void room', (msg)=>{
 })
 
 // 가득찬 방
-socket.on('full room'), (msg) => {
+socket.on('full room', (msg) => {
+  console.log("테스트중", msg);
   const conversation_default = document.getElementById("conversation-default");
   const conversation = document.getElementById("conversation");
   const conversation_default_text = document.getElementById("conversation-default-text");
@@ -93,7 +94,7 @@ socket.on('full room'), (msg) => {
   conversation_default_text.innerText = msg;
   conversation_default.classList.toggle("active");
   conversation.classList.toggle("active");
-}
+})
 
 
 // 본인 입장 알림
@@ -240,6 +241,13 @@ chatBTN.addEventListener('click', (event) => {
   const conversation_default = document.getElementById("conversation-default");
   conversation.classList.toggle('active');
   conversation_default.classList.toggle('active');
+  
+  if(window.innerWidth<=767){
+    const content_sidebar = document.getElementById("content-sidebar");
+    if(content_sidebar.classList.contains("active")){
+      content_sidebar.classList.remove("active");
+    }
+  }
 });
 
 // 참가자 현황
@@ -248,6 +256,20 @@ participantsBTN.addEventListener('click', (event) => {
   event.preventDefault();
   const content_sidebar = document.getElementById("content-sidebar");
   content_sidebar.classList.toggle("active");
+
+  if(window.innerWidth<=767){
+    const conversation = document.getElementById("conversation");
+    const conversation_default = document.getElementById("conversation-default");
+    if(conversation.classList.contains('active')){
+      conversation.classList.remove('active');
+    }
+    if(conversation_default.classList.contains('active')){
+      conversation_default.classList.remove('active');
+    }
+    if(!conversation.classList.contains('active')&&!conversation_default.classList.contains('active')){
+      conversation.classList.add('active');
+    }
+  }
 });
 
 // 모달창
