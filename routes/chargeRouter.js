@@ -11,6 +11,7 @@ router.post("/charge", (req, res) => {
     }
 
     let { charge_money } = req.body;
+    console.log('Received data:', req.body); // 로그 추가
     charge_money = parseFloat(charge_money);
 
     if (isNaN(charge_money)) {
@@ -36,15 +37,11 @@ router.post("/charge", (req, res) => {
                 console.error('누적 금액 업데이트 오류:', err);
                 return res.status(500).send('서버 오류');
             }
-            res.send(`
-                    <script>
-                        alert('${charge_money}원 충전완료')
-                        window.location.href = '/charge/charge';
-                    </script>
-            `);
+            res.status(200).send({ message: `${charge_money}원 충전완료` });
         });
     });
 });
+
 
 // 2. 금액 조회
 router.post("/money", (req, res) => {
@@ -173,10 +170,10 @@ router.get('/history', (req, res) => {
         }
 
         // 결과를 JSON 형식으로 클라이언트에 반환
+        console.log('historty의 마지막', rows); // 조아론이 만짐
         res.json(rows);
     });
 });
 
 
 module.exports = router;
-
