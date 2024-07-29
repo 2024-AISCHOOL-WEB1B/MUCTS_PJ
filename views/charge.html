@@ -13,10 +13,7 @@
       type="text/javascript"
       src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
     ></script>
-    <script
-      type="text/javascript"
-      src="https://unpkg.com/axios/dist/axios.min.js"
-    ></script>
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
     <script>
       function mypayment(event) {
         event.preventDefault(); // 폼 제출 막기
@@ -31,12 +28,7 @@
             pay_method: "card",
             name: "포인트 충전",
             amount: myAmount, // 여기서 amount로 변경
-            buyer_email: "gildong@gmail.com",
-            buyer_name: "홍길동",
-            buyer_tel: "010-4242-4242",
-            buyer_addr: "서울특별시 강남구 신사동",
-            buyer_postcode: "01181",
-            m_redirect_url: "", // 모바일 결제후 리다이렉트될 주소
+            
           },
           async (rsp) => {
             // callback
@@ -45,7 +37,7 @@
               try {
                 console.log('Payment success, response:', rsp); // 로그 추가
                 const response = await axios.post(
-                  "http://localhost:3000/charge",
+                  "http://localhost:3000/charge/charge",
                   {
                     charge_money: rsp.paid_amount
                   },
@@ -141,7 +133,7 @@
                           // HTML 문자열 생성
                           let rowHtml = `
                               <tr>
-                                  <td>${new Date(row.charge_date).toLocaleDateString()}</td>
+                                  <td>${new Date(row.charge_date).toLocaleString()}</td>
                                   <td>${chargeMoney} 포인트</td>
                                   <td>${usageMoney} 포인트</td>
                               </tr>
@@ -195,4 +187,17 @@
                     <br>
                     <span>Copyright © 2024 Mucts Inc. All rights reserved.</span>
                 </div>
+              </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="width-container">
+                먹츠는 통신판매중개자이며, 통신판매의 당사자가 아닙니다. 파티정보, 구매에 관한 의무와 책임은 판매자에게 있습니다.
+                <br>
+                먹츠는 소비자 보호와 안전거래를 위해 고객센터(manager@buts.co.kr)를 운영하고 있으며, 분쟁이 발생 된 경우 별도의 분쟁처리절차에 의거 분쟁해결 및 청약철회 등이 진행 됩니다.
+            </div>
+        </div>
+    
+    </body>
+    </html>
            
