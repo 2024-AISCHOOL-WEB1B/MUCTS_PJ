@@ -22,7 +22,7 @@ async function getUserPoint() {
   try {
     const response = await fetch('/chat/db');
     const data = await response.json();
-    userPoint = data.point;
+    userPoint = parseInt(data.point);
   }
   catch (err) {
     console.error('DB에서 유저의 포인트를 가져오지 못했습니다', err);
@@ -74,7 +74,7 @@ exitBTN.addEventListener('click', (event) => {
 
 // 본인 입장 알림
 socket.on('you joined room', (data) => {
-  min_amount = data.min_amount; // 입장한 방의 최소 금액을 가져옴
+  min_amount = parseInt(data.min_amount); // 입장한 방의 최소 금액을 가져옴
   const formattedNum = new Intl.NumberFormat().format(min_amount);
   const formattedPoint = new Intl.NumberFormat().format(userPoint);
   document.getElementById("content-sidebar-minAmount").innerText =`${formattedNum} 원`;
@@ -107,7 +107,7 @@ socket.on('reload participants', (data) => {
     const id = participantsID[i];
     const nickname = participantsNick[i];
     const isHost = id === user_id;
-    addParticipant(nickname, id, isHost, true); // isReady를 true로 설정
+    addParticipant(nickname, id, isHost, false); // isReady를 false로 설정
   }
 });
 
@@ -258,6 +258,7 @@ function openModal() {
 function closeModal() {
   document.getElementById('modal-map').classList.remove('active');
   document.getElementById('modal-payment').classList.remove('active');
+  document.getElementById('modal-payment-alert').classList.remove('active');
   document.getElementById('modal').style.display = 'none';
 }
 
@@ -355,14 +356,30 @@ modal_send_gathering.addEventListener('click', () => {
   // payment 모달창일 때
   else if(document.getElementById('modal-payment').classList.contains('active')) {
     const url = '/charge/use'; 
-    const charge_money = document.getElementById("charge_money").value
-    
+    const charge_money = parseInt(document.getElementById("charge_money").value);
+    const modal_payment_alert = document.getElementById("modal-payment-alert");
+    if(Number.isNaN(charge_money) || charge_money <= 0){
+      modal_payment_alert.classList.add("active");
+      modal_payment_alert.innerText = "제대로 입력해주세요!";
+      return;
+    }
+    else if(charge_money > userPoint){
+      modal_payment_alert.classList.add("active");
+      modal_payment_alert.innerText = "포인트가 부족합니다!";
+      return;
+    }
+
+    const data = {
+      charge_money : charge_money
+    };
+    console.log('보낼 데이터', data);
+  
     fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json', 
         },
-        body: JSON.stringify({ charge_money })
+        body: JSON.stringify(data)
     })
     .then(response => {
         if (!response.ok) {
@@ -371,7 +388,29 @@ modal_send_gathering.addEventListener('click', () => {
         return response.json(); 
     })
     .then(data => {
-        console.log('성공:', data); // 성공적인 응답 처리
+        console.log('성공:', data.message);
+
+        // 모달창에 성공 알림
+        modal_payment_alert.classList.add("active");
+        modal_payment_alert.innerText = data.message;
+        
+        // 준비 완료 구현
+        const participantReady = '<span class="content-participant-ready">완료</span>';
+        const participantElement = document.getElementById(sessionUserId);
+
+        // 참여자 요소가 생성될 때만 만들기
+        if (participantElement){
+          const participantMore = participantElement.querySelector('.content-participant-more');
+
+          // 레디가 되지 않았을 때만
+          if(participantMore && !participantMore.querySelector('.content-participant-ready')){
+            participantMore.innerHTML = participantReady + participantMore.innerHTML;
+          }
+          else{
+            console.log(`ID ${sessionUserId}를 가진 요소를 찾을 수 없습니다.`);
+          }
+        }
+        
     })
     .catch(error => {
         console.error('오류:', error); // 오류 처리
