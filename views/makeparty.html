@@ -17,9 +17,15 @@
                     <img src="/Mainlogo.png" alt="Header Image" />
                 </a>
             </div>
-            <div id="header-right">
-                <a href="#">로그인</a>
+            {% if user %}
+            <div id="header-right" style="cursor:pointer;" onclick="location.href='http://localhost:3000/logout'">
+                로그아웃
             </div>
+            {% else %}
+            <div id="header-right" style="cursor:pointer;" onclick="location.href='http://localhost:3000/login'">
+                로그인
+            </div>
+            {% endif %}
         </div>
     </div>
 
@@ -48,7 +54,7 @@
                     <input type="number" id="amount" name="min_amount" placeholder="최소주문 금액 입력">
                 </div>
                 <br><br>
-                <button id="submit" type="submit">제출</button>
+                <button id="submit" type="submit" style="cursor: pointer;">제출</button>
             </form>
         </div>
     </div>

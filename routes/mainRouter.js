@@ -1,10 +1,30 @@
 const express = require("express");
 const router = express.Router();
+const conn = require('../config/db');
+
 
 router.get("/", (req, res) => {
     res.render("main");
 });
 
+
+// 방 목록 가져오기
+router.get("/getPartyList", (req, res) => {
+    const sql = `
+    select * from Party_TB where party_status=1
+    `;
+    
+    // 쿼리 실행
+    conn.query(sql, (err, results) => {
+        if (err) {
+            console.error("메인 라우터에서 방목록 DB 불러오기 실패", err);
+            return;
+        }
+        else {
+            res.json(results);
+        }
+    });
+})
 
 // 사용자가 회원가입을 요청했을 때!
 router.get("/join",(req,res)=>{

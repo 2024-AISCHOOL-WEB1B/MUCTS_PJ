@@ -23,8 +23,8 @@
                     <img src="Mainlogo.png" alt="Buts Logo">
                 </a>
             </div>
-            <div id="header-right">
-                <a href="https://buts.co.kr/bbs/login.php">로그인</a>
+            <div id="header-right" style="cursor:pointer;" onclick="location.href='http://localhost:3000/login'">
+                로그인
             </div>
         </div>
     </div>
@@ -52,8 +52,8 @@
                         </div>
                     </div>
                     <br>
-                    <button type="submit" id="form-login-button">로그인</button>
-                    <a href="#" id="form-login-button-kakao">카카오계정 로그인하기
+                    <button type="submit" id="form-login-button" style="cursor: pointer;">로그인</button>
+                    <a href="javascript:void(0);" id="form-login-button-kakao" onclick="loginWithKakao()">카카오계정 로그인하기
                     </a>
                     
                 </form>
@@ -118,5 +118,15 @@
         </div>
     </div>
     <script src="login.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+        Kakao.init('74f5ebc858cd44555f0339f0227e8faa');
+        function loginWithKakao() {
+            Kakao.Auth.authorize({
+                redirectUri: 'http://localhost:3000/'
+            });
+        }
+
+    </script>
 </body>
 </html>

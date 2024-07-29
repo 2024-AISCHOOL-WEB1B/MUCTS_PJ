@@ -7,7 +7,7 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <title>BUTS</title>
     <link rel="stylesheet" href="/myPage.css">
-    <!-- <link rel="stylesheet" href="/changeinfo.css"> -->
+    <link rel="stylesheet" href="/changeinfo.css">
 
 </head>
 
@@ -27,9 +27,15 @@
                     <img src="/Mainlogo.png" alt="Buts Logo">
                 </a>
             </div>
-            <div id="header-right">
-                <a href="http://localhost:3000/login">로그인</a>
+            {% if user %}
+            <div id="header-right" style="cursor:pointer;" onclick="location.href='http://localhost:3000/logout'">
+                로그아웃
             </div>
+            {% else %}
+            <div id="header-right" style="cursor:pointer;" onclick="location.href='http://localhost:3000/login'">
+                로그인
+            </div>
+            {% endif %}
         </div>
     </div>
     <!-- body -->
@@ -157,7 +163,7 @@
             </div>
             <div class="input-btn">
                 <input type="submit" id="changeInfo_btn2" value="정보 수정">
-                <a href="/user/myPage" class="button">취소</a>
+                <a href="/user/myPage" role="button" class="cancel_button">취소</a>
             </div>
         </form>
     </div>

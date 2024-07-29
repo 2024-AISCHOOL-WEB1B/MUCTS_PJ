@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="tailwindcss-colors.css">
     <link rel="stylesheet" href="chat.css">
     <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=67c77d274ba0613f3bf51949c87c1440"></script>
     <title>Chat</title>
 </head>
 <body>
@@ -26,8 +27,8 @@
                     <li><a href="" data-title="Map" id="mapBTN"><i class="ri-map-pin-line"></i></a></li>
                     <li><a href="" data-title="Payment" id="paymentBTN"><i class="ri-coins-line"></i></a></li>
 
-                    <li class="chat-sidebar-profile">
-                        <a href="" data-title="Exit" chat-sidebar-profile-toggle"><i class="ri-arrow-go-back-line"></i></a>
+                    <li class="chat-sidebar-end">
+                        <a href="" data-title="Exit" id="chat-sidebar-end-exit"><i class="ri-arrow-go-back-line"></i></a>
                     </li>
                 </ul>
             </aside>
@@ -39,18 +40,18 @@
                 <!-- start: Content side -->
                 
                 <div class="content-sidebar active" id="content-sidebar">
-                    <div class="content-sidebar-title">Chats</div>
-                    <form action="" class="content-sidebar-form">
-                        <input type="search" class="content-sidebar-input" placeholder="최소 금액 입력">
-                        <button type="submit" class="content-sidebar-submit"><i class="ri-search-line"></i></button>
-                    </form>
+                    <div class="content-sidebar-title">최소 금액</div>
+                    <div class="content-sidebar-minAmount" id="content-sidebar-minAmount"></div>
+                        
+                       
+                
                     <div class="content-participants">
                         <ul class="content-participants-list" id="content-participants-list">
                             <li class="content-participants-title"><span>Participants</span></li>
                             <li>
                                 <div class="content-participant">
                                     <span class="content-participant-info">
-                                        <span class="content-participant-name">참가자 1</span>
+                                        <span class="content-participant-name">참가자</span>
                                         <span class="content-participant-text">지불 금액</span>
                                     </span>
                                     <span class="content-participant-more">
@@ -67,7 +68,7 @@
                 <!-- start: Conversation -->
                 <div class="conversation conversation-default" id="conversation-default">
                     <i class="ri-chat-3-line"></i>
-                    <p>MUCTS</p>
+                    <p id="conversation-default-text">MUCTS</p>
                 </div>
 
                 <div class="conversation active" id="conversation">
@@ -91,7 +92,7 @@
                         <div class="conversation-form-group">
                             <textarea id="messageInput" class="conversation-form-input" rows="1" placeholder="Type here..."></textarea>
                         </div>
-                        <button type="button" class="conversation-form-submit"><i class="ri-send-plane-2-line"></i></button>
+                        <button type="button" class="conversation-form-submit" id="conversation-submit-button"><i class="ri-send-plane-2-line"></i></button>
                     </div>
                 <!-- end: Conversation -->
 
@@ -100,18 +101,44 @@
             <!-- end: Content -->
         
             <!-- start : modal -->
-            <!-- <div class="modal" id="modal">
+            <div class="modal" id="modal">
                 <div class="modal-content">
-                    <div class="modal-head">
-                        <button class="close-button" onclick="closeModal()">닫기</button>
+                    
+                    <div class="modal-header">
+                        <div clase="modal-close" id="modal-close">
+                        X
+                        </div>
                     </div>
                     <div class="modal-body">
-                        <div class="modal-map"></div>
+                        <!-- Map -->
+                        <div class="modal-map" id="modal-map">
+                        
+                        </div>
+
+                        <!-- Payment -->
+                        <div class="modal-payment" id="modal-payment">
+                            <div class="modal-payment-header" >
+                                <span class="modal-payment-subtitle">최소 금액</span>
+                                <span class="modal-payment-figure" id="modal-payment-minAmount">20,000원</span>
+                            </div>
+                            <div class="modal-payment-body">
+                                <span class="modal-payment-subtitle">당신의 포인트</span>
+                                <span class="modal-payment-figure" id="modal-payment-userPoint" >500,000원</span>
+                                <span class="modal-payment-alert" id="modal-payment-alert">메시지</span>
+                            </div>
+                            <div class="modal-payment-footer">
+                                <span class="modal-payment-subtitle">얼마를 사용하실 건가요?</span>
+                                <input type="number" class="modal-payment-input" id="charge_money" >
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer" >
+                        <div id="modal-send-gathering">
+                        SEND
+                        </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
             <!-- start : modal -->
 
         </div>
