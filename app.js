@@ -37,8 +37,6 @@ app.use(sessionMiddleware)
 
 // post데이터 처리 등록
 app.use(bp.urlencoded({extended : true}));
-app.use(express.json());
-
 
 // router 등록
 app.use('/', mainRouter);
