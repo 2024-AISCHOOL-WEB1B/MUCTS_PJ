@@ -23,6 +23,7 @@ module.exports = (server) => {
                 roomList[results[i].party_id] = results[i];
                 roomList[results[i].party_id].participantsID = [];
                 roomList[results[i].party_id].participantsNick = [];
+                roomList[results[i].party_id].participantsReady = [];
             }
             console.log("소켓 select 결과값 : ", results);
             console.log("소켓 select 첫번째 결과값 : ", roomList[results[0].party_id]);
@@ -67,6 +68,7 @@ module.exports = (server) => {
             if(roomList[roomId].participantsID.indexOf(userId) === -1){
                 roomList[roomId].participantsID.push(userId);
                 roomList[roomId].participantsNick.push(userNick);
+                roomList[roomId].participantsReady.push(false);
             }
             
             console.log('채팅방 입장할 때 : ', data, roomList);
@@ -103,6 +105,16 @@ module.exports = (server) => {
             socket.to(roomId).emit('show gathering', {lat : lat, lng : lng});
         })
 
+        // 채팅창에서 결제 성공하고 상태 바꿀 때
+        socket.on('change status', (data) =>{
+            const idx = roomList[roomId].participantsID.indexOf(data.userId);
+            if (idx !== -1) {
+                console.log('결제 상태 확인', data);
+                roomList[roomId].participantsReady[idx] = data.ready;
+                io.to(roomId).emit('reload participants', roomList[roomId]);
+            }    
+        })
+
         // 연결 종료
         socket.on('disconnect', () => {
             /*
@@ -115,6 +127,7 @@ module.exports = (server) => {
                 if (idx !== -1) {
                     roomList[roomId].participantsNick.splice(idx, 1); // 요소 삭제
                     roomList[roomId].participantsID.splice(idx, 1); // 요소 삭제
+                    roomList[roomId].participantsReady.splice(idx, 1); // 요소 삭제
                 }
         
                 // 방이 비어있다면 

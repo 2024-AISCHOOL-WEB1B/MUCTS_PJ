@@ -119,7 +119,7 @@ socket.on('new user', (msg) => {
 // 사용자에게 인원 현황을 보여주자..
 socket.on('reload participants', (data) => {
   participantList.innerHTML = '<li class="content-participants-title"><span>Participants</span></li>';
-  const { participantsID, participantsNick, user_id, personnel } = data;
+  const { participantsID, participantsNick, participantsReady ,user_id, personnel } = data;
 
   roomCapacity.innerText = `${participantsID.length} / ${personnel}`;
   if (participantsID.length >= personnel) {
@@ -131,8 +131,9 @@ socket.on('reload participants', (data) => {
   for (let i = 0; i < participantsID.length; i++) {
     const id = participantsID[i];
     const nickname = participantsNick[i];
-    const isHost = id === user_id;
-    addParticipant(nickname, id, isHost, false); // isReady를 false로 설정
+    const isHost = (id === user_id);
+    const isReady = participantsReady[i]
+    addParticipant(nickname, id, isHost, isReady); 
   }
 });
 
@@ -435,11 +436,13 @@ modal_send_gathering.addEventListener('click', () => {
     })
     .then(data => {
         console.log('성공:', data.message);
-
+        socket.emit('change status', {userId : sessionUserId, ready : true});
+        
         // 모달창에 성공 알림
         modal_payment_alert.classList.add("active");
         modal_payment_alert.innerText = data.message;
         
+        /*
         // 준비 완료 구현
         const participantReady = '<span class="content-participant-ready">완료</span>';
         const participantElement = document.getElementById(sessionUserId);
@@ -456,6 +459,7 @@ modal_send_gathering.addEventListener('click', () => {
             console.log(`ID ${sessionUserId}를 가진 요소를 찾을 수 없습니다.`);
           }
         }
+        */
         
     })
     .catch(error => {
