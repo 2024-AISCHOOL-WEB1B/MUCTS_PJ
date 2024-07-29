@@ -71,6 +71,30 @@ exitBTN.addEventListener('click', (event) => {
   }
 })
 
+// 존재하지 않는 방
+socket.on('void room', (msg)=>{
+  const conversation_default = document.getElementById("conversation-default");
+  const conversation = document.getElementById("conversation");
+  const conversation_default_text = document.getElementById("conversation-default-text");
+  const content_sidebar = document.getElementById("content-sidebar");
+  content_sidebar.style.display = "none";
+  conversation_default_text.innerText = msg;
+  conversation_default.classList.toggle("active");
+  conversation.classList.toggle("active");
+})
+
+// 가득찬 방
+socket.on('full room'), (msg) => {
+  const conversation_default = document.getElementById("conversation-default");
+  const conversation = document.getElementById("conversation");
+  const conversation_default_text = document.getElementById("conversation-default-text");
+  const content_sidebar = document.getElementById("content-sidebar");
+  content_sidebar.style.display = "none";
+  conversation_default_text.innerText = msg;
+  conversation_default.classList.toggle("active");
+  conversation.classList.toggle("active");
+}
+
 
 // 본인 입장 알림
 socket.on('you joined room', (data) => {

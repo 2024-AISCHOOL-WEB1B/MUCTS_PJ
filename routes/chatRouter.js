@@ -40,9 +40,4 @@ router.get('/db', (req, res)=>{
 
 })
 
-// 아직 사용하고 있지 않음!
-router.post('/api', (req, res) => {
-    res.json({apikey : process.env.KAKAO_KEY})
-});
-
 module.exports = router;
