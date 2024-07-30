@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <title>BUTS</title>
+    <title>MUCTS</title>
     <link rel="stylesheet" href="/myPage.css">
     <link rel="stylesheet" href="/changeinfo.css">
 
@@ -23,24 +23,34 @@
     <div id="header">
         <div id="header-width-container">
             <div id="header-logo">
-                <a href="https://buts.co.kr/">
+                <a href="http://localhost:3000/">
                     <img src="/Mainlogo.png" alt="Buts Logo">
                 </a>
             </div>
-            {% if user %}
-            <div id="header-right" style="cursor:pointer;" onclick="location.href='http://localhost:3000/logout'">
-                로그아웃
+            <div id="btns">
+                <div id="cash_btn">
+                    <a href="http://localhost:3000/charge/charge">충전/조회</a>
+                </div>
+                <div id="mypage_btn">
+                    <a href="http://localhost:3000/user/myPage">마이페이지</a>
+                </div>
+                {% if user %}
+                <div id="header-right" style="cursor:pointer;" onclick="location.href='http://localhost:3000/logout'">
+                    로그아웃
+                </div>
+                {% else %}
+                <div id="header-right" style="cursor:pointer;" onclick="location.href='http://localhost:3000/login'">
+                    로그인
+                </div>
+                {% endif %}
             </div>
-            {% else %}
-            <div id="header-right" style="cursor:pointer;" onclick="location.href='http://localhost:3000/login'">
-                로그인
-            </div>
-            {% endif %}
         </div>
     </div>
     <!-- body -->
     <div class="container">
-        <h1>MY 프로필</h1>
+        <div id="h1tag">
+            <h1>MY 프로필</h1>
+        </div>
         {% if user %}
         <div class="profile-info-container"> <!-- 클래스 추가 -->
             <!-- <div class="line"> -->
@@ -59,7 +69,7 @@
             </div>
         </div>
         <div class="buttons">
-            <button type="button" id="changeInfo_btn" onclick="openModal()">정보 수정</button>
+            <button type="button" id="changeInfo_btn" onclick="openModal()">정보수정</button>
             <a href="#" class="button">탈퇴하기</a>
         </div>
         {% else %}
@@ -169,4 +179,5 @@
     </div>
 </body>
 <script src="/myPage.js"></script>
+
 </html>

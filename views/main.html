@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <title>BUTS</title>
+    <title>MUCTS</title>
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="main_modal.css">
 </head>
@@ -20,7 +20,7 @@
     <div id="header">
         <div id="header-width-container">
             <div id="header-logo">
-                <a href="https://buts.co.kr/">
+                <a href="http://localhost:3000/">
                     <img src="Mainlogo.png" alt="Buts Logo">
                 </a>
             </div>
@@ -47,7 +47,7 @@
     <div id="main-body">
         <div id="main-width-container">
             <br>
-            <a href="https://buts.co.kr/bbs/guide_buts.php">
+            <a href="http://localhost:3000/">
                 <img style="border-radius: 10px;
                 border: 1px solid #ffe655;" src="banner.png" alt="Guide Banner">
             </a>
@@ -135,26 +135,30 @@
     <!-- 계좌 인증 여부 모달 -->
     <div id="authModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeAuthModal()">&times;</span>
+            <span class="close" onclick="closeAuthModal()"></span>
             <h2>계좌 인증</h2>
             <p>계좌 인증을 진행하시겠습니까?</p>
             <div class="modal-button">
-                <button onclick="showAccountModal()">예</button>
-                <button onclick="redirectToMainPage()">아니오</button>
+                <button onclick="showAccountModal()" id="yes_btn">예</button>
+                <button onclick="redirectToMainPage()" id="no_btn">아니오</button>
             </div>
         </div>
     </div>
     <div id="myModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
+            <span class="close" onclick="closeModal()"></span>
             <h2>계좌 정보 등록</h2>
-            <form action="/party/registerAccount" method="POST">
+            <form action="/party/registerAccount" method="POST" id="bank_info">
                 <input type="hidden" name="userId" id="userId">
-                <label for="wd_account">출금계좌(은행):</label>
-                <input type="text" id="wd_account" name="wd_account" required><br>
-                <label for="ba_number">계좌번호:</label>
-                <input type="text" id="ba_number" name="ba_number" required><br>
-                <button type="submit">등록</button>
+                <div id="bank">
+                <label for="wd_account">출금계좌(은행) :</label>
+                <input type="text" id="wd_account" name="wd_account" required><br></div>
+                <div>
+                <label for="ba_number" id="bank_num">계좌번호 :</label>
+                <input type="text" id="ba_number" name="ba_number" required><br></div>
+                <div id="modal-button2">
+                <button type="submit" id="yes_btn2">등록</button>
+                <button type="button" onclick="redirectToMainPage()" id="no_btn2">취소</button></div>
             </form>
         </div>
     </div>

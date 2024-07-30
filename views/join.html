@@ -4,11 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 카카오 주소입력api -->
-    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="join.css">
-    <title>BUTS</title>
+    <title>MUCTS</title>
+    <link rel="stylesheet" href="login.css">
 </head>
 
 <body>
@@ -23,8 +21,8 @@
     <div id="header">
         <div id="header-width-container">
             <div id="header-logo">
-                <a href="https://buts.co.kr/">
-                    <img src="small-butslogo.png" alt="Buts Logo">
+                <a href="http://localhost:3000/">
+                    <img src="Mainlogo.png" alt="Buts Logo">
                 </a>
             </div>
             <div id="header-right" style="cursor:pointer;" onclick="location.href='http://localhost:3000/login'">
@@ -35,98 +33,40 @@
     <!-- body -->
     <div id="main-body">
         <div id="main-width-container">
-            <br>
             <div id="form-login">
-                <form id="form" action="http://localhost:3000/user/join" method="post">
-                    <div id="user_info">
-                        <ul>
-                            <li><span class="subject">아이디</span> <input type="text" name="user_id" id="id"><br></li>
-                            <li><span class="subject">비밀번호</span> <input type="password" name="pw" id="pw"><br></li>
-                            <li><span class="subject">이름</span> <input type="text" name="name" id="name"></li>
-                        </ul>
+                <form id="form" role="form" name="flogin" action="http://localhost:3000/user/login" method="post">
+                    <div id="login-logo">
+                        <img src="Mainlogo.png">
+                    </div>
+                    <div id="login-input">
+                        <input type="text" name="user_id" id="login_id" required="" maxlength="20"
+                            placeholder="아이디를 입력하세요">
                     </div>
                     <br>
-                    <div id="nick">
-                        <ul>
-                            <li><sapn class="subject">별명</sapn> <input type="text" name="nick" id="user_nick"><br></li>
-                            <li><span class="subject">주소</span> 
-                                <input type="text" id="sample4_postcode" class="rgst_inputBox" placeholder="우편번호" name="addr_code">
-                                <input type="button" id="searchAddrButton" value="우편번호 찾기" class="searchAddr"><br>
-                            </li>
-                            <li><input type="text" id="sample4_jibunAddress" class="rgst_inputBox" placeholder="지번주소" name="addr_jibun">
-                                <input type="text" id="sample4_detailAddress" class="rgst_inputBox" placeholder="상세주소" name="addr_detail"><br>
-                            </li>
-                            <li><span class="subject">이메일</sapn> <input type="email" name="email" id="email"><br></li>
-                            <li><span class="subject">생년월일</sapn> <input type="text" name="birth_date" id="birth_date"
-                                        placeholder="8자리를 입력해주세요"><br></li>
-                            <li><span class="subject">성별</sapn> <input type="radio" name="gender" value="M"
-                                        id="gender">남
-                                    <input type="radio" name="gender" value="W" id="gender-radio">여<br></li>
-                            <li><span class="subject">휴대폰</sapn> <input type="text" name="tel" id="tel"></li>
-                        </ul>
+                    <div id="login-input-pw">
+                        <input type="password" name="pw" id="login_pw" required="" maxlength="20"
+                            placeholder="패스워드를 입력하세요">
                     </div>
                     <br>
-                    <div id="make_p">
-                        <ul>
-                            <li><span class="subject">계좌</sapn> <input type="text" name="wd_account"
-                                        id="wd_account"><br>
-                            </li>
-                            <li><span class="subject">계좌번호</sapn> <input type="text" name="ba_number"
-                                        id="ba_number"><br>
-                            </li>
-                        </ul>
+                    <div id="login-option">
+                        <div id="login-option-right">
+                            <a href="http://localhost:3000/join" class="v-bar">회원가입</a>
+                            <span>|</span>
+                            <button type="button" id="id_pw_lost" onclick="openModal()">아이디/비밀번호찾기</button>
+                        </div>
                     </div>
                     <br>
-                    <input type="submit" value="회원가입" id="submit">
-                    <script>
-                        document.getElementById('searchAddrButton').addEventListener('click', sample4_execDaumPostcode);
-                    
-                        function sample4_execDaumPostcode() {
-                            var element_wrap = document.createElement('div'); // 팝업을 감쌀 div 생성
-                            document.body.appendChild(element_wrap); // body에 div 추가
-                    
-                            var currentPostcode = new daum.Postcode({
-                                oncomplete: function (data) {
-                                    // 지번 주소를 표시하는 코드
-                                    var jibunAddr = data.jibunAddress; // 지번 주소 변수
-                                    var extraJibunAddr = ''; // 참고 항목 변수
-                    
-                                    // 법정동명이 있을 경우 추가한다.
-                                    if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-                                        extraJibunAddr += data.bname;
-                                    }
-                                    // 건물명이 있고, 공동주택일 경우 추가한다.
-                                    if (data.buildingName !== '' && data.apartment === 'Y') {
-                                        extraJibunAddr += (extraJibunAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                                    }
-                                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                                    if (extraJibunAddr !== '') {
-                                        extraJibunAddr = ' (' + extraJibunAddr + ')';
-                                    }
-                    
-                                    // 우편번호와 지번 주소 정보를 해당 필드에 넣는다.
-                                    document.getElementById('sample4_postcode').value = data.zonecode;
-                                    document.getElementById("sample4_jibunAddress").value = jibunAddr + extraJibunAddr;
-                                    document.getElementById("sample4_detailAddress").value = ''; // 상세주소 필드는 사용자가 직접 입력하도록 설정
-                    
-                                    // 팝업을 감싼 div 제거
-                                    document.body.removeChild(element_wrap);
-                                },
-                                // 팝업을 감쌀 div 설정
-                                container: element_wrap
-                            });
-                    
-                            currentPostcode.open();
-                        }
-                    </script>
-                    
-
+                    <div id="login_btns">
+                        <button type="submit" id="form-login-button" style="cursor: pointer;">로그인</button>
+                        <a href="javascript:void(0);" id="form-login-button-kakao" onclick="loginWithKakao()">카카오계정
+                            로그인하기
+                        </a>
+                    </div>
 
                 </form>
             </div>
         </div>
     </div>
-    <br>
     <!-- footer -->
     <div class="footer">
         <div class="width-container">
@@ -164,6 +104,38 @@
             먹츠는 소비자 보호와 안전거래를 위해 고객센터(manager@buts.co.kr)를 운영하고 있으며, 분쟁이 발생 된 경우 별도의 분쟁처리절차에 의거 분쟁해결 및 청약철회 등이 진행 됩니다.
         </div>
     </div>
+
+    <!-- 아이디/패스워드찾기 모달창 html -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close"></span>
+            <h2>아이디 / 패스워드 찾기</h2>
+            <span id="demonst">
+                회원가입 시 등록하신 이메일 주소를 입력해 주세요.<br>
+                해당 이메일로 아이디와 비밀번호 정보를 보내드립니다.
+            </span>
+            <br>
+            <form>
+                <ul id="deco1">
+                    <input type="email" id="email" name="email" placeholder="이메일주소를 입력하세요">
+                </ul>
+                <br>
+                <button type="submit" id="ok_btn" style="cursor: pointer;">확인</button>
+                <button type="button" id="cancel" style="cursor: pointer;">취소</button>
+            </form>
+        </div>
+    </div>
+    <script src="login.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+        Kakao.init('74f5ebc858cd44555f0339f0227e8faa');
+        function loginWithKakao() {
+            Kakao.Auth.authorize({
+                redirectUri: 'http://localhost:3000/'
+            });
+        }
+
+    </script>
 </body>
 
 </html>
