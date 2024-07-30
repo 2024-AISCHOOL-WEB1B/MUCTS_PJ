@@ -4,7 +4,8 @@ const conn = require('../config/db');
 
 
 router.get("/", (req, res) => {
-    res.render("main");
+    res.render("main",
+        { user : req.session.user_id });
 });
 
 
@@ -37,6 +38,7 @@ router.get("/login",(req,res)=>{
 })
 
 router.get("/charge",(req,res)=>{
-    res.render("charge");
+    res.render("charge",
+        { user : req.session.user_id });
 })
 module.exports = router;

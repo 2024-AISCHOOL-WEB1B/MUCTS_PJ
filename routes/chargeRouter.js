@@ -148,6 +148,7 @@ router.get("/charge", (req, res) => {
                 {
                     charge: rows[0],
                     // user_date: formattedJoinDate
+                    user : req.session.user_id
                 });
         } else {
             res.render("charge", { charge: null });

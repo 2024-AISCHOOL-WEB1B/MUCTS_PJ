@@ -80,9 +80,15 @@
                     <img src="/Mainlogo.png" alt="Buts Logo">
                 </a>
             </div>
-            <div id="header-right" style="cursor:pointer;" onclick="location.href='http://localhost:3000/login'">
-              로그인
-          </div>
+            {% if user %}
+                <div id="header-right" style="cursor:pointer;" onclick="location.href='http://localhost:3000/logout'">
+                로그아웃
+                </div>
+                {% else %}
+                <div id="header-right" style="cursor:pointer;" onclick="location.href='http://localhost:3000/login'">
+                로그인
+                </div>
+                {% endif %}
         </div>
     </div>
     <div id="container">
