@@ -52,7 +52,10 @@ router.post('/registerAccount', (req, res) => {
 
 // 파티 만들기 페이지 라우트
 router.get('/makeParty', (req, res) => {
-    res.render('makeparty');
+    res.render('makeparty',
+        {
+            user : req.session.user_id
+        });
 });
 
 module.exports = router;

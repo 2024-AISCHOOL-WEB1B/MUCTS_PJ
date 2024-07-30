@@ -5,7 +5,8 @@ const conn = require('../config/db');
 
 router.get("/", (req, res) => {
     res.render("main",
-        { user : req.session.user_id });
+        { user : req.session.user_id }
+    );
 });
 
 
@@ -27,6 +28,7 @@ router.get("/getPartyList", (req, res) => {
     });
 })
 
+
 // 사용자가 회원가입을 요청했을 때!
 router.get("/join",(req,res)=>{
     res.render("join");
@@ -37,8 +39,16 @@ router.get("/login",(req,res)=>{
     res.render("login");
 })
 
+// 사용자가 로그아웃을 요청했을 때
+router.get("/logout",(req,res)=>{
+    req.session.destroy();
+    res.redirect("/");
+})
+
+
+
+
 router.get("/charge",(req,res)=>{
-    res.render("charge",
-        { user : req.session.user_id });
+    res.render("charge");
 })
 module.exports = router;
