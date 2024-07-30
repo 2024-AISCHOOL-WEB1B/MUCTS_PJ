@@ -19,15 +19,19 @@ module.exports = (server) => {
             return;
         }
         else {
-            for(let i = 0 ; i < results.length ; i++){
-                roomList[results[i].party_id] = results[i];
-                roomList[results[i].party_id].participantsID = [];
-                roomList[results[i].party_id].participantsNick = [];
-                roomList[results[i].party_id].participantsReady = [];
+            if (results.length!=0){
+                for(let i = 0 ; i < results.length ; i++){
+                    roomList[results[i].party_id] = results[i];
+                    roomList[results[i].party_id].participantsID = [];
+                    roomList[results[i].party_id].participantsNick = [];
+                    roomList[results[i].party_id].participantsReady = [];
+                }
+                console.log("소켓 select 결과값 : ", results);
             }
-            console.log("소켓 select 결과값 : ", results);
-            console.log("소켓 select 첫번째 결과값 : ", roomList[results[0].party_id]);
-            console.log("소켓 select 첫번째 결과값의 party_id : ", roomList[results[0].party_id].party_id);
+            else {
+                console.log("socket io에서 방을 가져 왔는데 아무것도 없음..")
+            }
+            
 
         }
     });
