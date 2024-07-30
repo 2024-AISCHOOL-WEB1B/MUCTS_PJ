@@ -6,58 +6,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>포인트 페이지</title>
   <link rel="stylesheet" href="/charge.css">
-  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-  <script>
-    function mypayment(event) {
-      event.preventDefault(); // 폼 제출 막기
-      const myAmount = Number(document.getElementById("charge_money").value);
+  <script
+  type="text/javascript"
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+></script>
+<script
+  type="text/javascript"
+  src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
+></script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-      const IMP = window.IMP; // 생략 가능
-      IMP.init("imp68104701"); // 예: imp00000000
-      IMP.request_pay(
-        {
-          // param
-          pg: "kakaopay",
-          pay_method: "card",
-          name: "포인트 충전",
-          amount: myAmount, // 여기서 amount로 변경
+<script>
+  function mypayment(event) {
+    event.preventDefault(); // 폼 제출 막기
+    const myAmount = Number(document.getElementById("charge_money").value);
 
-        },
-        async (rsp) => {
-          // callback
-          if (rsp.success) {
-            // 결제 성공시
-            try {
-              console.log('Payment success, response:', rsp); // 로그 추가
-              const response = await axios.post(
-                "http://localhost:3000/charge/charge",
-                {
-                  charge_money: rsp.paid_amount
+    const IMP = window.IMP; // 생략 가능
+    IMP.init("imp68104701"); // 예: imp00000000
+    const uniqueId = `order_no_${new Date().getTime()}`; // 고유한 주문번호 생성
+    IMP.request_pay(
+      {
+        // param
+        pg: "kakaopay",
+        pay_method: "card",
+        merchant_uid: uniqueId,
+        name: "포인트 충전",
+        amount: myAmount, // 여기서 amount로 변경
+        
+      },
+      async (rsp) => {
+        // callback
+        if (rsp.success) {
+          // 결제 성공시
+          try {
+            console.log('Payment success, response:', rsp); // 로그 추가
+            const response = await axios.post(
+              "http://localhost:3000/charge/charge",
+              {
+                charge_money: rsp.paid_amount
+              },
+              {
+                headers: {
+                  authorization: "Bearer 4325194f13e2bf4e524871ff2f6ad9de56d66664 ",
                 },
-                {
-                  headers: {
-                    authorization: "Bearer 액세스토큰",
-                  },
-                }
-              );
-              console.log('Server response:', response.data); // 서버 응답 로그 추가
-              alert(response.data.message);
-              location.reload(); // 페이지 새로고침하여 업데이트
-            } catch (error) {
-              console.error('서버 오류:', error.response ? error.response.data : error.message); // 상세 오류 메시지
-              alert('결제 처리 중 오류가 발생했습니다.');
-            }
-          } else {
-            // 결제 실패시
-            console.log('Payment failed, response:', rsp); // 실패 응답 로그 추가
-            alert('결제에 실패했습니다. 다시 시도해주세요.');
+              }
+            );
+            console.log('Server response:', response.data); // 서버 응답 로그 추가
+            alert(response.data.message);
+            location.reload(); // 페이지 새로고침하여 업데이트
+          } catch (error) {
+            console.log('서버 오류:', error.response ? error.response.data : error.message); // 상세 오류 메시지
+            alert('결제 처리 중 오류가 발생했습니다.');
           }
+        } else {
+          // 결제 실패시
+          console.log('Payment failed, response:', rsp); // 실패 응답 로그 추가
+          alert('결제에 실패했습니다. 다시 시도해주세요.');
         }
-      );
-    }
-  </script>
+      }
+    );
+  }
+</script>
 </head>
 
 <body>
