@@ -7,11 +7,6 @@ module.exports = (server) => {
     // 가져올 party 정보를 저장할 거임
     io.roomList = {};
 
-    io.use((socket, next) => {
-        socket.request.io = io; // Attach io to the socket request
-        next();
-    });
-
     // 진행중인(party_status=1) Party_TB 가져오기 
     const sql = `
     select * from Party_TB where party_status = 1
