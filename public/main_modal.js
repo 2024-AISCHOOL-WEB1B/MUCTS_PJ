@@ -3,7 +3,7 @@ function checkAccount() {
         .then(response => response.json())
         .then(data => {
             if (data.hasAccount) {
-                window.location.href = 'http://localhost:3000/party/makeParty';
+                window.location.href = '/party/makeParty';
             } else {
                 document.getElementById('authModal').style.display = 'block';
             }
@@ -19,7 +19,7 @@ function showAccountModal() {
 
 function redirectToMainPage() {
     document.getElementById('authModal').style.display = 'none';
-    window.location.href = 'http://localhost:3000'; // 메인 페이지로 리디렉션
+    window.location.href = '/'; // 메인 페이지로 리디렉션
 }
 
 function closeAuthModal() {

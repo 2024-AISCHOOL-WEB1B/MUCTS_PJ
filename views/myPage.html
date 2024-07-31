@@ -23,23 +23,23 @@
     <div id="header">
         <div id="header-width-container">
             <div id="header-logo">
-                <a href="http://localhost:3000/">
+                <a href="/">
                     <img src="/Mainlogo.png" alt="Buts Logo">
                 </a>
             </div>
             <div id="btns">
                 <div id="cash_btn">
-                    <a href="http://localhost:3000/charge/charge">충전/조회</a>
+                    <a href="/charge/charge">충전/조회</a>
                 </div>
                 <div id="mypage_btn">
-                    <a href="http://localhost:3000/user/myPage">마이페이지</a>
+                    <a href="/user/myPage">마이페이지</a>
                 </div>
                 {% if user %}
-                <div id="header-right" style="cursor:pointer;" onclick="location.href='http://localhost:3000/logout'">
+                <div id="header-right" style="cursor:pointer;" onclick="location.href='/logout'">
                     로그아웃
                 </div>
                 {% else %}
-                <div id="header-right" style="cursor:pointer;" onclick="location.href='http://localhost:3000/login'">
+                <div id="header-right" style="cursor:pointer;" onclick="location.href='/login'">
                     로그인
                 </div>
                 {% endif %}
@@ -118,7 +118,7 @@
     <!-- 회원정보 수정 모달창 html -->
     <div id="info_modal">
         <h2>회원정보 수정</h2>
-        <form action="http://localhost:3000/user/changeInfo" method="post" id="changeInfo2">
+        <form action="/user/changeInfo" method="post" id="changeInfo2">
             <div class="section">
                 <h3>아이디/비밀번호</h3>
                 <div class="input-group">

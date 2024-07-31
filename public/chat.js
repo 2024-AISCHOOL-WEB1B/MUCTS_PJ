@@ -188,6 +188,7 @@ socket.on('return message', (data) => {
   let sender = data.sender || "Guest";
   let msg = `${sender} : ${data.msg}`;
   addMessage(sender, msg);
+  scrollToBottom()
 });
 
 // 메시지를 추가하는 함수

@@ -13,23 +13,23 @@
     <div id="header">
         <div id="header-width-container">
             <div id="header-logo">
-                <a href="http://localhost:3000/">
+                <a href="/">
                     <img src="/Mainlogo.png" alt="Header Image" />
                 </a>
             </div>
             <div id="btns">
                 <div id="cash_btn">
-                    <a href="http://localhost:3000/charge/charge">충전/조회</a>
+                    <a href="/charge/charge">충전/조회</a>
                 </div>
                 <div id="mypage_btn">
-                    <a href="http://localhost:3000/user/myPage">마이페이지</a>
+                    <a href="/user/myPage">마이페이지</a>
                 </div>
                 {% if user %}
-                <div id="header-right" style="cursor:pointer;" onclick="location.href='http://localhost:3000/logout'">
+                <div id="header-right" style="cursor:pointer;" onclick="location.href='/logout'">
                     로그아웃
                 </div>
                 {% else %}
-                <div id="header-right" style="cursor:pointer;" onclick="location.href='http://localhost:3000/login'">
+                <div id="header-right" style="cursor:pointer;" onclick="location.href='/login'">
                     로그인
                 </div>
                 {% endif %}
@@ -42,7 +42,7 @@
                 <div id="title-party">
                     <span class="text-purple">파티/판매 등록</span>
                 </div>
-                <form action="http://localhost:3000/party/makeParty" method="post">
+                <form action="/party/makeParty" method="post">
                     <br>
                     <br>
                     <!-- 제목 입력 -->

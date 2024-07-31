@@ -23,7 +23,7 @@
                     <img src="Mainlogo.png" alt="Buts Logo">
                 </a>
             </div>
-            <div id="header-right" style="cursor:pointer;" onclick="location.href='http://localhost:3000/login'">
+            <div id="header-right" style="cursor:pointer;" onclick="location.href='/login'">
                 로그인
             </div>
         </div>
@@ -32,7 +32,7 @@
     <div id="main-body">
         <div id="main-width-container">
             <div id="form-login">
-                <form id="form" role="form" name="flogin" action="http://localhost:3000/user/login" method="post">
+                <form id="form" role="form" name="flogin" action="/user/login" method="post">
                     <div id="login-logo">
                         <img src="Mainlogo.png">
                     </div>
@@ -46,7 +46,7 @@
                     <br>
                     <div id="login-option">
                         <div id="login-option-right">
-                            <a href="http://localhost:3000/join" class="v-bar">회원가입</a>
+                            <a href="/join" class="v-bar">회원가입</a>
                             <span>|</span>
                             <button type="button" id="id_pw_lost" onclick="openModal()" >아이디/비밀번호찾기</button>
                         </div>
@@ -123,7 +123,7 @@
         Kakao.init('74f5ebc858cd44555f0339f0227e8faa');
         function loginWithKakao() {
             Kakao.Auth.authorize({
-                redirectUri: 'http://localhost:3000/'
+                redirectUri: '/'
             });
         }
 
