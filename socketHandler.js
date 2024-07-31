@@ -5,7 +5,7 @@ const conn = require("./config/db");
 module.exports = (server) => {
     const io = socketIo(server);
     // 가져올 party 정보를 저장할 거임
-    let roomList = {};
+    io.roomList = {};
 
     // 진행중인(party_status=1) Party_TB 가져오기 
     const sql = `
@@ -21,10 +21,10 @@ module.exports = (server) => {
         else {
             if (results.length!=0){
                 for(let i = 0 ; i < results.length ; i++){
-                    roomList[results[i].party_id] = results[i];
-                    roomList[results[i].party_id].participantsID = [];
-                    roomList[results[i].party_id].participantsNick = [];
-                    roomList[results[i].party_id].participantsReady = [];
+                    io.roomList[results[i].party_id] = results[i];
+                    io.roomList[results[i].party_id].participantsID = [];
+                    io.roomList[results[i].party_id].participantsNick = [];
+                    io.roomList[results[i].party_id].participantsReady = [];
                 }
                 console.log("소켓 select 결과값 : ", results);
             }
@@ -49,39 +49,39 @@ module.exports = (server) => {
             roomId = data.roomId;
             userNick = data.nick||"Geust's Nickname";
             userId = data.userId||"Guest's ID"
-            roomTitle = roomList[roomId]?.party_title||"존재하지 않는 방";
-            min_amount = roomList[roomId]?.min_amount||0; // 최소금액
-            maxRoomCapacity = roomList[roomId]?.personnel||0;
+            roomTitle = io.roomList[roomId]?.party_title||"존재하지 않는 방";
+            min_amount = io.roomList[roomId]?.min_amount||0; // 최소금액
+            maxRoomCapacity = io.roomList[roomId]?.personnel||0;
             
 
             // 존재하지 않는 방에 갔을 경우
-            if(!roomList[roomId]){
+            if(!io.roomList[roomId]){
                 console.log(`${userNick} 사용자가 존재하지 않는 방에 들어가서 연결 종료`);
                 socket.emit('void room', "존재하지 않는 방입니다.. 다른 방으로 ㄱㄱ")
                 socket.disconnect();
                 return; // 연결 종료
             }
             
-            if(roomList[roomId].participantsID.length >= maxRoomCapacity){
+            if(io.roomList[roomId].participantsID.length >= maxRoomCapacity){
                 socket.emit('full room', "방 인원이 가득 찼습니다.. 뒤로가기 해주세요ㅠㅠ");
                 socket.disconnect();
                 return; // 연결 종료
             }
             
             // 사용자 추가
-            if(roomList[roomId].participantsID.indexOf(userId) === -1){
-                roomList[roomId].participantsID.push(userId);
-                roomList[roomId].participantsNick.push(userNick);
-                roomList[roomId].participantsReady.push(false);
+            if(io.roomList[roomId].participantsID.indexOf(userId) === -1){
+                io.roomList[roomId].participantsID.push(userId);
+                io.roomList[roomId].participantsNick.push(userNick);
+                io.roomList[roomId].participantsReady.push(false);
             }
             
-            console.log('채팅방 입장할 때 : ', data, roomList);
+            console.log('채팅방 입장할 때 : ', data, io.roomList);
 
             socket.join(roomId);
             console.log(`사용자 ${userNick} 방 ${roomTitle}에 입장`);
         
             // 클라이언트 인원 현황 리로드
-            io.to(roomId).emit('reload participants', roomList[roomId])
+            io.to(roomId).emit('reload participants', io.roomList[roomId])
 
             // 입장한 사용자에게 메시지 전송
             socket.emit('you joined room', {roomTitle : roomTitle, min_amount : min_amount, msg :`${roomTitle} 방에 입장하셨습니다. 매너 채팅 부탁😜`});
@@ -111,11 +111,11 @@ module.exports = (server) => {
 
         // 채팅창에서 결제 성공하고 상태 바꿀 때
         socket.on('change status', (data) =>{
-            const idx = roomList[roomId].participantsID.indexOf(data.userId);
+            const idx = io.roomList[roomId].participantsID.indexOf(data.userId);
             if (idx !== -1) {
                 console.log('결제 상태 확인', data);
-                roomList[roomId].participantsReady[idx] = data.ready;
-                io.to(roomId).emit('reload participants', roomList[roomId]);
+                io.roomList[roomId].participantsReady[idx] = data.ready;
+                io.to(roomId).emit('reload participants', io.roomList[roomId]);
             }    
         })
 
@@ -126,17 +126,17 @@ module.exports = (server) => {
             그 중간에 null 또는 undefined가 있어도 오류를 발생시키지 않고 undefined를 반환합니다. 
             이는 코드의 안정성을 높이고, 중간 값이 null 또는 undefined인 경우에 대한 예외 처리를 쉽게 해줍니다.
             */
-            if (roomList[roomId]) {
-                const idx = roomList[roomId].participantsNick.indexOf(userNick);
+            if (io.roomList[roomId]) {
+                const idx = io.roomList[roomId].participantsNick.indexOf(userNick);
                 if (idx !== -1) {
-                    roomList[roomId].participantsNick.splice(idx, 1); // 요소 삭제
-                    roomList[roomId].participantsID.splice(idx, 1); // 요소 삭제
-                    roomList[roomId].participantsReady.splice(idx, 1); // 요소 삭제
+                    io.roomList[roomId].participantsNick.splice(idx, 1); // 요소 삭제
+                    io.roomList[roomId].participantsID.splice(idx, 1); // 요소 삭제
+                    io.roomList[roomId].participantsReady.splice(idx, 1); // 요소 삭제
                 }
         
                 // 방이 비어있다면 
-                if (roomList[roomId].participantsID.length === 0) {
-                    delete roomList[roomId];
+                if (io.roomList[roomId].participantsID.length === 0) {
+                    delete io.roomList[roomId];
                     
                     let sql = `
                             update Party_TB 
@@ -157,11 +157,14 @@ module.exports = (server) => {
             }
 
             // 클라이언트 인원 현황 리로드
-            io.to(roomId).emit('reload participants', roomList[roomId])
+            io.to(roomId).emit('reload participants', io.roomList[roomId])
 
             console.log(`클라이언트 ${socket.id} 접속 해제`);
-            console.log('접속 해제 하고', roomList[roomId], roomList[roomId]?.length);
+            console.log('접속 해제 하고', io.roomList[roomId], io.roomList[roomId]?.length);
         });
     });
     // 채팅방 코드 끝!
+
+
+    return io;
 }

@@ -19,10 +19,10 @@
             </div>
             <div id="btns">
                 <div id="cash_btn">
-                    <a href="/charge/charge">충전/조회</a>
+                    <a href="/charge/charge">POINT</a>
                 </div>
                 <div id="mypage_btn">
-                    <a href="/user/myPage">마이페이지</a>
+                    <a href="/user/myPage">MY</a>
                 </div>
                 {% if user %}
                 <div id="header-right" style="cursor:pointer;" onclick="location.href='/logout'">
@@ -48,18 +48,18 @@
                     <!-- 제목 입력 -->
                     <div class="form-group">
                         <label for="title">제목</label>
-                        <input type="text" id="title" name="party_title" placeholder="제목을 입력해 주세요">
+                        <input type="text" id="title" name="party_title" placeholder="제목을 입력해 주세요!">
                     </div>
                     <br><br>
                     <!-- 모집인원 선택 -->
                     <div class="form-group">
                         <label for="members">모집인원</label>
-                        <input type="text" id="members" name="personnel" placeholder="본인제외 명">
+                        <input type="text" id="members" name="personnel" placeholder="몇 명을 모집하실 건가요?">
                     </div>
                     <!-- 최소주문금액 금액 -->
                     <div class="form-group">
                         <label for="amount">최소주문금액</label>
-                        <input type="number" id="amount" name="min_amount" placeholder="최소주문 금액 입력">
+                        <input type="number" id="amount" name="min_amount" placeholder="최소 주문 금액을 입력해 주세요">
                     </div>
                     <br><br>
                     <button id="submit" type="submit" style="cursor: pointer;">등록</button>

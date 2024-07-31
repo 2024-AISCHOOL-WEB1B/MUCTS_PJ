@@ -58,9 +58,6 @@ router.get('/makeParty', (req, res) => {
         });
 });
 
-module.exports = router;
-
-
 
 // 파티 만들기에서 데이터가 들어왔을 때 처리
 router.post('/makeParty', (req, res) => {
@@ -71,17 +68,40 @@ router.post('/makeParty', (req, res) => {
         INSERT INTO Party_TB (user_id, party_status, party_title, personnel, min_amount)
         VALUES (?, 1, ?, ?, ?)
     `;
+
     conn.query(sql, [user_id, party_title, personnel, min_amount], (err, rows) => {
         if (err) {
             console.error("데이터베이스 에러!", err);
             res.send("<script>alert('파티만들기 실패..'); history.back();</script>");
         } else {
-            res.send(`
-                <script>
-                    alert('파티만들기 성공!');
-                    window.location.href='/';
-                </script>`
-            );
+            
+            const sql = `
+                select party_id from Party_TB
+            `
+            conn.query(sql, (err, results) => {
+                if (err) {
+                    console.error("방 만들고 새로운 방 아이디 가져오려고 했는데 에러", err);
+                    res.send("<script>alert('방은 만들어졌는데 아마 그 방 입장 못할거에요.. ㅈㅅ'); history.back();</script>")
+                }
+                else{
+                    party_id = results[results.length - 1].party_id;
+                    req.io.roomList[party_id] = {
+                        party_id : party_id,
+                        user_id : user_id,
+                        party_status: 1,
+                        party_title: party_title,
+                        personnel: personnel,
+                        party_date: new Date(),
+                        min_amount: parseInt(min_amount),
+                        participantsID: [],
+                        participantsNick: [],
+                        participantsReady: []
+                    }
+                    console.log("새로운 방 추가", req.io.roomList[party_id]);
+                    res.redirect(`/chat?room=${party_id}`);
+                }
+            })
+
         }
     });
 });
