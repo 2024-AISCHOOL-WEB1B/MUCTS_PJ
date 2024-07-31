@@ -116,8 +116,8 @@
     </div>
     <div class="points-details">
       <form id="chargeForm" action="/charge/charge" method="POST" onsubmit="mypayment(event)">
-        포인트충전: <input type="number" id="charge_money" name="charge_money" min="0" required>
-        <button type="submit">충전</button>
+        <span class="title_xl"> 포인트 충전: </span> <input type="number" id="charge_money" name="charge_money" min="0" required>
+        <button id="charge-id" type="submit">충전</button>
       </form>
     </div>
     <div class="points-history">

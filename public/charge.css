@@ -191,3 +191,32 @@ th {
     position: relative;
     display: inline-block;
 }
+
+#charge-id {
+    display: inline-block;
+    padding: 8px 8px;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    margin-left: 0px;
+}
+
+#charge-id:hover {
+    background-color: gray;
+}
+
+#charge_money {
+    width: 150px; /* 입력 필드의 너비를 200픽셀로 설정 */
+    height: 23px; /* 입력 필드의 높이를 40픽셀로 설정 */
+    font-size: 16px; /* 입력 필드의 폰트 크기를 16픽셀로 설정 */
+}
+
+.title_xl {
+    font-size: 24px; /* 폰트 크기 */
+    font-weight: bold; /* 폰트 굵기 */
+}
