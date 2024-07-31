@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 
 html, body {
     margin: 0;
@@ -52,7 +55,7 @@ html, body {
 #cash_btn,
 #mypage_btn {
     display: inline-block;
-    width: 6rem;
+    width: 5rem;
     height: 34px;
     text-align: center;
     line-height: 32px;
@@ -71,7 +74,7 @@ html, body {
     font-size: 1rem;
 }
 #mypage_btn{
-    padding-right: 3rem;
+    padding-right: 2rem;
 }
 #header-right a {
     color: #ffffff;
@@ -79,11 +82,13 @@ html, body {
 }
 
 #main-body {
+    position:relative;
     width: 100%;
     min-height: 600px;
     padding-top: 100px; /* Adjust for fixed header */
 }
 #main-width-container {
+    position:relative;
     width: 100%;
     max-width: 1280px;
     min-height: 600px;
@@ -92,6 +97,11 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#mucts-banner {
+    margin-top:20px;
+    width:100%;
 }
 #title-wrap-party {
     width: 100%;
@@ -117,7 +127,7 @@ html, body {
     background-color: #ffffff;
     padding: 0 16px;
     font-size: 20px;
-    margin-right:15px;
+    
     border-radius: 17px;
     text-decoration: none;
 }
@@ -226,7 +236,7 @@ html, body {
         align-items: center;
     }
     .card {
-        width: 100%;
+        width: 90%;
         margin-bottom: 20px;
     }
 }
