@@ -16,6 +16,14 @@ const partyRouter = require("./routes/partyRouter");
 // 서버 실행
 const app = express();
 const server = http.createServer(app);
+const socketHandler = require('./socketHandler');
+const io = socketHandler(server);
+
+app.use((req, res, next)=>{
+    req.io = io;
+    next();
+});
+
 
 // statitc 파일 등록
 app.use(express.static("public"));
@@ -56,8 +64,6 @@ nunjucks.configure("views", {
 });
 
 
-const socketHandler = require('./socketHandler');
-socketHandler(server);
 
 
 const PORT = 3000;
