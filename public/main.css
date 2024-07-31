@@ -140,7 +140,8 @@ html, body {
     flex-wrap: wrap;
 
     /* 아론씨가 말한 채팅방 정렬되는 순서 바꾸기 주석처리 */
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap:55px;
     margin-top: 24px;
 }
 .card {
