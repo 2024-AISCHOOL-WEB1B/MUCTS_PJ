@@ -138,9 +138,9 @@ html, body {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+
     /* 아론씨가 말한 채팅방 정렬되는 순서 바꾸기 주석처리 */
-    /* justify-content: space-between; */
+    justify-content: space-between;
     margin-top: 24px;
 }
 .card {
@@ -236,7 +236,7 @@ html, body {
         align-items: center;
     }
     .card {
-        width: 90%;
+        width: 100%;
         margin-bottom: 20px;
     }
 }
