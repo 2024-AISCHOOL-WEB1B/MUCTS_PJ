@@ -74,6 +74,7 @@ router.post('/makeParty', (req, res) => {
             console.error("데이터베이스 에러!", err);
             res.send("<script>alert('파티만들기 실패..'); history.back();</script>");
         } else {
+            
             const sql = `
                 select party_id from Party_TB
             `
@@ -83,7 +84,7 @@ router.post('/makeParty', (req, res) => {
                     res.send("<script>alert('방은 만들어졌는데 아마 그 방 입장 못할거에요.. ㅈㅅ'); history.back();</script>")
                 }
                 else{
-                    const party_id = results[results.length - 1].party_id;
+                    party_id = results[results.length - 1].party_id;
                     req.io.roomList[party_id] = {
                         party_id : party_id,
                         user_id : user_id,
@@ -97,15 +98,10 @@ router.post('/makeParty', (req, res) => {
                         participantsReady: []
                     }
                     console.log("새로운 방 추가", req.io.roomList[party_id]);
+                    res.redirect(`/chat?room=${party_id}`);
                 }
             })
-            
-            res.send(`
-                <script>
-                    alert('파티만들기 성공!');
-                    window.location.href='/';
-                </script>`
-            );
+
         }
     });
 });
