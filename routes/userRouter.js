@@ -9,15 +9,20 @@ const conn = require("../config/db");
 router.post("/join", (req, res) => {
     // 요청 본문에서 데이터 추출
     const { user_id, pw, name, nick, addr_code, addr_jibun, addr_detail, email, birth_date, gender, tel, wd_account, ba_number } = req.body;
-    console.log("데이터 확인!",req.body); 
+
+    // 주소 정보를 합침
+    let address = `${addr_code} ${addr_jibun} ${addr_detail}`;
+
+    console.log("데이터 확인!", req.body);
+    
     // SQL 쿼리문 작성
     const sql = `
-        INSERT INTO User_TB (user_id, pw, name, nick, addr_code, addr_jibun, addr_detail, email, birth_date, gender, tel, point, wd_account, ba_number)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?, ?)
+        INSERT INTO User_TB (user_id, pw, name, nick, address, email, birth_date, gender, tel, point, wd_account, ba_number)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?, ?)
     `;
 
     // 쿼리 실행
-    conn.query(sql, [user_id, pw, name, nick, addr_code, addr_jibun, addr_detail, email, birth_date, gender, tel, wd_account, ba_number], (err, results) => {
+    conn.query(sql, [user_id, pw, name, nick, address, email, birth_date, gender, tel, wd_account, ba_number], (err, results) => {
         if (err) {
             console.error("Database insertion error: ", err);
             res.send("<script>alert('회원가입 실패..'); history.back();</script>");
@@ -121,6 +126,7 @@ router.post("/changeInfo", (req, res) => {
     // 요청 본문에서 데이터 추출
     const { pw, name, nick, email, addr_code, addr_jibun, addr_detail, tel, wd_account, ba_number } = req.body;
     const user_id = req.session.user_id;
+    let address = `${addr_code} ${addr_jibun} ${addr_detail}`;
 
     console.log("수정할 데이터 확인:", req.body);
 
@@ -132,9 +138,7 @@ router.post("/changeInfo", (req, res) => {
             name = ?,
             nick = ?,
             email = ?,
-            addr_code = ?,
-            addr_jibun = ?,
-            addr_detail = ?,
+            address = ?,
             tel = ?,
             wd_account = ?,
             ba_number = ?
@@ -142,7 +146,7 @@ router.post("/changeInfo", (req, res) => {
     `;
 
     // 쿼리 실행
-    conn.query(sql, [pw, name, nick, email, addr_code, addr_jibun, addr_detail, tel, wd_account, ba_number, user_id], (err, result) => {
+    conn.query(sql, [pw, name, nick, email, address, tel, wd_account, ba_number, user_id], (err, result) => {
         if (err) {
             console.error("SQL 실행 중 오류 발생:", err);
             res.status(500).send("서버 오류가 발생했습니다.");
