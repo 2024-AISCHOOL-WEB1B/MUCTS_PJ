@@ -12,14 +12,6 @@
 </head>
 
 <body>
-    <!-- head -->
-    <div id="topper">
-        <div id="topper-menu">
-            <a href="">커뮤니티</a>
-            <a href="">이벤트</a>
-            <a href="">공지사항</a>
-        </div>
-    </div>
     <div id="header">
         <div id="header-width-container">
             <div id="header-logo">
@@ -27,8 +19,22 @@
                     <img src="Mainlogo.png" alt="Buts Logo">
                 </a>
             </div>
-            <div id="header-right" style="cursor:pointer;" onclick="location.href='/login'">
+            <div id="btns">
+                <div id="cash_btn">
+                    <a href="/charge/charge">POINT</a>
+                </div>
+                <div id="mypage_btn">
+                    <a href="/user/myPage">MY</a>
+                </div>
+                {% if user %}
+                <div id="header-right" style="cursor:pointer;" onclick="location.href='/logout'">
+                로그아웃
+                </div>
+                {% else %}
+                <div id="header-right" style="cursor:pointer;" onclick="location.href='/login'">
                 로그인
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -40,39 +46,39 @@
                 <form id="addressForm" action="/user/join" method="post">
                     <div id="user_info">
                         <ul>
-                            <li><span class="subject">아이디</span> <input type="text" name="user_id" id="id"><br></li>
-                            <li><span class="subject">비밀번호</span> <input type="password" name="pw" id="pw"><br></li>
-                            <li><span class="subject">이름</span> <input type="text" name="name" id="name"></li>
+                            <li><span class="subject">아이디</span> <input type="text" name="user_id" id="id" placeholder="아이디를 입력해주세요"><br></li>
+                            <li><span class="subject">비밀번호</span> <input type="password" name="pw" id="pw" placeholder="비밀번호를 입력해주세요"><br></li>
+                            <li><span class="subject">이름</span> <input type="text" name="name" id="name" placeholder="이름을 입력해주세요"></li>
                         </ul>
                     </div>
                     <br>
                     <div id="nick">
                         <ul>
-                            <li><span class="subject">별명</span> <input type="text" name="nick" id="user_nick"><br></li>
+                            <li><span class="subject">닉네임</span> <input type="text" name="nick" id="user_nick" placeholder="닉네임을 입력해주세요"><br></li>
                             <li><span class="subject">주소</span> 
                                 <input type="text" id="sample4_postcode" class="rgst_inputBox" placeholder="우편번호" name="addr_code">
                                 <input type="button" id="searchAddrButton" value="우편번호 찾기" class="searchAddr"><br>
                             </li>
                             <li><input type="text" id="sample4_jibunAddress" class="rgst_inputBox" placeholder="지번주소" name="addr_jibun">
-                                <input type="text" id="sample4_detailAddress" class="rgst_inputBox" placeholder="상세주소" name="addr_detail"><br>
+                                <input type="text" id="sample4_detailAddress" class="rgst_inputBox" placeholder="상세주소를 입력해주세요" name="addr_detail"><br>
                             </li>
-                            <li><span class="subject">이메일</span> <input type="email" name="email" id="email"><br></li>
+                            <li><span class="subject">이메일</span> <input type="email" name="email" id="email" placeholder="이메일을 입력해주세요"><br></li>
                             <li><span class="subject">생년월일</span> <input type="text" name="birth_date" id="birth_date"
                                         placeholder="8자리를 입력해주세요"><br></li>
                             <li><span class="subject">성별</span> <input type="radio" name="gender" value="M"
                                         id="gender">남
                                     <input type="radio" name="gender" value="W" id="gender-radio">여<br></li>
-                            <li><span class="subject">휴대폰</span> <input type="text" name="tel" id="tel"></li>
+                            <li><span class="subject">휴대폰</span> <input type="text" name="tel" id="tel" placeholder="전화번호를 입력해주세요"></li>
                         </ul>
                     </div>
                     <br>
                     <div id="make_p">
                         <ul>
                             <li><span class="subject">계좌</span> <input type="text" name="wd_account"
-                                        id="wd_account"><br>
+                                        id="wd_account" placeholder="은행을 입력해주세요"><br>
                             </li>
                             <li><span class="subject">계좌번호</span> <input type="text" name="ba_number"
-                                        id="ba_number"><br>
+                                        id="ba_number" placeholder="계좌번호를 입력해주세요"><br>
                             </li>
                         </ul>
                     </div>
