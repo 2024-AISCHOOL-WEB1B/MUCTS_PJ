@@ -44,8 +44,13 @@ h2 {
     gap: 10px;
     margin-top: 15px;
 }
-
-
+.searchAddr{
+    background: black;
+    color: white;
+}
+.searchAddr:hover{
+    background: gray;
+}
 
 .cancel_button {
     color: white;

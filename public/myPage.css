@@ -1,33 +1,11 @@
-html,
-body {
+* {
+    box-sizing: border-box;
+}
+
+html, body {
     margin: 0;
     padding: 0;
 }
-
-#topper {
-    width: 100%;
-    height: 35px;
-    background-color: #f9f9f9;
-    border-bottom: 1px solid #f0eff7;
-}
-
-#topper-menu {
-    position: relative;
-    text-align: right;
-    line-height: 34px;
-    width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 10px;
-}
-
-#topper-menu>a {
-    display: inline-block;
-    padding: 0 20px;
-    font-size: 12px;
-    color: #888888;
-}
-
 #header {
     width: 100%;
     height: 100px;
@@ -37,7 +15,6 @@ body {
     top: 0;
     z-index: 1000;
 }
-
 #header-width-container {
     width: 100%;
     max-width: 1280px;
@@ -48,7 +25,6 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-
 #header-logo {
     display: inline-block;
 }
@@ -56,39 +32,36 @@ body {
     transform: scale(1.1);
 }
 
+#btns {
+    display: flex;
+    flex-direction: row;
+}
 #header-right {
     display: inline-block;
-    width: 116px;
+    width: 5rem;
+    margin-right:15px;
     height: 34px;
     font-size: 16px;
     color: #ffffff;
     text-align: center;
-    line-height: 34px;
+    line-height: 32px;
     border-radius: 17px;
     background-color: black;
 }
-
-#header-right a {
-    color: #ffffff;
-    text-decoration: none;
-}
-
-/* 헤더 버튼 css */
-#header-right:hover {
+#header-right:hover{
     background-color: gray;
 }
 
 #cash_btn,
 #mypage_btn {
     display: inline-block;
-    width: 116px;
+    width: 5rem;
     height: 34px;
     text-align: center;
     line-height: 32px;
 }
-
 #cash_btn:hover,
-#mypage_btn:hover {
+#mypage_btn:hover{
     /* background-color: gray; */
     transform: scale(1.1);
 }
@@ -98,17 +71,16 @@ body {
     height: 100px;
     color: black;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 1rem;
 }
-
-#mypage_btn {
-    padding-right: 80px;
+#mypage_btn{
+    padding-right: 2rem;
 }
-
 #header-right a {
     color: #ffffff;
     text-decoration: none;
 }
+
 
 
 
@@ -304,11 +276,11 @@ body {
 
     padding: 40px 145px;
     /* border-radius: 8px; */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
 }
 #h1tag{
     width: 500px;
-    margin-left: 7%;
+    margin-left: -57px;
 }
 h1 {
     color: black;
@@ -351,7 +323,7 @@ h1 {
 }
 
 .profile .points {
-    color: gold;
+    color: blue;
     font-size: 1.5em;
 }
 
@@ -363,6 +335,10 @@ h1 {
 
 .title_xs {
     margin: 10px 10px;
+}
+
+#title_a{
+    margin: 15px 5px
 }
 
 .buttons {

@@ -8,44 +8,45 @@
     <title>MUCTS</title>
     <link rel="stylesheet" href="/myPage.css">
     <link rel="stylesheet" href="/changeinfo.css">
-
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 
 <body>
     <!-- head -->
-    <div id="topper">
-        <div id="topper-menu">
-            <a href="">커뮤니티</a>
-            <a href="">이벤트</a>
-            <a href="">공지사항</a>
-        </div>
+    <!-- head -->
+  <div id="topper">
+    <div id="topper-menu">
+      <a href="">커뮤니티</a>
+      <a href="">이벤트</a>
+      <a href="">공지사항</a>
     </div>
-    <div id="header">
-        <div id="header-width-container">
-            <div id="header-logo">
-                <a href="/">
-                    <img src="/Mainlogo.png" alt="Buts Logo">
-                </a>
-            </div>
-            <div id="btns">
-                <div id="cash_btn">
-                    <a href="/charge/charge">충전/조회</a>
-                </div>
-                <div id="mypage_btn">
-                    <a href="/user/myPage">마이페이지</a>
-                </div>
-                {% if user %}
-                <div id="header-right" style="cursor:pointer;" onclick="location.href='/logout'">
-                    로그아웃
-                </div>
-                {% else %}
-                <div id="header-right" style="cursor:pointer;" onclick="location.href='/login'">
-                    로그인
-                </div>
-                {% endif %}
-            </div>
+  </div>
+  <div id="header">
+    <div id="header-width-container">
+      <div id="header-logo">
+        <a href="/">
+          <img src="/Mainlogo.png" alt="Buts Logo">
+        </a>
+      </div>
+      <div id="btns">
+        <div id="cash_btn">
+          <a href="/charge/charge">POINT</a>
         </div>
+        <div id="mypage_btn">
+          <a href="/user/myPage">MY</a>
+        </div>
+        {% if user %}
+        <div id="header-right" style="cursor:pointer;" onclick="location.href='/logout'">
+          로그아웃
+        </div>
+        {% else %}
+        <div id="header-right" style="cursor:pointer;" onclick="location.href='/login'">
+          로그인
+        </div>
+        {% endif %}
+      </div>
     </div>
+  </div>
     <!-- body -->
     <div class="container">
         <div id="h1tag">
@@ -56,8 +57,8 @@
             <!-- <div class="line"> -->
             <div class="profile">
                 <div class="title_s">나의 프로필</div>
-                <span class="title_xs">닉네임:</span> {{user.nick}}<br>
-                <span class="title_xs">보유 포인트:</span><span class="points">{{user.point}}</span>
+                <div id="title_a"><span class="title_xs">닉네임:</span>{{user.nick}}<br></div>
+                <div id="title_a"><span class="title_xs">보유 포인트:</span><span class="points">{{user.point}}</span></div>
             </div>
             <div class="info">
                 <div class="title_s">알림 정보</div>
@@ -151,12 +152,12 @@
                 <div class="input-group">
                     <label for="address">주소</label>
                     <input type="text" id="sample4_postcode" class="rgst_inputBox" value="{{user.addr_code}}"
-                        placeholder="우편번호" name="addr_code">
-                    <input type="button" id="searchAddrButton" value="우편번호 찾기" class="searchAddr"><br>
+                        placeholder="우편번호" name="addr_code"><br>
                     <input type="text" id="sample4_jibunAddress" class="rgst_inputBox" value="{{user.addr_jibun}}"
                         placeholder="도로명주소" name="addr_jibun">
                     <input type="text" id="sample4_detailAddress" class="rgst_inputBox" value="{{user.addr_detail}}"
                         placeholder="상세주소" name="addr_detail"><br>
+                    <input type="button" id="searchAddrButton" value="우편번호 찾기" class="searchAddr">    
                 </div>
                 <div class="input-group">
                     <label for="phone">휴대전화 번호</label>
